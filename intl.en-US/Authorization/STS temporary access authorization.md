@@ -48,9 +48,9 @@ To meet these requirements, use STS to grant users temporary access permission. 
     4.  Click **Create Authorization Policy** and then click **Close**.
 4.  Grant the role RamTestAppReadOnly the ram-test-app read-only permission.
     1.  Click Roles and click **Authorize** on the right side of role RamTestAppReadOnly.
-    2.  Select ram-test-app-readonly and click ![](images/11777_en-US.png).
+    2.  Select ram-test-app-readonly and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960255411777_en-US.png).
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960219611784_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960255511784_en-US.png)
 
     3.  Click **OK**.
 
@@ -127,7 +127,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
         **Note:** The content entered after Resource is a role ID. To find the role ID, click **Manage** on the Roles page.
 
     5.  Click **Users**.
-    6.  Find `AliyunSTSAssumeRolePolicy2016011401` and `AliyunSTSAssumeRolePolicy2016011402`, and click ![](images/11777_en-US.png) to add them.
+    6.  Find `AliyunSTSAssumeRolePolicy2016011401` and `AliyunSTSAssumeRolePolicy2016011402`, and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960255411777_en-US.png) to add them.
 -   Use STS
 
     [Download STS command line tool Python](https://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/cn/oss/0.4.30/assets/tool/sts.py).
