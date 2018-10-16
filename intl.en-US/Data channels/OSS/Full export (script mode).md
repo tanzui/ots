@@ -102,8 +102,6 @@ This operation is similar to Step 1. You only need to select OSS as the data sou
 
     If the configurations contain variables, for example, $\{date\}, the variable setting page is displayed. You can set only specific values.
 
-    ![](images/11897_en-US.png)
-
 2.  View logs in the lower part of the page.
 
     If no error is logged, the task is successfully executed, and you can check the data in the target OSS instance.
