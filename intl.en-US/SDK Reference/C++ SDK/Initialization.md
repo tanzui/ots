@@ -15,7 +15,7 @@ Endpoint is the domain name address for the Alibaba Cloud Table Store service in
 
 -   Table Store supports public and private network access.
 -   You can log on to the [Table Store console](https://partners-intl.console.aliyun.com/#/ots) and go to the instance details page. The Instance Access URL is the endpoint for that instance.
--   
+
 ## Configure an AccessKey { .section}
 
 To access the Alibaba Cloud Table Store service, you must have a valid AccessKey for signature authentication. These three ways of configuring an AccessKey are currently supported:
