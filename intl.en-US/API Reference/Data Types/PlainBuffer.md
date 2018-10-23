@@ -70,38 +70,52 @@ The basic logic for calculating the checksum is as follows:
 -   Calculate the delete in the row. If delete mark exists in the row, supplement a single-byte 1; otherwise, supplement a single-byte 0.
 -   Because the checksum is calculated for each cell, the cell checksum is used to calculate the row checksum, that is, the CRC operation is only performed on the checksums of cells in the row, not data in the row.
 
-C++ implementation:
+Java implementation:
+
+**Note:** The following code is from `$tablestore-4.2.1-sources/com/alicloud/openservices/tablestore/core/protocol/PlainBufferCrc8.java`. For more information, see [Java SDK](../../../../intl.en-US/SDK Reference/Java SDK/Installation.md).
 
 ```language-c++
-void GetChecksum(uint8_t* crc, const InplaceCell& cell)
-{
-	Crc8(crc, cell.GetName());
-	Crc8(crc, cell.GetValue(). GetInternalSlice());
-	Crc8(crc, cell.GetTimestamp());
-	Crc8(crc, cell.GetOpType());
+public static byte getChecksum(byte crc, PlainBufferCell cell) throws IOException {
+
+    if (cell.hasCellName()) {
+        crc = crc8(crc, cell.getNameRawData());
+    }
+
+    if (cell.hasCellValue()) {
+        if (cell.isPk()) {
+            crc = cell.getPkCellValue().getChecksum(crc);
+        } else {
+            crc = cell.getCellValue().getChecksum(crc);
+        }
+    }
+
+    if (cell.hasCellTimestamp()) {
+        crc = crc8(crc, cell.getCellTimestamp());
+    }
+
+    if (cell.hasCellType()) {
+        crc = crc8(crc, cell.getCellType());
+    }
+
+    return crc;
 }
 
-void GetChecksum(uint8_t* crc, const InplaceRow& row)
-{
-	const std::deque<InplaceCell>& pk = row.GetPrimaryKey();
-	for (size_t i = 0; i < pk.size(); i++) {
-		uint8_t* cellcrc;
-		*cellcrc = 0;
-		GetChecksum(cellcrc, pk[i]);
-		Crc8(crc, *cellcrc);
-	}
-	for (int i = 0; i < row.GetCellCount(); i++) {
-		uint8_t* cellcrc;
-		*cellcrc = 0;
-		GetChecksum(cellcrc, row.GetCell(i));
-		Crc8(crc, *cellcrc);
-	}
-	
-	uint8_t del = 0;
-	if (row.HasDeleteMarker()) {
-		del = 1;
-	}
-	Crc8(crc, del);
+public static byte getChecksum(byte crc, PlainBufferRow row) throws IOException {
+    for (PlainBufferCell cell : row.getPrimaryKey()) {
+        crc = crc8(crc, cell.getChecksum());
+    }
+
+    for (PlainBufferCell cell : row.getCells()) {
+        crc = crc8(crc, cell.getChecksum());
+    }
+
+    byte del = 0;
+    if (row.hasDeleteMarker()) {
+        del = (byte)0x1;
+    }
+    crc = crc8(crc, del);
+
+    return crc;
 }
 
 ```
@@ -122,15 +136,16 @@ A data row contains two primary key columns and four data columns. The primary k
 Encoding:
 
 ```
-	<Header starting>[0x75]
-	<Primary key column starting>[0x1]
-		<Cell1>[0x3][0x4][3][pk1][0x5][3][5][iampk]
-		<Cell2>[0x3][0x4][3][pk2][0x5][0][100]
-	<Attribute column starting>[0x2]
-		<Cell1>[0x3][0x4][7][column1][0x5][0x3][3][bad][0x7][1001]
-		<Cell2>[0x3][0x4][7][column2][0x5][0x0][128][0x7][1002]
-		<Cell3>[0x3][0x4][7][column3][0x5][0x1][34.2][0x7][1003]
-		<Cell4>[0x3][0x4][7][column4][0x5][0x6][1]
+  <HHeader starting>[0x75]
+  <rimary key column starting>[0x1]
+  <Cell1>[0x3][0x4][0x3][3][pk1][0x5][0x3][5][iampk][_cell_checksum]
+    <Cell2>[0x3][0x4][0x3][3][pk2][0x5][0x0][8][100][_cell_checksum]
+  <Attribute column starting>[0x2]
+    <Cell1>[0x3][0x4][0x3][7][column1][0x5][0x3][3][bad][0x7][1001][_cell_checksum]
+    <Cell2>[0x3][0x4][0x3][7][column2][0x5][0x0][8][128][0x7][1002][_cell_checksum]
+    <Cell3>[0x3][0x4][0x3][7][column3][0x5][0x1][8][34.2][0x7][1003][_cell_checksum]
+    <Cell4>[0x3][0x4][0x3][7][column4][0x6][1][_cell_checksum]
+  [_row_check_sum]
 
 ```
 
