@@ -8,7 +8,7 @@ Applicable to JDK 6 and later.
 
 -   Install Java SDK by using Maven
 
-    To use the Table Store Java SDK in Maven, you only need to add the corresponding dependency to the pom.xml file. Java SDK v4.3.1 is used as an example. Type the following content in the “dependency” section:
+    To use the Table Store Java SDK in Maven, you only need to add the corresponding dependency to the pom.xml file. Java SDK v4.7.4 is used as an example. Type the following content in the “dependency” section:
 
     ```language-xml
     <dependency>
@@ -21,9 +21,9 @@ Applicable to JDK 6 and later.
 
 -   Install Java SDK by importing the JAR package to Eclipse
 
-    For Java SDK v4.2.1, the process is as follows:
+    For Java SDK v4.7.4, the process is as follows:
 
-    1.  Download the [Java SDK](https://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/43005/cn_zh/1484715297472/tablestore-4.2.1.zip).
+    1.  Download the [Java SDK](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/86690/cn_zh/1540433142084/tablestore-4.7.4-release.zip).
     2.  Decompress the SDK.
     3.  Copy the `tablestore-<versionId>.jar` file in the decompressed folder and copy all the files in the lib folder to your project.
     4.  In Eclipse, right-click your project and choose **Properties** \> **Java Build Path** \> **Add JARs** from the context menu.
