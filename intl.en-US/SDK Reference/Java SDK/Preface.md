@@ -4,30 +4,30 @@
 
 This document describes how to install and use Java SDK v4.0.0 and later for Table Store \(formerly OTS\). This document assumes that you have activated Alibaba Cloud Table Store and created an AccessKeyId and AccessKeySecret.
 
--   If you have not activated Table Store or want to learn more about Table Store, visit the Table Store product homepage.
+-   If you have not activated Table Store or want to learn more about Table Store, visit the [Table Store product homepage](https://www.alibabacloud.com/product/table-store).
 
--   If you have not created an AccessKeyId and AccessKeySecret, log on to [Alibaba Cloud Access Key Console](https://partners-intl.console.aliyun.com/#/ak) to create an AccessKey.
+-   If you have not created an AccessKeyId and AccessKeySecret, log on to [Alibaba Cloud Access Key Console](https://ak-console.aliyun.com/#/accesskey) to create an AccessKey.
 
 
 ## Special note { .section}
 
 SDK version 4.0.0 and later support multiple data versions and TimeToLive. However, these SDK versions are not compatible with SDKs v2.x.x.
 
--    [Added TimeToLive \(TTL\)](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) 
+-    [Added TimeToLive \(TTL\)](../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) 
 
--    [Added Multiple Data Versions](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) 
+-    [Added Multiple Data Versions](../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) 
 
 
 ## Download the SDK package { .section}
 
--   SDK: [aliyun\_tablestore\_java\_sdk\_4.2.0.zip](https://repo.maven.apache.org/maven2/com/aliyun/openservices/tablestore/4.3.1/tablestore-4.3.1-release.zip) 
+-   SDK: [tablestore-4.7.4-release.zip](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/86690/cn_zh/1540433142084/tablestore-4.7.4-release.zip) 
 
 
-For more information about version iterations, [click here](reseller.en-US/SDK Reference/Download SDK/Java SDK.md#).
+For more information about version iterations, [click here](intl.en-US/SDK Reference/Download SDK/Java SDK.md#).
 
 ## Version { .section}
 
-Latest version: 4.2.0
+Latest version: 4.7.4
 
 -   Compatibility
 
