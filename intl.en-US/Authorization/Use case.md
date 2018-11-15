@@ -15,12 +15,12 @@ Procedure
 3.  Click **Create User** to create a RAM user. Designate it with the same Table Store access permissions as the primary account.
 4.  Click **OK**. The AccessKey for the new RAM user ram\_test is generated.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154217630511795_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154227491511795_en-US.png)
 
 5.  Save the AccessKey information.
 6.  Click **Authorize**to grant the RAM user full access permissions for Table Store.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154217630511796_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154227491511796_en-US.png)
 
 7.  \(Optional\) Click **Manage** to grant the account console logon or other permissions.
 
@@ -50,9 +50,9 @@ To share data of an instance in Table Store without data modification, you can s
 
 Create a RAM user named ram\_test\_pub. Select ReadOnly on the Edit User-Level Authorization page to grant the RAM user read-only access permission for Table Store.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154217630511797_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154227491611797_en-US.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154217630511798_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20299/154227491611798_en-US.png)
 
 Example
 
