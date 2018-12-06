@@ -44,3 +44,17 @@ The descriptions of billing items and pricing of Table Store are shown as follow
 
 ## Billing description {#section_rhq_g12_cfb .section}
 
+The form store provides a way to pay by volume. The descriptions of billing methods, expiration/overdue payment and renewal are as follows:
+
+|Method|Description|Expiration/Overdue payment description|Renewal description|
+|:-----|:----------|:-------------------------------------|:------------------|
+|Pay-As-You-Go| -   Billing per hour.
+-   The system generates a bill after a table is created.
+
+ | -   Fees are calculated on an hourly basis. If funds are unavailable to rectify your calculated bill, you are notified through your preferred contact method \(SMS or email\). The severity of the effect to your account of overdue account payments increases as follows:
+-   Within 15 days of your payment being overdue, and after a notification has been sent, your services remain unaffected.
+-   If your payment has been overdue for more than 15 days and the account has not been rectified, Alibaba Cloud suspends your service and freezes your Table Store. Your data remains stored in the system, and remains billable. At the same time, you will be reminded by SMS and email.
+-   If your payment has been overdue for more than 30 days and your account has not been rectified, Alibaba Cloud stops providing any additional services. Any data stored in your Table Store is deleted and unrecoverable. You are notified through your preferred contact method \(SMS or email\) one day before the data is deleted.
+
+ |A Pay-As-You-Go instance is billed according to the actual usage time. Renewal is not required.|
+
