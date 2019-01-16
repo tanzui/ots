@@ -15,7 +15,7 @@ Script mode of Data Integration:
 
 **Note:** Skip this step if you have created a Table Store data source.
 
-For more information about how to create a data source, see [Create a Table Store data source](reseller.en-US/Data channels/MaxCompute/Incremental synchronization (wizard mode).md#).
+For more information about how to create a data source, see [Create a Table Store data source](intl.en-US/Data channels/MaxCompute/Incremental synchronization (wizard mode).md#).
 
 ## Step 2. Create an OSS data source {#section_hk1_fgc_dfb .section}
 
@@ -25,7 +25,7 @@ This operation is similar to Step 1. You only need to select OSS as the data sou
 
 ## Step 3. Create an export task {#section_v2b_vcb_dfb .section}
 
-1.  Log on to the [Data Integration console](https://di-cn-shanghai.data.aliyun.com/).
+1.  Log on to the Data Integration console.
 2.  On the Sync Tasks page, select **Script Mode**.
 3.  In the Import Template dialog box, set **Source Type** to Table Store \(OTS\) and **Type of Objective** to OSS.
 4.  Click **OK** to go to the configuration page.
@@ -106,11 +106,11 @@ This operation is similar to Step 1. You only need to select OSS as the data sou
 
     If no error is logged, the task is successfully executed, and you can check the data in the target OSS instance.
 
-    **Note:** Full export is generally a one-time task, and thus you do not need to set automatic scheduling parameters. For more information about how to set the scheduling parameters, see [Incremental synchronization](reseller.en-US/Data channels/OSS/Incremental synchronization (script mode).md#).
+    **Note:** Full export is generally a one-time task, and thus you do not need to set automatic scheduling parameters. For more information about how to set the scheduling parameters, see [Incremental synchronization](intl.en-US/Data channels/OSS/Incremental synchronization (script mode).md#).
 
 
 ## Step 6. Check the data exported to OSS {#section_nj3_2hc_dfb .section}
 
-1.  Log on to the [OSS console](https://partners-intl.console.aliyun.com/#/oss).
+1.  Log on to the [OSS console](https://oss.console.aliyun.com/index?spm=a2c4g.11186623.2.11.43efb5c053MiTX).
 2.  Select the bucket and file name, and verify its contents.
 
