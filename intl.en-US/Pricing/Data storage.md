@@ -2,17 +2,17 @@
 
 The total data volume of an instance is the sum of data from all tables in that instance. The total data volume of a table is the sum of data in all rows of that table. The total data volume of all rows is the sum of data in all primary key columns and attribute columns of a single row.
 
-Data storage fees are based on the total volume of instance data. Fees are calculated on a per hour basis. Due to fluctuations in the total data volume utilized, Table Store collects the total data volume of all table partitions at regular intervals and calculates the average hourly total data volume. This average volume value is then multiplied by the unit price to account for the actual storage fee.
+Data storage fees are based on the total volume of instance data. Fees are calculated on a per hour basis. Due to fluctuations in the total data volume utilized, Table Store collects the total data volume of all table partitions at regular intervals and calculates the average hourly total data volume. This average volume value is then multiplied by the unit price to account for the actual storage fee. For the latest unit price information, see [Table Store pricing details](https://www.alibabacloud.com/product/table-store/pricing).
 
 The following examples illustrate how to calculate a row and table’s data volume.
 
 ## Calculation of a row’s data volume {#section_lpp_222_cfb .section}
 
-The data in each row of a table consumes space in Table Store. When the Max Versions or [TTL](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) feature is enabled, the data of each version includes the [Version number](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) \(eight bits\), column name, and data value.
+The data in each row of a table consumes space in Table Store. When the Max Versions or [TTL](../../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) feature is enabled, the data of each version includes the [Version number](../../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) \(eight bits\), column name, and data value.
 
 Storage space is calculated as follows:
 
--   Data size of a single row = size of the [primary keys](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Primary key and attribute.md#)data + size of all [attribute columns](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Primary key and attribute.md#) data.
+-   Data size of a single row = size of the [primary keys](../../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Primary key and attribute.md#) data + size of all [attribute columns](../../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Primary key and attribute.md#) data.
 
 Among of which,
 
@@ -49,7 +49,7 @@ The preceding table has two valid versions for attribute column "Comments".
 
     Data size of a single attribute column = \(Name length of the attribute column + 8\) \* Number of the valid versions + Total size of the values of all the valid versions in the attribute column
 
-    **Note:** When the Max Versions or TTL feature is enabled \([Max versions](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) \> 1）or TTL! = -1\), each version number consumes 8 Bytes of the storage space:
+    **Note:** When the Max Versions or TTL feature is enabled \([Max versions](../../../../../intl.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#) \> 1\) or TTL! = -1\), each version number consumes 8 Bytes of the storage space:
 
     The row’s data size is 334 bytes, and the calculation is as follows:
 
@@ -84,7 +84,7 @@ The preceding table has two valid versions for attribute column "Comments".
 
 Assume that there is a table whose primary key is ID \(Integer\), and other columns are attribute columns. If its Max Versions = 2 and TTL = –1, the table’s data size is calculated as follows:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20254/153958278211617_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20254/154763140411617_en-US.png)
 
 -   The data size of the row whose ID is 1 = 10 \(primary key size\) + \(116 + 166\) \(total data size of the two versions in the attribute column Comments\) = 292 Bytes
 
