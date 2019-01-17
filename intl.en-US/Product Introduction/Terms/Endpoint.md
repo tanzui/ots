@@ -18,7 +18,7 @@ Each instance corresponds to an endpoint that is also known as the connection UR
 
     ```
     Endpoint for Internet access: https://myInstance.cn-hangzhou.ots.aliyuncs.com
-      Endpoint for intranet access: https://myInstance.cn-hangzhou.ots-internal.aliyuncs.com
+    Endpoint for intranet access: https://myInstance.cn-hangzhou.ots-internal.aliyuncs.com
     ```
 
     Better performance, such as lower response latency and no unnecessary Internet traffic, can be expected through the intranet.
