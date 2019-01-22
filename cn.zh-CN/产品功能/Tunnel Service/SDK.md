@@ -1,6 +1,4 @@
 # SDK {#concept_u3m_st3_kgb .concept}
 
-目前，您可以使用以下语言的SDK实现Tunnel Service功能。
-
-[Go SDK](../../../../../cn.zh-CN/SDK 参考/Go SDK/Tunnel Service操作/安装.md)
+目前您可以使用[Go SDK](../../../../../cn.zh-CN/SDK 参考/Go SDK/Tunnel Service操作/安装.md)实现Tunnel Service功能。
 
