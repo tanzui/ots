@@ -6,7 +6,7 @@ Billing items of Table Store include Data storage, Reserved read/write throughpu
 
 -   Data Storage
 
-    Data storage fees are based on the total volume of instance data. Fees are calculated on a per hour basis. Due to fluctuations in the total data volume utilized, Table Store collects the total data volume of all table partitions at regular intervals and calculates the average hourly total data volume. This average volume value is then multiplied by the unit price to account for the actual storage fee. For more information about the data storage, see [Data storage](reseller.en-US/Pricing/Data storage.md#).
+    Data storage fees are based on the total volume of instance data. Fees are calculated on a per hour basis. Due to fluctuations in the total data volume utilized, Table Store collects the total data volume of all table partitions at regular intervals and calculates the average hourly total data volume. This average volume value is then multiplied by the unit price to account for the actual storage fee. For more information about the data storage, see [Data storage](intl.en-US/Pricing/Data storage.md#).
 
 -   Reserved read/write throughput
 
@@ -40,7 +40,12 @@ The descriptions of billing items and pricing of Table Store are shown as follow
 |Additional read/write throughput|The additional read/write throughput is the portion of read/write throughput actually consumed that exceeds the reserved read/write throughput| Pay-As-You-Go
 
  |
-|Internet downstream traffic|Fees for internet outbound traffic|Pay-As-You-Go|
+|Internet downstream traffic|Fees for Internet outbound traffic|Pay-As-You-Go|
+
+**Note:** 
+
+-   For more information about the billing standard, see [Table Store pricing details](https://www.alibabacloud.com/product/table-store/pricing).
+-   The unit price of these billing items may change from time to time. For more information, see [Table Store pricing details](https://www.alibabacloud.com/product/table-store/pricing).
 
 ## Billing description {#section_rhq_g12_cfb .section}
 
