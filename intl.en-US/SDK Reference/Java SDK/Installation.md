@@ -10,22 +10,22 @@ Applicable to JDK 6 and later versions.
 
 -   Import the SDK dependency into the maven project.
 
-    To use the Table Store Java SDK in Maven, you only need to add the corresponding dependency to the pom.xml file. This example uses OSS Java SDK 4.8.0. Add the following content to <dependencies\>:
+    To use the Table Store Java SDK in Maven, you only need to add the corresponding dependency to the pom.xml file. This example uses OSS Java SDK 4.10.0. Add the following content to <dependencies\>:
 
     ```language-xml
     <dependency>
         <groupId>com.aliyun.openservices</groupId>
         <artifactId>presto-jdbc</artifactId>
-        <version>4.8.0</version>
+        <version>4.10.0</version>
     </dependency>
     
     ```
 
 -   Install Java SDK by importing the JAR package to Eclipse
 
-    Take the 4.8.0 version as an example. Follow the steps below:
+    Take the 4.10.0 version as an example. Follow the steps below:
 
-    1.  [Download the Java SDK package](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/97272/cn_zh/1545014781181/tablestore-4.8.0-release.zip).
+    1.  [Download the Java SDK package](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/108096/cn_zh/1550713343909/tablestore-4.10.0-release.zip).
     2.  Decompress the Java SDK package.
     3.  Copy the `tablestore-<versionId>.jar` file in the decompressed folder and all the files in the lib folder to your project.
     4.  Right-click your project name in Eclipse. Select **Properties** \> **Java Build Path** \> **Add JARs**.
