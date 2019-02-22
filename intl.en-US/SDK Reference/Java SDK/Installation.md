@@ -1,40 +1,37 @@
 # Installation {#concept_43007_zh .concept}
 
+This topic describes how to install Table Store Java SDK.
+
 ## Prerequisites {#section_ach_41d_2fb .section}
 
-Applicable to JDK 6 and later.
+Applicable to JDK 6 and later versions.
 
 ## Installation methods { .section}
 
--   Install Java SDK by using Maven
+-   Import the SDK dependency into the maven project.
 
-    To use the Table Store Java SDK in Maven, you only need to add the corresponding dependency to the pom.xml file. Java SDK v4.7.4 is used as an example. Type the following content in the “dependency” section:
+    To use the Table Store Java SDK in Maven, you only need to add the corresponding dependency to the pom.xml file. This example uses OSS Java SDK 4.8.0. Add the following content to <dependencies\>:
 
     ```language-xml
     <dependency>
         <groupId>com.aliyun.openservices</groupId>
-        <artifactId>tablestore</artifactId>
-        <version>4.3.1</version>
+        <artifactId>presto-jdbc</artifactId>
+        <version>4.8.0</version>
     </dependency>
     
     ```
 
 -   Install Java SDK by importing the JAR package to Eclipse
 
-    For Java SDK v4.7.4, the process is as follows:
+    Take the 4.8.0 version as an example. Follow the steps below:
 
-    1.  Download the [Java SDK](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/86690/cn_zh/1540433142084/tablestore-4.7.4-release.zip).
-    2.  Decompress the SDK.
-    3.  Copy the `tablestore-<versionId>.jar` file in the decompressed folder and copy all the files in the lib folder to your project.
-    4.  In Eclipse, right-click your project and choose **Properties** \> **Java Build Path** \> **Add JARs** from the context menu.
-    5.  Select all JAR files that you have copied in Step 3.
-    After completing the preceding steps, you can use the Table Store Java SDK in Eclipse.
-
+    1.  [Download the Java SDK package](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/97272/cn_zh/1545014781181/tablestore-4.8.0-release.zip).
+    2.  Decompress the Java SDK package.
+    3.  Copy the `tablestore-<versionId>.jar` file in the decompressed folder and all the files in the lib folder to your project.
+    4.  Right-click your project name in Eclipse. Select **Properties** \> **Java Build Path** \> **Add JARs**.
+    5.  Select all JAR files that you copied in Step 3.
 
 ## Sample programs { .section}
 
-The Table Store Java SDK provides diverse sample programs for your reference or use. You can get the sample program as follows:
-
-1.  Download and decompress the Table Store Java SDK.
-2.  Find the sample programs in the examples folder.
+The Table Store Java SDK provides a variety of sample programs for your reference or use. You can decompress the downloaded SDK package and view the sample programs in the examples folder.
 
