@@ -23,7 +23,7 @@ Applicable to JDK 6 and later versions.
 
 -   Install Java SDK by importing the JAR package to Eclipse
 
-    Take the 4.10.0 version as an example. Follow the steps below:
+    Take the 4.10.2 version as an example. Follow the steps below:
 
     1.  [Download the Java SDK package](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/108096/cn_zh/1552274752739/tablestore-4.10.2-release.zip).
     2.  Decompress the Java SDK package.
