@@ -2,6 +2,34 @@
 
 4.0.0 以上版本的 SDK 支持数据多版本和生命周期，但是该版本 SDK 不兼容 2.x.x 系列的 SDK。
 
+## 版本号：4.10.2 {#section_kzf_x1c_bhb .section}
+
+发布时间：2019-03-11
+
+下载地址：[tablestore-4.10.2](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/108096/cn_zh/1552274752739/tablestore-4.10.2-release.zip)
+
+更新日志：
+
+-   Remove log4j2 implement and log4j2.xml.
+-   TunnelWorker: fix auto retry logic when network condition is too bad.
+
+## 版本号：4.7.4 {#section_i1n_wlt_4fb .section}
+
+发布时间：2018-09-27
+
+下载地址：[tablestore-4.7.4-release.zip](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/86690/cn_zh/1540433142084/tablestore-4.7.4-release.zip)
+
+更新日志：
+
+-   新增SearchIndex功能：
+    -   多字段检索
+    -   范围查询
+    -   通配符查询
+    -   嵌套查询
+    -   全文检索
+    -   排序
+-   新增全局二级索引。
+
 ## 版本号：4.0.0 { .section}
 
 发布时间：2016-08-01

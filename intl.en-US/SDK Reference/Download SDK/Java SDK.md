@@ -2,6 +2,17 @@
 
 The SDK of version 4.0.0 and later provides TTL and Max Versions, and is therefore incompatible with the SDK in Version 2.x.x.
 
+## SDK version: 4.10.2 {#section_kzf_x1c_bhb .section}
+
+Release date: 2019-03-11
+
+Download:[tablestore-4.10.2](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/108096/cn_zh/1552274752739/tablestore-4.10.2-release.zip)
+
+Updates:
+
+-   Remove log4j2 implement and log4j2.xml.
+-   TunnelWorker: fix auto retry logic when network condition is too bad.
+
 ## SDK version: 4.7.4 {#section_i1n_wlt_4fb .section}
 
 Release date: 2018-09-27
@@ -10,7 +21,7 @@ Download: [tablestore-4.7.4-release.zip](http://docs-aliyun.cn-hangzhou.oss.aliy
 
 Updates:
 
--   Added SearchIndex：
+-   Added SearchIndex:
     -   Multi-Field Search
     -   Range query
     -   Wildcard search
@@ -35,9 +46,9 @@ Download: [aliyun\_tablestore\_java\_sdk\_4.0.0.zip](https://docs-aliyun.cn-hang
 
 Updates:
 
--   Provides [Time To Live](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#section_cv2_kyf_cfb).
+-   Provides [Time To Live](../../../../../reseller.en-US/Data Models/Wide Column/Data versions and time to live.md#section_cv2_kyf_cfb).
 
--   Provides [Max Versions](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Data versions and Time To Live.md#).
+-   Provides [Max Versions](../../../../../reseller.en-US/Data Models/Wide Column/Data versions and time to live.md#).
 
 
 ## SDK version: 2.2.4 { .section}
