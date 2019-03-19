@@ -43,7 +43,7 @@
         
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153801636912253_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296481612253_zh-CN.png)
 
         该策略内容表示对 ram-test-app 授予只读权限。
 
@@ -52,7 +52,7 @@
     1.  在角色管理页面，单击 RamTestAppReadOnly 右侧操作栏中的**授权**按钮。
     2.  将 ram-test-app-readonly 权限添加至右侧栏中。完成给该角色赋予对 ram-test-app 拥有只读的权限。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153801637011784_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296481711784_zh-CN.png)
 
     3.  单击**确定**。
 
@@ -108,7 +108,7 @@
             {
                 "Effect": "Allow",
                 "Action": "sts:AssumeRole",
-                "Resource": "acs:ram:1983407596944237:role/ramtestappreadonly"
+                "Resource": "acs:ram:198***237:role/ramtestappreadonly"
             }
         ]
         }
@@ -123,7 +123,7 @@
             {
                 "Effect": "Allow",
                 "Action": "sts:AssumeRole",
-                "Resource": "acs:ram:1983407596944237:role/ramtestappwrite"
+                "Resource": "acs:ram:198***237:role/ramtestappwrite"
             }
         ]
         }
@@ -143,7 +143,7 @@
     具体的调用方法如下，更详细的参数解释可以参考[STS帮助文档](https://www.alibabacloud.com/help/doc-detail/28756.htm)。
 
     ```
-    $python ./sts.py AssumeRole RoleArn=acs:ram::1983407596944237:role/ramtestappreadonly RoleSessionName=usr001 Policy='{"Version":"1","Statement":[{"Effect":"Allow","Action":["ots:ListTable","ots:DescribeTable"],"Resource":["acs:ots:*:*:ram-test-app","acs:ots:*:*:ram-test-app/*"]}]}' DurationSeconds=1000 --id=id --secret=secret
+    $python ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=usr001 Policy='{"Version":"1","Statement":[{"Effect":"Allow","Action":["ots:ListTable","ots:DescribeTable"],"Resource":["acs:ots:*:*:ram-test-app","acs:ots:*:*:ram-test-app/*"]}]}' DurationSeconds=1000 --id=id --secret=secret
     
     ```
 
@@ -182,16 +182,15 @@
     1.  使用 STS 来获取临时凭证。
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::1983407596944237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
         {
         "AssumedRoleUser": {
-            "Arn": "acs:ram::1983407596944237:role/ramtestappwrite/session001", 
+            "Arn": "acs:ram::198***237:role/ramtestappwrite/session001", 
             "AssumedRoleId": "330629052749595885:session001"
         }, 
         "Credentials": {
-            "AccessKeyId": "STS.x4gG7KMsfHckQe8nPKLO", 
-            "AccessKeySecret": "IA6CJh5kE5J5m8mR6aQXWbMemSL63Xh7SIhrEcke", 
-            "Expiration": "2016-01-14T07:58:14Z", 
+            "AccessKeyId": "***", 
+            "AccessKeySecret": "***"
             "SecurityToken": "CAESgAQIARKAATDsbhiBSujhVEHoMKm1i17pyZhPTCe1BnVF5YzdNyRos4WuQjalxLkOE/hNNxg25vTo9bljKg4VCcrfh6GkJNujMMcJ4V1i/0RMDLfXwa0/vOHP9W/oSQpwAD5EaWJfqVY/nxwmJ0aKJDHPmSieWssnlmocaOZAgHkpCqQSSDA8GhhTVFMueDRnRzdLTXNmSGNrUWU4blBLTE8iEjMzMDYyOTA1Mjc0OTU5NTg4NSoGdXNyMDAxMPnCkfmjKjoGUnNhTUQ1QuIBCgExGtwBCgVBbGxvdxJnCgxBY3Rpb25FcXVhbHMSBkFjdGlvbhpPCgtvdHM6Q3JlYXRlKgoPb3RzOkJhdGNoV3JpdGUqCghvdHM6UHV0KgoLb3RzOkluc2VydCoKC290czpVcGRhdGUqCgtvdHM6RGVsZXRlKhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzMzA2MjkwNTI3NDk1OTU4ODVyD3JhbXRlc3RhcHB3cml0ZQ=="
         }, 
         "RequestId": "5F92B248-F200-40F8-A05A-C9C7D018E351"
@@ -216,15 +215,15 @@
     1.  使用 STS 来获取临时凭证。
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::1983407596944237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
         {
         "AssumedRoleUser": {
-            "Arn": "acs:ram::1983407596944237:role/ramtestappreadonly/session002",
+            "Arn": "acs:ram::198***237:role/ramtestappreadonly/session002",
             "AssumedRoleId": "396025752746614078:session002"
         },
         "Credentials": {
-            "AccessKeyId": "STS.0qJ2UE8AalcHdQ6n2Q8Q",
-            "AccessKeySecret": "pSaUjb8O9mU5M76nkC6FHt6wKwbCVYO27gxSEBAu",
+            "AccessKeyId": "***",
+            "AccessKeySecret": "***",
             "Expiration": "2016-01-14T08:14:16Z",
             "SecurityToken": "CAES6wMIARKAAVtHeNgUnhk132OwDfxZTu8gPQCxfakYLeWha/FxoEYNqBKQTtyI4WPC5mpYuu8+n+yamSYTI2VPQ/z44fcYCNT1bQ0km87F3nb6EJxVvCdJIPNGVwQBMdQl/FLwBVhEGJ9BIwog4fMzwhERjqnAP8HbynAIQpG55BHaIXmv53x+GhhTVFMuMHFKMlVFOEFhbGNIZFE2bjJROFEiEjM5NjAyNTc1Mjc0NjYxNDA3OCoKc2Vzc2lvbjAwMjConMz5oyo6BlJzYU1ENULGAQoBMRrAAQoFQWxsb3cSSwoMQWN0aW9uRXF1YWxzEgZBY3Rpb24aMwoNb3RzOkJhdGNoR2V0KgoNb3RzOkRlc2NyaWJlKgoIb3RzOkdldCoKCW90czpMaXN0KhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzOTYwMjU3NTI3NDY2MTQwNzhyEnJhbXRlc3RhcHByZWFkb25seQ=="
         }, 

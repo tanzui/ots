@@ -48,9 +48,9 @@ To meet these requirements, use STS to grant users temporary access permission. 
     4.  Click **Create Authorization Policy** and then click **Close**.
 4.  Grant the role RamTestAppReadOnly the ram-test-app read-only permission.
     1.  Click Roles and click **Authorize** on the right side of role RamTestAppReadOnly.
-    2.  Select ram-test-app-readonly and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960255411777_en-US.png).
+    2.  Select ram-test-app-readonly and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296482111777_en-US.png).
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960255511784_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296482111784_en-US.png)
 
     3.  Click **OK**.
 
@@ -102,7 +102,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
             {
                 "Effect": "Allow",
                 "Action": "sts:AssumeRole",
-                "Resource": "acs:ram:1983407596944237:role/ramtestappreadonly"
+                "Resource": "acs:ram:198***237:role/ramtestappreadonly"
             }
         ]
         }
@@ -117,7 +117,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
             {
                 "Effect": "Allow",
                 "Action": "sts:AssumeRole",
-                "Resource": "acs:ram:1983407596944237:role/ramtestappwrite"
+                "Resource": "acs:ram:198***237:role/ramtestappwrite"
             }
         ]
         }
@@ -127,7 +127,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
         **Note:** The content entered after Resource is a role ID. To find the role ID, click **Manage** on the Roles page.
 
     5.  Click **Users**.
-    6.  Find `AliyunSTSAssumeRolePolicy2016011401` and `AliyunSTSAssumeRolePolicy2016011402`, and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/153960255411777_en-US.png) to add them.
+    6.  Find `AliyunSTSAssumeRolePolicy2016011401` and `AliyunSTSAssumeRolePolicy2016011402`, and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296482111777_en-US.png) to add them.
 -   Use STS
 
     [Download STS command line tool Python](https://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/cn/oss/0.4.30/assets/tool/sts.py).
@@ -135,7 +135,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
     For more information about the call method and parameter description, see [STS Help Documentation](https://partners-intl.aliyun.com/help/doc-detail/28756.htm).
 
     ```
-    $python ./sts.py AssumeRole RoleArn=acs:ram::1983407596944237:role/ramtestappreadonly RoleSessionName=usr001 Policy='{"Version":"1","Statement":[{"Effect":"Allow","Action":["ots:ListTable","ots:DescribeTable"],"Resource":["acs:ots:*:*:ram-test-app","acs:ots:*:*:ram-test-app/*"]}]}' DurationSeconds=1000 --id=id --secret=secret
+    $python ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=usr001 Policy='{"Version":"1","Statement":[{"Effect":"Allow","Action":["ots:ListTable","ots:DescribeTable"],"Resource":["acs:ots:*:*:ram-test-app","acs:ots:*:*:ram-test-app/*"]}]}' DurationSeconds=1000 --id=id --secret=secret
     
     ```
 
@@ -174,15 +174,15 @@ To meet these requirements, use STS to grant users temporary access permission. 
     1.  Use STS to obtain temporary credentials.
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::1983407596944237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
         {
         "AssumedRoleUser": {
-            "Arn": "acs:ram::1983407596944237:role/ramtestappwrite/session001", 
+            "Arn": "acs:ram::198***237:role/ramtestappwrite/session001", 
             "AssumedRoleId": "330629052749595885:session001"
         }, 
         "Credentials": {
-            "AccessKeyId": "STS.x4gG7KMsfHckQe8nPKLO", 
-            "AccessKeySecret": "IA6CJh5kE5J5m8mR6aQXWbMemSL63Xh7SIhrEcke", 
+            "AccessKeyId": "***", 
+            "AccessKeySecret": "***", 
             "Expiration": "2016-01-14T07:58:14Z", 
             "SecurityToken": "CAESgAQIARKAATDsbhiBSujhVEHoMKm1i17pyZhPTCe1BnVF5YzdNyRos4WuQjalxLkOE/hNNxg25vTo9bljKg4VCcrfh6GkJNujMMcJ4V1i/0RMDLfXwa0/vOHP9W/oSQpwAD5EaWJfqVY/nxwmJ0aKJDHPmSieWssnlmocaOZAgHkpCqQSSDA8GhhTVFMueDRnRzdLTXNmSGNrUWU4blBLTE8iEjMzMDYyOTA1Mjc0OTU5NTg4NSoGdXNyMDAxMPnCkfmjKjoGUnNhTUQ1QuIBCgExGtwBCgVBbGxvdxJnCgxBY3Rpb25FcXVhbHMSBkFjdGlvbhpPCgtvdHM6Q3JlYXRlKgoPb3RzOkJhdGNoV3JpdGUqCghvdHM6UHV0KgoLb3RzOkluc2VydCoKC290czpVcGRhdGUqCgtvdHM6RGVsZXRlKhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzMzA2MjkwNTI3NDk1OTU4ODVyD3JhbXRlc3RhcHB3cml0ZQ=="
         }, 
@@ -208,15 +208,15 @@ To meet these requirements, use STS to grant users temporary access permission. 
     1.  Use STS to obtain temporary credentials.
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::1983407596944237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
         {
         "AssumedRoleUser": {
-            "Arn": "acs:ram::1983407596944237:role/ramtestappreadonly/session002",
+            "Arn": "acs:ram::198***237:role/ramtestappreadonly/session002",
             "AssumedRoleId": "396025752746614078:session002"
         },
         "Credentials": {
-            "AccessKeyId": "STS. 0qJ2UE8AalcHdQ6n2Q8Q",
-            "AccessKeySecret": "pSaUjb8O9mU5M76nkC6FHt6wKwbCVYO27gxSEBAu",
+            "AccessKeyId": "***",
+            "AccessKeySecret": "***",
             "Expiration": "2016-01-14T08:14:16Z",
             "SecurityToken": "CAES6wMIARKAAVtHeNgUnhk132OwDfxZTu8gPQCxfakYLeWha/FxoEYNqBKQTtyI4WPC5mpYuu8+n+yamSYTI2VPQ/z44fcYCNT1bQ0km87F3nb6EJxVvCdJIPNGVwQBMdQl/FLwBVhEGJ9BIwog4fMzwhERjqnAP8HbynAIQpG55BHaIXmv53x+GhhTVFMuMHFKMlVFOEFhbGNIZFE2bjJROFEiEjM5NjAyNTc1Mjc0NjYxNDA3OCoKc2Vzc2lvbjAwMjConMz5oyo6BlJzYU1ENULGAQoBMRrAAQoFQWxsb3cSSwoMQWN0aW9uRXF1YWxzEgZBY3Rpb24aMwoNb3RzOkJhdGNoR2V0KgoNb3RzOkRlc2NyaWJlKgoIb3RzOkdldCoKCW90czpMaXN0KhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzOTYwMjU3NTI3NDY2MTQwNzhyEnJhbXRlc3RhcHByZWFkb25seQ=="
         }, 
