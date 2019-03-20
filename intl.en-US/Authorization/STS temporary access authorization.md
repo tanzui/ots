@@ -48,9 +48,9 @@ To meet these requirements, use STS to grant users temporary access permission. 
     4.  Click **Create Authorization Policy** and then click **Close**.
 4.  Grant the role RamTestAppReadOnly the ram-test-app read-only permission.
     1.  Click Roles and click **Authorize** on the right side of role RamTestAppReadOnly.
-    2.  Select ram-test-app-readonly and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296482111777_en-US.png).
+    2.  Select ram-test-app-readonly and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305066911777_en-US.png).
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296482111784_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305067011784_en-US.png)
 
     3.  Click **OK**.
 
@@ -127,7 +127,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
         **Note:** The content entered after Resource is a role ID. To find the role ID, click **Manage** on the Roles page.
 
     5.  Click **Users**.
-    6.  Find `AliyunSTSAssumeRolePolicy2016011401` and `AliyunSTSAssumeRolePolicy2016011402`, and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296482111777_en-US.png) to add them.
+    6.  Find `AliyunSTSAssumeRolePolicy2016011401` and `AliyunSTSAssumeRolePolicy2016011402`, and click ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305066911777_en-US.png) to add them.
 -   Use STS
 
     [Download STS command line tool Python](https://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/cn/oss/0.4.30/assets/tool/sts.py).
@@ -158,7 +158,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
     In this example, the RAM user ram\_test\_app is used to access Table Store. In actual scenarios, replace the following AccessKey with your own AccessKey.
 
     ```
-    python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id 6iTlV1uhiY71mlRt --key clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+    python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id 6iT***lRt --key ****
     You cannot access the instance!
     ErrorCode: OTSNoPermissionAccess
     ErrorMessage: You have no permission to access the requested resource, please contact the resource owner.
@@ -174,7 +174,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
     1.  Use STS to obtain temporary credentials.
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=<yourAccessKeyId> --secret=<yourAccessKeySecret>
         {
         "AssumedRoleUser": {
             "Arn": "acs:ram::198***237:role/ramtestappwrite/session001", 
@@ -184,7 +184,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
             "AccessKeyId": "***", 
             "AccessKeySecret": "***", 
             "Expiration": "2016-01-14T07:58:14Z", 
-            "SecurityToken": "CAESgAQIARKAATDsbhiBSujhVEHoMKm1i17pyZhPTCe1BnVF5YzdNyRos4WuQjalxLkOE/hNNxg25vTo9bljKg4VCcrfh6GkJNujMMcJ4V1i/0RMDLfXwa0/vOHP9W/oSQpwAD5EaWJfqVY/nxwmJ0aKJDHPmSieWssnlmocaOZAgHkpCqQSSDA8GhhTVFMueDRnRzdLTXNmSGNrUWU4blBLTE8iEjMzMDYyOTA1Mjc0OTU5NTg4NSoGdXNyMDAxMPnCkfmjKjoGUnNhTUQ1QuIBCgExGtwBCgVBbGxvdxJnCgxBY3Rpb25FcXVhbHMSBkFjdGlvbhpPCgtvdHM6Q3JlYXRlKgoPb3RzOkJhdGNoV3JpdGUqCghvdHM6UHV0KgoLb3RzOkluc2VydCoKC290czpVcGRhdGUqCgtvdHM6RGVsZXRlKhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzMzA2MjkwNTI3NDk1OTU4ODVyD3JhbXRlc3RhcHB3cml0ZQ=="
+            "SecurityToken": "CAE****0ZQ=="
         }, 
         "RequestId": "5F92B248-F200-40F8-A05A-C9C7D018E351"
         }
@@ -194,7 +194,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
     2.  Use Table Store CLI tool to write data. \(The Token parameter is supported by Table Store CLI tool v1.2.\)
 
         ```
-        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS.x4gG7KMsfHckQe8nPKLO --key IA6CJh5kE5J5m8mR6aQXWbMemSL63Xh7SIhrEcke --token=CAESgAQIARKAATDsbhiBSujhVEHoMKm1i17pyZhPTCe1BnVF5YzdNyRos4WuQjalxLkOE/hNNxg25vTo9bljKg4VCcrfh6GkJNujMMcJ4V1i/0RMDLfXwa0/vOHP9W/oSQpwAD5EaWJfqVY/nxwmJ0aKJDHPmSieWssnlmocaOZAgHkpCqQSSDA8GhhTVFMueDRnRzdLTXNmSGNrUWU4blBLTE8iEjMzMDYyOTA1Mjc0OTU5NTg4NSoGdXNyMDAxMPnCkfmjKjoGUnNhTUQ1QuIBCgExGtwBCgVBbGxvdxJnCgxBY3Rpb25FcXVhbHMSBkFjdGlvbhpPCgtvdHM6Q3JlYXRlKgoPb3RzOkJhdGNoV3JpdGUqCghvdHM6UHV0KgoLb3RzOkluc2VydCoKC290czpVcGRhdGUqCgtvdHM6RGVsZXRlKhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzMzA2MjkwNTI3NDk1OTU4ODVyD3JhbXRlc3RhcHB3cml0ZQ==
+        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS***KLO --key **** --token=CAE****0ZQ==
         
         	OTS-TableStoreTest>$ put test_write_read '001' age:integer=30
         	A new row has been put in table test_write_read
@@ -208,7 +208,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
     1.  Use STS to obtain temporary credentials.
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=<yourAccessKeyId> --secret=<yourAccessKeySecret>
         {
         "AssumedRoleUser": {
             "Arn": "acs:ram::198***237:role/ramtestappreadonly/session002",
@@ -218,7 +218,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
             "AccessKeyId": "***",
             "AccessKeySecret": "***",
             "Expiration": "2016-01-14T08:14:16Z",
-            "SecurityToken": "CAES6wMIARKAAVtHeNgUnhk132OwDfxZTu8gPQCxfakYLeWha/FxoEYNqBKQTtyI4WPC5mpYuu8+n+yamSYTI2VPQ/z44fcYCNT1bQ0km87F3nb6EJxVvCdJIPNGVwQBMdQl/FLwBVhEGJ9BIwog4fMzwhERjqnAP8HbynAIQpG55BHaIXmv53x+GhhTVFMuMHFKMlVFOEFhbGNIZFE2bjJROFEiEjM5NjAyNTc1Mjc0NjYxNDA3OCoKc2Vzc2lvbjAwMjConMz5oyo6BlJzYU1ENULGAQoBMRrAAQoFQWxsb3cSSwoMQWN0aW9uRXF1YWxzEgZBY3Rpb24aMwoNb3RzOkJhdGNoR2V0KgoNb3RzOkRlc2NyaWJlKgoIb3RzOkdldCoKCW90czpMaXN0KhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzOTYwMjU3NTI3NDY2MTQwNzhyEnJhbXRlc3RhcHByZWFkb25seQ=="
+            "SecurityToken": "CAE****5seQ=="
         }, 
         "RequestId": "EE788165-B760-4014-952C-E58ED229C80D"
         }
@@ -228,7 +228,7 @@ To meet these requirements, use STS to grant users temporary access permission. 
     2.  Use the Table Store CLI tool to read data. \(The Token parameter is supported by Table Store CLI tool v1.2.\)
 
         ```
-        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS. 0qJ2UE8AalcHdQ6n2Q8Q --key pSaUjb8O9mU5M76nkC6FHt6wKwbCVYO27gxSEBAu --token=CAES6wMIARKAAVtHeNgUnhk132OwDfxZTu8gPQCxfakYLeWha/FxoEYNqBKQTtyI4WPC5mpYuu8+n+yamSYTI2VPQ/z44fcYCNT1bQ0km87F3nb6EJxVvCdJIPNGVwQBMdQl/FLwBVhEGJ9BIwog4fMzwhERjqnAP8HbynAIQpG55BHaIXmv53x+GhhTVFMuMHFKMlVFOEFhbGNIZFE2bjJROFEiEjM5NjAyNTc1Mjc0NjYxNDA3OCoKc2Vzc2lvbjAwMjConMz5oyo6BlJzYU1ENULGAQoBMRrAAQoFQWxsb3cSSwoMQWN0aW9uRXF1YWxzEgZBY3Rpb24aMwoNb3RzOkJhdGNoR2V0KgoNb3RzOkRlc2NyaWJlKgoIb3RzOkdldCoKCW90czpMaXN0KhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzOTYwMjU3NTI3NDY2MTQwNzhyEnJhbXRlc3RhcHByZWFkb25seQ==
+        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS***Q8Q --key **** --token=CAE***5seQ==
         
         	OTS-TableStoreTest>: get test_write_read '001'
         	age:INTEGER='30'

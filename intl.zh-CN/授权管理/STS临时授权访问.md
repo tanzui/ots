@@ -43,7 +43,7 @@
         
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296481612253_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305066512253_zh-CN.png)
 
         该策略内容表示对 ram-test-app 授予只读权限。
 
@@ -52,7 +52,7 @@
     1.  在角色管理页面，单击 RamTestAppReadOnly 右侧操作栏中的**授权**按钮。
     2.  将 ram-test-app-readonly 权限添加至右侧栏中。完成给该角色赋予对 ram-test-app 拥有只读的权限。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155296481711784_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305066511784_zh-CN.png)
 
     3.  单击**确定**。
 
@@ -166,7 +166,7 @@
     使用 ram\_test\_app 这个子账号直接来访问，请将下面的 AccessKey 换成自己测试用的 AccessKey。
 
     ```
-    python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id 6iTlV1uhiY71mlRt --key clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+    python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id <yourAccessKeyId> --key <yourAccessKeySecret>
     You cannot access the instance!
     ErrorCode: OTSNoPermissionAccess
     ErrorMessage: You have no permission to access the requested resource, please contact the resource owner.
@@ -182,16 +182,16 @@
     1.  使用 STS 来获取临时凭证。
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=<yourAccessKeyId> --secret=<yourAccessKeySecret>
         {
         "AssumedRoleUser": {
             "Arn": "acs:ram::198***237:role/ramtestappwrite/session001", 
-            "AssumedRoleId": "330629052749595885:session001"
+            "AssumedRoleId": "33062905274959****:session001"
         }, 
         "Credentials": {
             "AccessKeyId": "***", 
             "AccessKeySecret": "***"
-            "SecurityToken": "CAESgAQIARKAATDsbhiBSujhVEHoMKm1i17pyZhPTCe1BnVF5YzdNyRos4WuQjalxLkOE/hNNxg25vTo9bljKg4VCcrfh6GkJNujMMcJ4V1i/0RMDLfXwa0/vOHP9W/oSQpwAD5EaWJfqVY/nxwmJ0aKJDHPmSieWssnlmocaOZAgHkpCqQSSDA8GhhTVFMueDRnRzdLTXNmSGNrUWU4blBLTE8iEjMzMDYyOTA1Mjc0OTU5NTg4NSoGdXNyMDAxMPnCkfmjKjoGUnNhTUQ1QuIBCgExGtwBCgVBbGxvdxJnCgxBY3Rpb25FcXVhbHMSBkFjdGlvbhpPCgtvdHM6Q3JlYXRlKgoPb3RzOkJhdGNoV3JpdGUqCghvdHM6UHV0KgoLb3RzOkluc2VydCoKC290czpVcGRhdGUqCgtvdHM6RGVsZXRlKhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzMzA2MjkwNTI3NDk1OTU4ODVyD3JhbXRlc3RhcHB3cml0ZQ=="
+            "SecurityToken": "CAE****0ZQ=="
         }, 
         "RequestId": "5F92B248-F200-40F8-A05A-C9C7D018E351"
         }
@@ -201,7 +201,7 @@
     2.  使用 CLI 工具写入数据（版本 V1.2 开始支持 token 参数，待发布）。
 
         ```
-        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS.x4gG7KMsfHckQe8nPKLO --key IA6CJh5kE5J5m8mR6aQXWbMemSL63Xh7SIhrEcke --token=CAESgAQIARKAATDsbhiBSujhVEHoMKm1i17pyZhPTCe1BnVF5YzdNyRos4WuQjalxLkOE/hNNxg25vTo9bljKg4VCcrfh6GkJNujMMcJ4V1i/0RMDLfXwa0/vOHP9W/oSQpwAD5EaWJfqVY/nxwmJ0aKJDHPmSieWssnlmocaOZAgHkpCqQSSDA8GhhTVFMueDRnRzdLTXNmSGNrUWU4blBLTE8iEjMzMDYyOTA1Mjc0OTU5NTg4NSoGdXNyMDAxMPnCkfmjKjoGUnNhTUQ1QuIBCgExGtwBCgVBbGxvdxJnCgxBY3Rpb25FcXVhbHMSBkFjdGlvbhpPCgtvdHM6Q3JlYXRlKgoPb3RzOkJhdGNoV3JpdGUqCghvdHM6UHV0KgoLb3RzOkluc2VydCoKC290czpVcGRhdGUqCgtvdHM6RGVsZXRlKhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzMzA2MjkwNTI3NDk1OTU4ODVyD3JhbXRlc3RhcHB3cml0ZQ==
+        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id <yourAccessKeyId> --key <yourAccessKeySecret> --token=CAE****0ZQ==
         
         	OTS-TableStoreTest>$ put test_write_read '001' age:integer=30
         	A new row has been put in table test_write_read
@@ -215,7 +215,7 @@
     1.  使用 STS 来获取临时凭证。
 
         ```
-        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iTlV1uhiY71mlRt --secret=clkkuDiq69IJWJ7PnA9PXJxhRWMr3P
+        python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iT***lRt --secret=****
         {
         "AssumedRoleUser": {
             "Arn": "acs:ram::198***237:role/ramtestappreadonly/session002",
@@ -225,7 +225,7 @@
             "AccessKeyId": "***",
             "AccessKeySecret": "***",
             "Expiration": "2016-01-14T08:14:16Z",
-            "SecurityToken": "CAES6wMIARKAAVtHeNgUnhk132OwDfxZTu8gPQCxfakYLeWha/FxoEYNqBKQTtyI4WPC5mpYuu8+n+yamSYTI2VPQ/z44fcYCNT1bQ0km87F3nb6EJxVvCdJIPNGVwQBMdQl/FLwBVhEGJ9BIwog4fMzwhERjqnAP8HbynAIQpG55BHaIXmv53x+GhhTVFMuMHFKMlVFOEFhbGNIZFE2bjJROFEiEjM5NjAyNTc1Mjc0NjYxNDA3OCoKc2Vzc2lvbjAwMjConMz5oyo6BlJzYU1ENULGAQoBMRrAAQoFQWxsb3cSSwoMQWN0aW9uRXF1YWxzEgZBY3Rpb24aMwoNb3RzOkJhdGNoR2V0KgoNb3RzOkRlc2NyaWJlKgoIb3RzOkdldCoKCW90czpMaXN0KhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzOTYwMjU3NTI3NDY2MTQwNzhyEnJhbXRlc3RhcHByZWFkb25seQ=="
+            "SecurityToken": "CAE****seQ=="
         }, 
         "RequestId": "EE788165-B760-4014-952C-E58ED229C80D"
         }
@@ -235,7 +235,7 @@
     2.  使用 CLI 工具读取数据（版本 V1.2 开始支持 token 参数，待发布）。
 
         ```
-        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS.0qJ2UE8AalcHdQ6n2Q8Q --key pSaUjb8O9mU5M76nkC6FHt6wKwbCVYO27gxSEBAu --token=CAES6wMIARKAAVtHeNgUnhk132OwDfxZTu8gPQCxfakYLeWha/FxoEYNqBKQTtyI4WPC5mpYuu8+n+yamSYTI2VPQ/z44fcYCNT1bQ0km87F3nb6EJxVvCdJIPNGVwQBMdQl/FLwBVhEGJ9BIwog4fMzwhERjqnAP8HbynAIQpG55BHaIXmv53x+GhhTVFMuMHFKMlVFOEFhbGNIZFE2bjJROFEiEjM5NjAyNTc1Mjc0NjYxNDA3OCoKc2Vzc2lvbjAwMjConMz5oyo6BlJzYU1ENULGAQoBMRrAAQoFQWxsb3cSSwoMQWN0aW9uRXF1YWxzEgZBY3Rpb24aMwoNb3RzOkJhdGNoR2V0KgoNb3RzOkRlc2NyaWJlKgoIb3RzOkdldCoKCW90czpMaXN0KhJqCg5SZXNvdXJjZUVxdWFscxIIUmVzb3VyY2UaTgohYWNzOm90czoqOio6aW5zdGFuY2UvcmFtLXRlc3QtYXBwCilhY3M6b3RzOio6KjppbnN0YW5jZS9yYW0tdGVzdC1hcHAvdGFibGUvKkoQMTk4MzQwNzU5Njk0NDIzN1IFMjY4NDJaD0Fzc3VtZWRSb2xlVXNlcmAAahIzOTYwMjU3NTI3NDY2MTQwNzhyEnJhbXRlc3RhcHByZWFkb25seQ==
+        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS***Q8Q --key **** --token=CAE****Q==
         
         	OTS-TableStoreTest>: get test_write_read '001'
         	age:INTEGER='30'
