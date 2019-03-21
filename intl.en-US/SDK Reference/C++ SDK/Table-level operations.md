@@ -2,13 +2,13 @@
 
 The SDK offers table operation interfaces, such as CreateTable, ListTable, UpdateTable, DescribeTable, and DeleteTable.
 
-**Note:** The following operation examples are based on synchronous interfaces. See [Asynchronous interfaces](reseller.en-US/SDK Reference/C++ SDK/Asynchronous interface.md#) for more information on how to operate asynchronous interfaces.
+**Note:** The following operation examples are based on synchronous interfaces. See [Asynchronous interfaces](intl.en-US/SDK Reference/C++ SDK/Asynchronous interface.md#) for more information on how to operate asynchronous interfaces.
 
 ## Create a table \(CreateTable\) {#section_bbz_flf_2fb .section}
 
 You must always specify the name and primary key of the table you want to create. The primary key contains between 1 and 4 primary key columns, each of which has a name and type.
 
-In Table Store tables, you can set auto increments in primary key columns. See [Primary key column auto-increment](reseller.en-US/SDK Reference/C++ SDK/Primary key column auto-increment.md#) for more information.
+In Table Store tables, you can set auto increments in primary key columns. See [Primary key column auto-increment](intl.en-US/SDK Reference/C++ SDK/Primary key column auto-increment.md#) for more information.
 
 **Example**
 
