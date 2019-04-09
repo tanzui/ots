@@ -196,11 +196,11 @@ next\_start\_primary\_key:
 -   若不为空，则表示本次 GetRange 的响应消息中只包含了 \[inclusive\_start\_primary\_key, next\_start\_primary\_key\) 间的数据，若需要剩下的数据，需要将 next\_start\_primary\_key 作为 inclusive\_start\_primary\_key，原始请求中的 exclusive\_end\_primary\_key 作为 exclusive\_end\_primary\_key 继续执行 GetRange 操作。
 
 
-**说明：** 表格存储系统中限制了 GetRange 操作的响应消息中数据不超过 5000 行，大小不超过 4 M，并且返回的数据量不超过当前剩余的预留读吞吐量。即使在 GetRange 请求中未设定 limit，在响应中仍可能出现 next\_start\_primary\_key。因此在使用 GetRange 时一定要对响应中是否有 next\_start\_primary\_key 进行处理。
+**说明：** 表格存储系统中限制了 GetRange 操作的响应消息中数据不超过 5000 行，大小不超过 4 MB。即使在 GetRange 请求中未设定 limit，在响应中仍可能出现 next\_start\_primary\_key。因此在使用 GetRange 时一定要对响应中是否有 next\_start\_primary\_key 进行处理。
 
 服务能力单元消耗：
 
--   GetRange 操作消耗读服务能力单元的数值为查询范围内所有行主键数据大小与实际读取的属性列数据大小之和除以 4 KB 向上取整。关于数据大小的计算请参见[产品定价](../../../../intl.zh-CN/产品定价/计量项和计费说明.md#)。
+-   GetRange 操作消耗读服务能力单元的数值为查询范围内所有行主键数据大小与实际读取的属性列数据大小之和除以 4 KB 向上取整。关于数据大小的计算请参见[产品定价](../../../../../intl.zh-CN/产品定价/计量项和计费说明.md#)。
 
 -   如果请求超时，结果未定义，服务能力单元有可能被消耗，也可能未被消耗。
 
