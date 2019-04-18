@@ -20,7 +20,6 @@ HBase 1.0.0 及以上的版本中，用户需要管理 Connection 的生命周�
 Connection connection = ConnectionFactory.createConnection(config);
 // ...
 connection.close();
-
 ```
 
 ## TableName 类 { .section}
@@ -33,30 +32,28 @@ connection.close();
 String tableName = "MyTable";
 // or byte[] tableName = Bytes.toBytes("MyTable");
 TableName tableNameObj = TableName.valueOf(tableName);
-
 ```
 
-## Table，BufferedMutator 和 RegionLocator 接口 { .section}
+## Table、BufferedMutator 和 RegionLocator 接口 { .section}
 
 从 HBase Client 1.0.0 开始，HTable 接口已经废弃，取而代之的是 Table、BufferedMutator 和 RegionLocator 三个接口。
 
--    `org.apache.hadoop.hbase.client.Table`：用于操作单张表的读写等请求
+-   `org.apache.hadoop.hbase.client.Table`：用于操作单张表的读写等请求
 
--    `org.apache.hadoop.hbase.client.BufferedMutator`：用于异步批量写，对应于旧版本 HTableInterface 接口中的`setAutoFlush(boolean)` 
+-   `org.apache.hadoop.hbase.client.BufferedMutator`：用于异步批量写，对应于旧版本 HTableInterface 接口中的`setAutoFlush(boolean)`
 
--    `org.apache.hadoop.hbase.client.RegionLocator`：表分区信息
+-   `org.apache.hadoop.hbase.client.RegionLocator`：表分区信息
 
 
 Table、BufferedMutator 和 RegionLocator 三个接口都不是线程安全的，但比较轻量，可以为每个线程创建一个对象。
 
 ## Admin 接口 { .section}
 
-从 HBase Client 1.0.0 开始，HBaseAdmin 类被新接口`org.apache.hadoop.hbase.client.Admin`取代。由于表格存储是一个云服务，大多数运维类接口都是自动处理的，所以 Admin 接口中的众多接口都不会被支持，具体区别请参见[表格存储和 HBase 的区别](intl.zh-CN/产品功能/HBase 支持/表格存储和 HBase 的区别.md#)。
+从 HBase Client 1.0.0 开始，HBaseAdmin 类被新接口`org.apache.hadoop.hbase.client.Admin`取代。由于表格存储是一个云服务，大多数运维类接口都是自动处理的，所以 Admin 接口中的众多接口都不会被支持，具体区别请参见[表格存储和 HBase 的区别](cn.zh-CN/产品功能/HBase 支持/表格存储和 HBase 的区别.md#)。
 
 通过 Connection 实例创建 Admin 实例：
 
 ```language-java
 Admin admin = connection.getAdmin();
-
 ```
 
