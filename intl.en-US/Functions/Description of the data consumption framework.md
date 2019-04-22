@@ -31,7 +31,7 @@ The Tunnel client regularly checks for heartbeats to detect active channels, upd
 
     Based on the number of active Tunnel clients obtained in the heartbeat request, Tunnel Service allocates available partitions to different clients to balance the loads. Tunnel Service automatically processes channel status as described in the following figure, and drives channel consumption and load balancing.
 
-    ![](images/39085_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/127799/155589733439085_en-US.png)
 
     Tunnel Service and Tunnel clients change their status by using heartbeat requests and channel version updates.
 
