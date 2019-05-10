@@ -69,17 +69,13 @@ Commands:
   create                 Creat a new table 创建表
   del                    Delete the specify row from TableStore 删除一行数据
   desc                   Show table meta 查询表描述信息
-  desc_stream            Describe the stream 获取当前stream的数据分片信息
   drop                   Drop the table 删除表
   exit                   Exit the program
   export                 Export the data of table to disk from TableStore, not support multi version 表数据导出磁盘文件，不支持数据多版本
   get                    Get specify row from TableStore 读取一行数据
-  get_stream_record      Read the incremental content of the current shard 读取具体的修改记录
-  get_stream_shard       Gets the start iterator to read the current shard record 获取当前shard的读iterator值
   help                   Display help
   import                 Load the data to TableStore, not support multi version 磁盘文件数据导入表
   list                   List all tables 列出表名称
-  list_stream            List all streams 获取当前表的stream信息
   points                 Logically divide the data of the full table into several shards close to the specified size
   press_check            Check data for press 检查压测状态
   press_input            Input data for press 开启压测
@@ -226,45 +222,6 @@ Sample:
     del --pk '["86", 6771]'
 Flags:
       --pk string   PrimaryKey value
-```
-
-## 增量数据操作 {#section_qdt_a3v_pzz .section}
-
- **获取当前表的stream信息** 
-
-``` {#codeblock_xk1_qpw_pz3}
-Sample:
-    list_stream -t tablename
-Flags:
-  -t, --table string   table name
-```
-
- **当前stream的数据分片信息** 
-
-``` {#codeblock_uue_1mj_0an}
-Sample:
-    desc_stream -i streamid
-Flags:
-  -i, --id string   stream id
-```
-
- **获取当前shard的读iterator值** 
-
-``` {#codeblock_4hl_fsx_fk0}
-Sample:
-    get_stream_shard -i streamid -s shardid
-Flags:
-  -i, --id string      stream id
-  -s, --shard string   stream shard id
-```
-
- **读取具体的修改记录** 
-
-``` {#codeblock_k8i_hzl_gwr}
-Sample:
-    get_stream_record -i sharditerator
-Flags:
-  -i, --iter string   shard iterator
 ```
 
 ## 简单压测操作 {#section_evz_8ck_57z .section}
