@@ -2,9 +2,9 @@
 
 您可以使用PutRow接口插入数据到指定的行。
 
-## 请求消息结构 { .section}
-
 **说明：** 如果指定行不存在，则新增一行；若指定行存在，则覆盖原有行。
+
+## 请求消息结构 { .section}
 
 ```language-protobuf
 message PutRowRequest {
