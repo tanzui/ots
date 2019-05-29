@@ -64,7 +64,7 @@ Grid模型（网格模型）是表格存储针对多维网格数据设计的模�
 -   meta表示这个数据集的元数据，例如GridDataSetId、各维度长度、自定义属性等。
 -   data表示这个数据集里实际的网格数据。data相比meta在数据大小上要大很多。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314830/155912046048133_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314830/155912051648133_zh-CN.png)
 
 ## 使用 {#section_2b0_vy7_o49 .section}
 
