@@ -18,7 +18,7 @@ Conditional update can be used to implement optimistic locking. When a row needs
         'row_existence' => <RowExistenceExpectation>
         'column_condition' => <ColumnCondition>
     ]
-
+		
 ```
 
 The structure of SingleColumnValueCondition is as follows:
@@ -31,7 +31,7 @@ The structure of SingleColumnValueCondition is as follows:
         'pass_if_missing' => true || false
         'latest_version_only' => true || false
     ]
-
+		
 ```
 
 The structure of CompositeColumnValueCondition is as follows:
@@ -46,17 +46,17 @@ The structure of CompositeColumnValueCondition is as follows:
             // Other conditions
         ]
     ]
-
+		
 ```
 
 Alternatively, when only a row existence condition exists \(in most cases\), the format can be as follows:
 
 ```language-php
     'condition' => <RowExistenceExpectation>
-
+		
 ```
 
-**Format description**
+**Format description** 
 
 -   row\_existence: the row existence condition.
     -   The row existence conditions include IGNORE, EXPECT\_EXIST, and EXPECT\_NOT\_EXIST,
@@ -69,7 +69,7 @@ Alternatively, when only a row existence condition exists \(in most cases\), the
         -   value: the column value.
             -   The column value is in the format of \[Value, Type\]. Type can be set to ColumnTypeConst::CONST\_INTEGER, ColumnTypeConst::CONST\_STRING, ColumnTypeConst::CONST\_BINARY, ColumnTypeConst::CONST\_BOOLEAN, or ColumnTypeConst::CONST\_DOUBLE, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), BINARY, BOOLEAN, and DOUBLE types. If the type is BINARY, it must be specified. Otherwise, the type can be ignored.
             -   If the type is not BINARY, the column value can be in the format of \[Value\].
-        -   comparator: [the comparison type](https://help.aliyun.com/document_detail/35160.html).
+        -   comparator: [ComparatorType](../../../../intl.en-US/API Reference/Data Types/ComparatorType.md#).
             -   EQUAL: expressed by ComparatorTypeConst::CONST\_EQUAL.
             -   NOT\_EQUAL: expressed by ComparatorTypeConst::CONST\_NOT\_EQUAL.
             -   GREATER\_THAN: expressed by ComparatorTypeConst::CONST\_GREATER\_THAN.
@@ -86,7 +86,7 @@ Alternatively, when only a row existence condition exists \(in most cases\), the
             -   The default value is true.
     -   CompositeColumnValueCondition has a tree structure. It contains the inner node logical\_operator and the leaf node SingleColumnValueCondition.
 
-        -   logical\_operator: [the logical operator](https://help.aliyun.com/document_detail/35162.html), in the enumeration type.
+        -   logical\_operator: [LogicalOperator](../../../../intl.en-US/API Reference/Data Types/LogicalOperator.md#), in the enumeration type.
             -   NOT: expressed by LogicalOperatorConst::CONST\_NOT.
             -   AND: expressed by LogicalOperatorConst::CONST\_AND.
             -   OR: expressed by LogicalOperatorConst::CONST\_OR.
@@ -108,7 +108,7 @@ The following code provides an example of how to construct a SingleColumnValueCo
         'pass_if_missing' => false                         // If a row does not contain the Col0 column, the row is not returned.
         'latest_version_only' => true                      // Only the values of the latest version is checked.
     ];
-
+		
 ```
 
 **Example 2**
