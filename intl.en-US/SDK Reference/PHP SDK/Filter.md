@@ -10,7 +10,7 @@ Note that the filters are used to filter the data that has been read. Therefore,
 
 ```language-php
     'column_filter' => <ColumnFilter>
-
+		
 ```
 
 The structure of SingleColumnValueFilter is as follows:
@@ -23,7 +23,7 @@ The structure of SingleColumnValueFilter is as follows:
         'pass_if_missing' => true || false
         'latest_version_only' => true || false
     ]
-
+		
 ```
 
 The structure of CompositeColumnValueFilter is as follows:
@@ -38,10 +38,10 @@ The structure of CompositeColumnValueFilter is as follows:
             // Other conditions
         ]
     ]
-
+		
 ```
 
-**Format description**
+**Format description** 
 
 -   column\_filter: the filtering condition.
 
@@ -50,7 +50,7 @@ The structure of CompositeColumnValueFilter is as follows:
         -   value: the column value.
             -   The column value is in the format of \[Value, Type\]. Type can be set to ColumnTypeConst::CONST\_INTEGER, ColumnTypeConst::CONST\_STRING, ColumnTypeConst::CONST\_BINARY, ColumnTypeConst::CONST\_BOOLEAN, or ColumnTypeConst::CONST\_DOUBLE, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), BINARY, BOOLEAN, and DOUBLE types. If the type is BINARY, it must be specified. Otherwise, the type can be ignored.
             -   If the type is not BINARY, the column value can be in the format of \[Value\].
-        -   comparator: [the comparison type](https://help.aliyun.com/document_detail/35160.html).
+        -   comparator: [ComparatorType](../../../../intl.en-US/API Reference/Data Types/ComparatorType.md#).
             -   EQUAL: expressed by ComparatorTypeConst::CONST\_EQUAL.
             -   NOT\_EQUAL: expressed by ComparatorTypeConst::CONST\_NOT\_EQUAL.
             -   GREATER\_THAN: expressed by ComparatorTypeConst::CONST\_GREATER\_THAN.
@@ -66,7 +66,7 @@ The structure of CompositeColumnValueFilter is as follows:
             -   A value of false indicates that a row is returned if the value of any version for the specified column in the row meets the condition.
             -   The default value is true.
     -   CompositeColumnValueFilter has a tree structure. It contains the inner node logical\_operator and the leaf node SingleColumnValueFilter.
-        -   logical\_operator: [the logical operator](https://help.aliyun.com/document_detail/35162.html), in the enumeration type.
+        -   logical\_operator: [LogicalOperator](../../../../intl.en-US/API Reference/Data Types/LogicalOperator.md#), in the enumeration type.
             -   NOT: expressed by LogicalOperatorConst::CONST\_NOT.
             -   AND: expressed by LogicalOperatorConst::CONST\_AND.
             -   OR: expressed by LogicalOperatorConst::CONST\_OR.
@@ -85,10 +85,10 @@ The structure of CompositeColumnValueFilter is as follows:
             'pass_if_missing' => false                         // If a row does not contain the Col0 column, the row is not returned.
             'latest_version_only' => true                      // Only the values of the latest version is checked.
         ];
-    
+    					
     ```
 
-    **Example 2**
+     **Example 2** 
 
     The following code provides an example of how to construct a CompositeColumnValueFilter:
 
@@ -121,7 +121,7 @@ The structure of CompositeColumnValueFilter is as follows:
                 ]
             ]
         ];  
-    
+    					
     ```
 
 
