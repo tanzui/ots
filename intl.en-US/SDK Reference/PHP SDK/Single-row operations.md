@@ -4,13 +4,13 @@ The Table Store SDK provides the PutRow, GetRow, UpdateRow, and DeleteRow operat
 
 ## PutRow {#section_nw3_42k_2fb .section}
 
- [Description](https://help.aliyun.com/document_detail/27306.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to insert a row of data. If the row does not exist, this operation inserts a row. If the row exists, this operation overwrites it. \(This means that all columns and column values of all versions of the existing row are deleted\).
 
-When performing PutRow, you can use conditional update to set conditions for the existence of the row or conditions for values in certain columns of the row. For more information, see [Conditional update]().
+When performing PutRow, you can use conditional update to set conditions for the existence of the row or conditions for values in certain columns of the row. For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -23,10 +23,10 @@ When performing PutRow, you can use conditional update to set conditions for the
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function putRow(array $request); 
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->putRow([
@@ -50,17 +50,17 @@ $result = $client->putRow([
     ]
 ]);
 
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   table\_name: required. This parameter specifies the name of the table.
--   condition: For more information, see [Conditional update]().
+-   condition: For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
     -   row\_existence: the row existence condition.
     -   column\_condition: the column-based condition.
 -   primary\_key: required. This parameter specifies the primary key value of the row.
-    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
     -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
     -   The value of PrimaryKeyValue can be an integer or a string. This parameter can be set to null for an auto-increment primary key column.
     -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, PrimaryKeyTypeConst::CONST\_BINARY, or PrimaryKeyTypeConst::CONST\_PK\_AUTO\_INCR, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), BINARY, and PK\_AUTO\_INCR types. PK\_AUTO\_INCR indicates the auto-increment column. For more information, see Auto-increment primary key column. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
@@ -72,7 +72,7 @@ $result = $client->putRow([
     -   return\_type: Currently, only this parameter is required.
         -   A value of ReturnTypeConst::CONST\_PK indicates that the value of the auto-increment primary key column is returned.
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -89,10 +89,10 @@ $result = $client->putRow([
     ],  
     'attribute_columns' => []
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
@@ -101,7 +101,7 @@ $result = $client->putRow([
 -   primary\_key: the primary key value, which is consistent with that in the request. If you set the return type to return the value of the auto-increment primary key, this primary key value is returned.
 -   attribute\_columns: the attribute value, which is the same as that in the request. It is currently empty.
 
-**Example 1**
+ **Example 1** 
 
 The following code provides an example of how to write a row with 10 attribute columns and write one version of data for each column. The version number \(timestamp\) is specified by the server.
 
@@ -120,10 +120,10 @@ $request = [
     'attribute_columns' => $attr
 ];
 $response = $otsClient->putRow ($request);
-
+			
 ```
 
-**Example 2**
+ **Example 2** 
 
 The following code provides an example of how to write a row with 10 attribute columns and write three versions of data for each column. The version number \(timestamp\) is specified by the client.
 
@@ -145,10 +145,10 @@ $request = [
     'attribute_columns' => $attr
 ];
 $response = $otsClient->putRow ($request);
-
+			
 ```
 
-**Example 3**
+ **Example 3** 
 
 The following code provides an example of how to write data if the target row does not exist:
 
@@ -170,10 +170,10 @@ $request = [
     'attribute_columns' => $attr
 ];
 $response = $otsClient->putRow ($request);
-
+			
 ```
 
-**Example 4**
+ **Example 4** 
 
 The following code provides an example of how to write data if the target row already exists and the value of Col0 is greater than 100:
 
@@ -202,19 +202,19 @@ $request = [
     'attribute_columns' => $attr
 ];
 $response = $otsClient->putRow ($request);
-
+			
 ```
 
 ## GetRow { .section}
 
- [Description](https://help.aliyun.com/document_detail/27305.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 The GetRow operation specifies the table name and the primary key of a row. The two possible reading results are as follows:
 
 -   If the row exists, the primary key columns and attribute columns of the row are returned.
 -   If the row does not exist, no row is returned and no error is reported.
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -227,10 +227,10 @@ The GetRow operation specifies the table name and the primary key of a row. The 
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function getRow(array $request);
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->getRow([
@@ -256,19 +256,19 @@ $result = $client->getRow([
     ],
     'column_filter' =>  <ColumnCondition>
 ]);
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   table\_name: required. This parameter specifies the name of the table.
 -   primary\_key: required. This parameter specifies the primary key value of the row.
-    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
     -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
     -   The value of PrimaryKeyValue can be an integer or a string.
     -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, or PrimaryKeyTypeConst::CONST\_BINARY, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), and BINARY types. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
 -   max\_versions: the maximum number of versions from which data is read.
--   time\_range: the range of versions from which data is read. For more information, see [TimeRange](https://help.aliyun.com/document_detail/50585.html).
+-   time\_range: the range of versions from which data is read. For more information, see [TimeRange](../../../../intl.en-US/API Reference/Data Types/TimeRange.md#).
     -   start\_time: the start timestamp, in milliseconds. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively. To query data within a range, specify start\_time and end\_time. The range is a left-closed right-open interval.
     -   end\_time: the end timestamp, in milliseconds. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively.
     -   specific\_time: the specific timestamp. To query data at a specific time, specify specific\_time. You can set either specific\_time or \[start\_time, end\_time\). The unit of this parameter is millisecond. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively.
@@ -277,12 +277,12 @@ $result = $client->getRow([
     -   If you only specify time\_range, all data within the range is returned.
     -   If you specify both max\_versions and time\_range, data of up to the specified number of versions within the version range is returned from the latest to the earliest.
 -   columns\_to\_get: the set of columns to be read. If you do not specify this parameter, all columns are read.
--   start\_column: the start column to be read, which is used for reading wide rows. The returned result includes the start column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of start\_column is "b", the reading starts from column "b", and columns "b" and "c" are returned. For more information, see [Wide-row reading](https://help.aliyun.com/document_detail/44573.html).
+-   start\_column: the start column to be read, which is used for reading wide rows. The returned result includes the start column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of start\_column is "b", the reading starts from column "b", and columns "b" and "c" are returned.
 -   end\_column: the end column to be read, which is used for reading wide rows. The returned result does not include the end column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of end\_column is "b", the reading ends at column "b", and column "a" is returned.
 -   token: the starting position of a wide row to be read next time. This parameter is currently unavailable.
--   column\_filter: the filtering condition. Only rows meeting the condition are returned. This parameter is similar to column\_condition in condition. For more information, see [Filter]().
+-   column\_filter: the filtering condition. Only rows meeting the condition are returned. This parameter is similar to column\_condition in condition. For more information, see [Filter](intl.en-US/SDK Reference/PHP SDK/Filter.md#).
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -304,10 +304,10 @@ $result = $client->getRow([
     ],
     'next_token' => '<string>'
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
@@ -323,7 +323,7 @@ $result = $client->getRow([
 -   next\_token: the starting position of a wide row to be read next time. This parameter is currently unavailable. \(This parameter is currently unavailable.\)
 -   If the row does not exist, the values of primary\_key and attribute\_columns are empty lists \[\].
 
-**Example 1**
+ **Example 1** 
 
 The following code provides an example of how to read the latest version of a column in a row:
 
@@ -338,7 +338,7 @@ $request = [
     'columns_to_get' => ['Col0']             // Set the column to be read.
 ];
 $response = $otsClient->getRow ($request);
-
+			
 ```
 
 Note:
@@ -352,7 +352,7 @@ Note:
 -   When a specified column does not exist, pass\_if\_missing determines the next action. The default value is true, indicating that the condition is valid if the column does not exist.
 
 
-**Example 2**
+ **Example 2** 
 
 The following code provides an example of how to set a filter:
 
@@ -372,12 +372,12 @@ $request = [
     ]
 ];
 $response = $otsClient->getRow ($request);
-
+			
 ```
 
 ## UpdateRow { .section}
 
- [Description](https://help.aliyun.com/document_detail/27307.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to update a single row of data. If no row exists, a new row is added.
 
@@ -390,9 +390,9 @@ An update operation may be performed in any of the following scenarios:
 -   Delete the column values of the specified version.
 -   Delete the column values of all versions for the entire column.
 
-When performing UpdateRow, you can use conditional update to set conditions for the existence of the row or conditions for values in certain columns of the row. For more information, see [Conditional update]().
+When performing UpdateRow, you can use conditional update to set conditions for the existence of the row or conditions for values in certain columns of the row. For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -405,10 +405,10 @@ When performing UpdateRow, you can use conditional update to set conditions for 
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function updateRow(array $request);
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->updateRow([
@@ -445,17 +445,17 @@ $result = $client->updateRow([
         'return_type' => <ReturnType>
     ]
 ]);
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   table\_name: required. This parameter specifies the name of the table.
--   condition: the condition for the operation to take effect. For more information, see [Conditional update]().
+-   condition: the condition for the operation to take effect. For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
     -   row\_existence: the row existence condition.
     -   column\_condition: the column-based condition.
 -   primary\_key: required. This parameter specifies the primary key value of the row.
-    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
     -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
     -   The value of PrimaryKeyValue can be an integer or a string.
     -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, or PrimaryKeyTypeConst::CONST\_BINARY, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), and BINARY types. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
@@ -473,7 +473,7 @@ $result = $client->updateRow([
     -   return\_type: Currently, only this parameter is required.
         -   A value of ReturnTypeConst::CONST\_PK indicates that the value of the auto-increment primary key column is returned.
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -490,10 +490,10 @@ $result = $client->updateRow([
     ],  
     'attribute_columns' => []
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
@@ -502,7 +502,7 @@ $result = $client->updateRow([
 -   primary\_key: the primary key value, which is consistent with that in the request. If you set the return type to return the value of the auto-increment primary key, this primary key value is returned.
 -   attribute\_columns: the attribute value, which is the same as that in the request. It is currently empty.
 
-**Example 1**
+ **Example 1** 
 
 The following code provides an example of how to update several columns, delete the specified version of a column, and delete the specified column:
 
@@ -530,14 +530,14 @@ $request = [
     ]
 ];
 $response = $otsClient->updateRow($request);
-
+			
 ```
 
 Note:
 
 -   UpdateRow also supports conditional statements.
 
-**Example 2**
+ **Example 2** 
 
 The following code provides an example of how to set update conditions:
 
@@ -572,18 +572,18 @@ $request = [
         ]
     ]
 ];
-
+			
 ```
 
 ## DeleteRow { .section}
 
- [Description](https://help.aliyun.com/document_detail/27308.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to delete a row. No error is reported regardless of whether the specified row exists.
 
-When performing DeleteRow, you can use conditional update to set conditions for the existence of the row or conditions for values in certain columns of the row. For more information, see [Conditional update]().
+When performing DeleteRow, you can use conditional update to set conditions for the existence of the row or conditions for values in certain columns of the row. For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -596,10 +596,10 @@ When performing DeleteRow, you can use conditional update to set conditions for 
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function deleteRow(array $request);
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->deleteRow([
@@ -617,17 +617,17 @@ $result = $client->deleteRow([
         'return_type' => <ReturnType>
     ]
 ]);
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   table\_name: required. This parameter specifies the name of the table.
--   condition: the condition for the operation to take effect. For more information, see [Conditional update]().
+-   condition: the condition for the operation to take effect. For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
     -   row\_existence: the row existence condition.
     -   column\_condition: the column-based condition.
 -   primary\_key: required. This parameter specifies the primary key value of the row.
-    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
     -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
     -   The value of PrimaryKeyValue can be an integer or a string.
     -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, or PrimaryKeyTypeConst::CONST\_BINARY, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), and BINARY types. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
@@ -638,7 +638,7 @@ $result = $client->deleteRow([
         -   A value of ReturnTypeConst::CONST\_PK indicates that the value of the auto-increment primary key column is returned.
 
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -655,10 +655,10 @@ $result = $client->deleteRow([
     ],
     'attribute_columns' => []
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
@@ -667,7 +667,7 @@ $result = $client->deleteRow([
 -   primary\_key: the primary key value, which is consistent with that in the request. If you set the return type to return the value of the auto-increment primary key, this primary key value is returned.
 -   attribute\_columns: the attribute value, which is the same as that in the request. It is currently empty.
 
-**Example 1**
+ **Example 1** 
 
 The following code provides an example of how to delete a row of data:
 
@@ -684,10 +684,10 @@ $request = [
     ]
 ];
 $response = $otsClient->deleteRow($request);
-
+			
 ```
 
-**Example 2**
+ **Example 2** 
 
 The following code provides an example of how to set deletion conditions:
 
@@ -708,6 +708,6 @@ $request = [
     ]
 ];
 $response = $otsClient->deleteRow ($request);
-
+			
 ```
 
