@@ -19,7 +19,7 @@ Table Store table names:
 
 ## Primary Key { .section}
 
-When creating a Table Store table, you must specify the primary key of the table. A primary key contains at least one, and up to four primary key columns. Each primary key column has a name and type. Table Store has some restrictions on the names and types of the primary key columns. For more information, see [Primary key and attribute](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Primary key and attribute.md#).
+When creating a Table Store table, you must specify the primary key of the table. A primary key contains at least one, and up to four primary key columns. Each primary key column has a name and type. Table Store has some restrictions on the names and types of the primary key columns. For more information, see [Primary key and attribute](../../../../intl.en-US/Data Models/Wide Column/Primary keys and attributes.md#).
 
 Table Store indexes data based on the primary key. The primary key uniquely identifies each row in the table, so that no two rows have the same key. The rows are sorted in ascending order by their primary key.
 
@@ -52,11 +52,9 @@ Table Store table is ready within one minute after it is created. You must wait 
 
 ## Best Practice {#section_vqt_zkg_cfb .section}
 
- [See Table operations](../../../../reseller.en-US/Best Practices/Table operations.md#) 
+[See Table operations](../../../../intl.en-US/Best Practices/Table operations.md#)
 
 ## Table Store SDKs {#section_vmz_1lg_cfb .section}
 
-[Use Table Store Java SDK for table operations](../../../../reseller.en-US/SDK Reference/Java SDK/Table-level operations.md#) 
-
- [Use Table Store Python SDK for table operations](../../../../reseller.en-US/SDK Reference/Python SDK/Preface.md#) 
+[Use Table Store Python SDK for table operations](../../../../intl.en-US/SDK Reference/Python SDK/Preface.md#)
 
