@@ -4,7 +4,7 @@ The Table Store SDK provides CreateTable, ListTable, DeleteTable, UpdateTable, D
 
 ## CreateTable {#section_shf_4ck_2fb .section}
 
- [Description](https://help.aliyun.com/document_detail/27312.html) 
+[OperationsSummary](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to create a table. When creating a table in Table Store, you must specify TableMeta and TableOptions. You can also set ReservedThroughput.
 
@@ -23,12 +23,13 @@ After you create the table, the server loads splits of the table to a specified 
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function createTable(array $request);
-
+			
 ```
 
 **Request format**
 
 ```language-php
+
 
 $result = $client->createTable([
     'table_meta' => [                  // REQUIRED
@@ -56,7 +57,7 @@ $result = $client->createTable([
     ]
 ]);
 
-
+			
 ```
 
 **Request format description**
@@ -64,7 +65,7 @@ $result = $client->createTable([
 -   table\_meta: required. This parameter specifies the table name and schema of the primary key.
     -   table\_name: the name of the table.
     -   primary\_key\_schema: the schema of the primary key of the table.
-        -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+        -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
         -   The first primary key column serves as the partition key. Data with the same partition key value is in the same partition. Therefore, we recommend that you have no more than 10 GB of data with the same partition key value. Otherwise, individual partitions are too large and cannot be split. We also recommend that you distribute read and write operations evenly among different partitions to facilitate load balancing.
         -   When creating a table, you only need to define the primary key of the table. Attribute columns do not need to be defined. Different rows can have different data columns and the names of attribute columns can be specified when data is written. Therefore, Table Store is suitable for the storage of semi-structured data. You can dynamically add new data columns during business development.
         -   Each item consists of the primary key name, primary key type \(PrimaryKeyType\), and primary key settings \(PrimaryKeyOption, which is optional\).
@@ -77,10 +78,10 @@ $result = $client->createTable([
 -   table\_options: required. This parameter contains the TTL, MaxVersions, and MaxTimeDeviation configurations of the table.
     -   time\_to\_live: the retention time of data, in seconds.
         -   The latest API version of Table Store supports automatic data expiration. If you do not want data to expire, set time\_to\_live to -1.
-        -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Data model concepts](https://help.aliyun.com/document_detail/44276.html).
+        -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Preface](../../../../intl.en-US/Data Models/Preface.md#).
         -   After the TTL is set, the server checks whether data expires based on the data timestamp. If you specify a timestamp when writing data and the timestamp is significantly different from the actual time, unexpected data expiration may occur. For example, if the specified data timestamp is too small, the data may expire and be deleted as soon as it is written. If the specified timestamp is too large, the data may not expire when required. Therefore, when writing data with the TTL specified, make sure that you set a reasonable timestamp.
     -   max\_versions: the maximum number of versions retained by each attribute column.
-        -   The latest API version of Table Store supports data models of multiple versions. For more information, see [Data model concepts](https://help.aliyun.com/document_detail/44276.html). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
+        -   The latest API version of Table Store supports data models of multiple versions. For more information, see [Preface](../../../../intl.en-US/Data Models/Preface.md#). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
     -   deviation\_cell\_version\_in\_sec: the maximum deviation allowed between the specified version and the current system time when data is written to the version, in seconds.
         -   Table Store supports multiple versions. By default, the system generates a new version number when writing new data. The version number is a timestamp corresponding to the write time in milliseconds. The TTL feature uses this timestamp to determine if data has expired. In addition, you can specify the data writing timestamp. If you set an extremely small timestamp, which deviates from the current time by more than the TTL set for the table, the written data immediately expires. To prevent immediate data expiration, Table Store provides the deviation\_cell\_version\_in\_sec parameter to limit the permissible deviation between the data writing timestamp and the current system time. The value of this parameter is in seconds. You can specify this parameter when creating a table and modify it by using the UpdateTable operation.
 -   stream\_spec: optional. This parameter specifies the Stream-related settings.
@@ -91,7 +92,7 @@ $result = $client->createTable([
 
 ```language-php
     []
-
+			
 ```
 
 **Result format description**
@@ -132,7 +133,7 @@ The following code provides an example of how to create a table with three prima
                 'expiration_time' => 24
             ]
         ]);
-
+			
 ```
 
 ## ListTable { .section}
@@ -152,14 +153,14 @@ You can call this operation to obtain the names of all tables created in the cur
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function listTable(array $request);
-
+			
 ```
 
 **Request format**
 
 ```language-php
 $result = $client->listTable([]);
-
+			
 ```
 
 **Request format description**
@@ -174,7 +175,7 @@ Currently, no parameter is required in the request.
         '<string>',
         '<string>'
     ]
-
+			
 ```
 
 **Result format description**
@@ -186,8 +187,8 @@ The result is a list of strings. Each item indicates a table name.
 The following code provides an example of how to obtain the names of all tables in an instance:
 
 ```language-php
-	$result = $otsClient->listTable([]);
-
+    $result = $otsClient->listTable([]);
+			
 ```
 
 ## UpdateTable { .section}
@@ -210,12 +211,13 @@ For more information about ReservedThroughput, TableOptions, and StreamSpecifica
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function updateTable(array $request);
-
+			
 ```
 
 **Request format**
 
 ```language-php
+
 
 $result = $client->updateTable([
     'table_name' => '<string>',         // REQUIRED
@@ -236,10 +238,10 @@ $result = $client->updateTable([
     ]
 ]);
 
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   The difference between UpdateTable and CreateTable is the TableMeta parameter. Except TableMeta, all other parameters are defined and set in the same way as those of CreateTable. Except table\_name, all other parameters are optional.
 -   table\_name: required. This parameter specifies the name of the table.
@@ -250,17 +252,17 @@ $result = $client->updateTable([
 -   table\_options: optional. This parameter contains the TTL, MaxVersions, and MaxTimeDeviation configurations of the table.
     -   time\_to\_live: the retention time of data, in seconds.
         -   The latest API version of Table Store supports automatic data expiration. If you do not want data to expire, set time\_to\_live to -1.
-        -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Data model concepts](https://help.aliyun.com/document_detail/44276.html).
+        -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Preface](../../../../intl.en-US/Data Models/Preface.md#).
         -   After the TTL is set, the server checks whether data expires based on the data timestamp. If you specify a timestamp when writing data and the timestamp is significantly different from the actual time, unexpected data expiration may occur. For example, if the specified data timestamp is too small, the data may expire and be deleted as soon as it is written. If the specified timestamp is too large, the data may not expire when required. Therefore, when writing data with the TTL specified, make sure that you set a reasonable timestamp.
     -   max\_versions: the maximum number of versions retained by each attribute column.
-        -   The latest API version of Table Store supports data models of multiple versions. For more information, see [Data model concepts](https://help.aliyun.com/document_detail/44276.html). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
+        -   The latest API version of Table Store supports data models of multiple versions. For more information, see [Preface](../../../../intl.en-US/Data Models/Preface.md#). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
     -   deviation\_cell\_version\_in\_sec: the maximum deviation allowed between the specified version and the current system time when data is written to the version, in seconds.
         -   Table Store supports multiple versions. By default, the system generates a new version number when writing new data. The version number is a timestamp corresponding to the write time in milliseconds. The TTL feature uses this timestamp to determine if data has expired. In addition, you can specify the data writing timestamp. If you set an extremely small timestamp, which deviates from the current time by more than the TTL set for the table, the written data immediately expires. To prevent immediate data expiration, Table Store provides the deviation\_cell\_version\_in\_sec parameter to limit the permissible deviation between the data writing timestamp and the current system time. The value of this parameter is in seconds. You can specify this parameter when creating a table and modify it by using the UpdateTable operation.
 -   stream\_spec: optional. This parameter specifies the Stream-related settings.
     -   enable\_stream: indicates whether to enable Stream.
     -   expiration\_time: the expiration time of the Stream data of the table, in hours. Earlier modification records are deleted.
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -285,10 +287,10 @@ $result = $client->updateTable([
     ]
 ]
 
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   capacity\_unit\_details: the reserved read/write throughput configuration, which is related to billing.
     -   capacity\_unit: When the reserved read/write throughput is greater than 0, you are charged based on the reserved volume and duration. Traffic that exceeds the reserved volume is billed on a Pay-As-You-Go basis. By default, the reserved read/write throughput is 0 and all traffic is billed on a Pay-As-You-Go basis. If you want to set a value greater than 0, we recommend that you read the documentation about Table Store billing to avoid unexpected fees. You can set the reserved read/write throughput of capacity instances only to 0. These instances do not allow you to reserve read/write throughput.
@@ -303,7 +305,7 @@ $result = $client->updateTable([
     -   expiration\_time: the expiration time of the Stream data of the table, in hours. Earlier modification records are deleted.
     -   last\_enable\_time: the last time that Stream was enabled.
 
-**Examples**
+ **Examples** 
 
 The following code provides an example of how to update the read CU and write CU of a table to 1 and 2, respectively:
 
@@ -317,7 +319,7 @@ The following code provides an example of how to update the read CU and write CU
             ]
         ]
     ]);
-
+			
 ```
 
 The following code provides an example of how to set the TTL of a table to one day \(86400s\), retain two versions, and set the maximum deviation to 10s:
@@ -331,7 +333,7 @@ The following code provides an example of how to set the TTL of a table to one d
             'deviation_cell_version_in_sec' => 10  
         ]
     ]);
-
+			
 ```
 
 The following code provides an example of how to enable Stream for the table and set the expiration time to 24 hours:
@@ -344,14 +346,14 @@ The following code provides an example of how to enable Stream for the table and
             'expiration_time' => 24
         ]
     ]);
-
+			
 ```
 
 ## DescribeTable { .section}
 
 You can call this operation to query TableMeta, TableOptions, ReservedThroughputDetails, and StreamDetails of a table. TableMeta and TableOptions have already been described in the CreateTable section. Besides containing the reserved read/write throughput, ReservedThroughputDetails shows the last time the throughput was increased or decreased. StreamDetails shows the detailed information about Stream.
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -364,23 +366,23 @@ You can call this operation to query TableMeta, TableOptions, ReservedThroughput
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function describeTable(array $request); 
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->describeTable([
      'table_name' => '<string>', // REQUIRED
 ]);
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   table\_name: the name of the table.
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -412,10 +414,10 @@ $result = $client->describeTable([
     ]
 ]
 
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   table\_meta: the table name and schema of the primary key, which are the same as those specified when the table is created.
 -   capacity\_unit\_details: the reserved read/write throughput configuration, which is related to billing.
@@ -427,10 +429,10 @@ $result = $client->describeTable([
 -   table\_options: the TTL, MaxVersions, and MaxTimeDeviation configurations of the table.
     -   time\_to\_live: the retention time of data, in seconds.
         -   The latest API version of Table Store supports automatic data expiration. If you do not want data to expire, set time\_to\_live to -1.
-        -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Data model concepts](https://help.aliyun.com/document_detail/44276.html).
+        -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Preface](../../../../intl.en-US/Data Models/Preface.md#).
         -   After the TTL is set, the server checks whether data expires based on the data timestamp. If you specify a timestamp when writing data and the timestamp is significantly different from the actual time, unexpected data expiration may occur. For example, if the specified data timestamp is too small, the data may expire and be deleted as soon as it is written. If the specified timestamp is too large, the data may not expire when required. Therefore, when writing data with the TTL specified, make sure that you set a reasonable timestamp.
     -   max\_versions: the maximum number of versions retained by each attribute column.
-        -   The latest API version of Table Store supports data models of multiple versions. For more information, see [Data model concepts](https://help.aliyun.com/document_detail/44276.html). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
+        -   The latest API version of Table Store supports data models of multiple versions. For more information, see [Preface](../../../../intl.en-US/Data Models/Preface.md#). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
     -   deviation\_cell\_version\_in\_sec: the maximum deviation allowed between the specified version and the current system time when data is written to the version, in seconds.
         -   Table Store supports multiple versions. By default, the system generates a new version number when writing new data. The version number is a timestamp corresponding to the write time in milliseconds. The TTL feature uses this timestamp to determine if data has expired. In addition, you can specify the data writing timestamp. If you set an extremely small timestamp, which deviates from the current time by more than the TTL set for the table, the written data immediately expires. To prevent immediate data expiration, Table Store provides the deviation\_cell\_version\_in\_sec parameter to limit the permissible deviation between the data writing timestamp and the current system time. The value of this parameter is in seconds. You can specify this parameter when creating a table and modify it by using the UpdateTable operation.
 -   stream\_details: the Stream information of the table.
@@ -439,7 +441,7 @@ $result = $client->describeTable([
     -   expiration\_time: the expiration time of the Stream data of the table, in hours. Earlier modification records are deleted.
     -   last\_enable\_time: the last time that Stream was enabled.
 
-**Example**
+ **Example** 
 
 The following code provides an example of how to obtain the descriptive information of a table:
 
@@ -448,14 +450,14 @@ The following code provides an example of how to obtain the descriptive informat
          'table_name' => 'mySampleTable',
     ]);
     var_dump($result);
-
+			
 ```
 
 ## DeleteTable { .section}
 
 You can call this operation to delete a specified table from an instance.
 
-**Operation**
+ **Operation** 
 
 ```language-php
      /**
@@ -468,34 +470,34 @@ You can call this operation to delete a specified table from an instance.
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function deleteTable(array $request);
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->deleteTable([
      'table_name' => '<string>', // REQUIRED
 ]);
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 table\_name: the name of the table.
 
-**Result format**
+ **Result format** 
 
 ```language-php
     []
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 The response is empty. If an error occurs, the system throws an exception.
 
-**Example**
+ **Example** 
 
 The following code provides an example of how to delete a table:
 
@@ -503,14 +505,14 @@ The following code provides an example of how to delete a table:
 $result = $otsClient->deleteTable([
     'table_name' => 'MyTable'
 ]);
-
+			
 ```
 
 ## ComputeSplitsBySize { .section}
 
 You can call this operation to logically split data in a table into several partitions whose sizes are close to the specified size, and return the split points between the partitions and prompt about hosts where the partitions reside. This operation is generally used for execution plans on compute engines, such as concurrency plans.
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -524,27 +526,28 @@ You can call this operation to logically split data in a table into several part
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function computeSplitPointsBySize(array $request)
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
+
 
 $result = $client->ComputeSplitsBySize([
     'table_name' => '<string>', // REQUIRED
     'split_size' => <integer>   // REQUIRED
 ]);
 
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   table\_name: the name of the table.
 -   split\_size: the approximate size of each split, in megabytes.
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -573,10 +576,10 @@ $result = $client->ComputeSplitsBySize([
         // ...
     ]
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
@@ -590,7 +593,7 @@ $result = $client->ComputeSplitsBySize([
     -   upper\_bound: the maximum value in the range of the primary key. The format is the same as that of lower\_bound.
     -   location: the prompt about the hosts where the split points reside. This parameter can be null.
 
-**Example**
+ **Example** 
 
 The following code provides an example of how to specify the size to split data:
 
@@ -604,6 +607,6 @@ The following code provides an example of how to specify the size to split data:
         print_r($split['lower_bound']);    
         print_r($split['upper_bound']);    
     }
-
+			
 ```
 
