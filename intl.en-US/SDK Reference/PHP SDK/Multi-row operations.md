@@ -4,7 +4,7 @@ The Table Store SDK provides multi-row operations, such as BatchGetRow, BatchWri
 
 ## BatchGetRow {#section_ihj_rfk_2fb .section}
 
- [Description](https://help.aliyun.com/document_detail/27310.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to read several rows of data from one or more tables.
 
@@ -16,7 +16,7 @@ The parameters of the BatchGetRow operation are the same as those of the GetRow 
 
 Similar to the use of the BatchWriteRow operation, when using the BatchGetRow operation, you must check the response. If the operation fails for some rows, the system may not throw an exception but stores information about the failed rows in BatchGetRowResponse.
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -30,10 +30,10 @@ Similar to the use of the BatchWriteRow operation, when using the BatchGetRow op
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function batchGetRow(array $request);  
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
 $result = $client->batchGetRow([
@@ -68,10 +68,10 @@ $result = $client->batchGetRow([
     ]
 ]);
 
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   Difference from GetRow
     -   The primary\_key parameter is changed to the primary\_keys parameter, so that multiple rows can be read simultaneously.
@@ -79,12 +79,12 @@ $result = $client->batchGetRow([
 -   The tables parameter is organized in the unit of tables, which specifies the information about the rows to be read for subsequent operations on tables.
     -   table\_name: required. This parameter specifies the name of the table.
     -   primary\_keys: required. The value is a list of primary key information of the rows. Each item in the list contains information about a primary key column. The structure of each primary key column is as follows:
-        -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+        -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
         -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
         -   The value of PrimaryKeyValue can be an integer or a string.
         -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, or PrimaryKeyTypeConst::CONST\_BINARY, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), and BINARY types. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
     -   max\_versions: the maximum number of versions from which data is read.
-    -   time\_range: the range of versions from which data is read. For more information, see [TimeRange](https://help.aliyun.com/document_detail/50585.html).
+    -   time\_range: the range of versions from which data is read. For more information, see [TimeRange](../../../../intl.en-US/API Reference/Data Types/TimeRange.md#).
         -   start\_time: the start timestamp, in milliseconds. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively. To query data within a range, specify start\_time and end\_time. The range is a left-closed right-open interval.
         -   end\_time: the end timestamp, in milliseconds. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively.
         -   specific\_time: the specific timestamp. To query data at a specific time, specify specific\_time. You can set either specific\_time or \[start\_time, end\_time\). The unit of this parameter is millisecond. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively.
@@ -93,12 +93,12 @@ $result = $client->batchGetRow([
         -   If you only specify time\_range, all data within the range is returned.
         -   If you specify both max\_versions and time\_range, data of up to the specified number of versions within the version range is returned from the latest to the earliest.
     -   columns\_to\_get: the set of columns to be read. If you do not specify this parameter, all columns are read.
-    -   start\_column: the start column to be read, which is used for reading wide rows. The returned result includes the start column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of start\_column is "b", the reading starts from column "b", and columns "b" and "c" are returned. For more information, see [Wide-row reading](https://help.aliyun.com/document_detail/44573.html).
+    -   start\_column: the start column to be read, which is used for reading wide rows. The returned result includes the start column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of start\_column is "b", the reading starts from column "b", and columns "b" and "c" are returned.
     -   end\_column: the end column to be read, which is used for reading wide rows. The returned result does not include the end column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of end\_column is "b", the reading ends at column "b", and column "a" is returned.
     -   token: the starting position of a wide row to be read next time. This parameter is currently unavailable.
-    -   column\_filter: the filtering condition. Only rows meeting the condition are returned. This parameter is similar to column\_condition in condition. For more information, see [Filter]().
+    -   column\_filter: the filtering condition. Only rows meeting the condition are returned. This parameter is similar to column\_condition in condition. For more information, see [Filter](intl.en-US/SDK Reference/PHP SDK/Filter.md#).
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -136,20 +136,20 @@ $result = $client->batchGetRow([
         // Other tables
     ]
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
--    [Description](https://help.aliyun.com/document_detail/27310.html) \(This section describes scenarios where reading all rows fails or reading partial rows fails. Make sure that you have read this section.\)
+-   [API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#) \(This section describes scenarios where reading all rows fails or reading partial rows fails. Make sure that you have read this section.\)
 -   MaxCompute
 
 -   The tables parameter is organized in the unit of tables. The tables correspond to requests one by one.
     -   table\_name: the name of the table.
     -   is\_ok: indicates whether the row operation is successful. A value of true indicates that the row is read. In this case, error is invalid. A value of false indicates that the row fails to be read. In this case, consumed, primary\_key, and attribute\_columns are invalid.
     -   error: the error information in the response when the operation fails.
-        -   code: the error code for the operation on the current row. For more information, see [Error codes](https://help.aliyun.com/document_detail/27300.html).
-        -   message: the error message for the operation on the current row. For more information, see [Error codes](https://help.aliyun.com/document_detail/27300.html).
+        -   code: the error code for the operation on the current row.
+        -   message: the error message for the operation on the current row.
     -   consumed: the number of CUs consumed by this operation.
         -   capacity\_unit: the number of read and write CUs consumed.
             -   read: the number of read CUs consumed.
@@ -163,7 +163,7 @@ $result = $client->batchGetRow([
         -   The order of the columns may be inconsistent with that of columns\_to\_get in the request.
     -   next\_token: the starting position of a wide row to be read next time. This parameter is currently unavailable.
 
-**Example**
+ **Example** 
 
 The following code provides an example of how to read 30 rows of data at a time:
 
@@ -188,7 +188,7 @@ The following code provides an example of how to read 30 rows of data at a time:
         'tables' => $tables
     ];
     $response = $otsClient->batchGetRow ($request);
-    
+
     // Process each table that is returned.
     foreach ($response['tables'] as $tableData) {
       print "Handling table {$tableData['table_name']} ...\n";
@@ -209,22 +209,22 @@ The following code provides an example of how to read 30 rows of data at a time:
         }
       }
     }
-
+			
 ```
 
 For more information, see the sample documents listed in the following table.
 
 |Document|Description|
 |:-------|:----------|
-| [BatchGetRow1.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow1.php) |Describes how to use BatchGetRow to read multiple rows from a table.|
-| [BatchGetRow2.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow2.php) |Describes how to use BatchGetRow to read multiple rows from multiple tables.|
-| [BatchGetRow3.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow3.php) |Describes how to use BatchGetRow to read multiple rows from a table with the specified columns.|
-| [BatchGetRow4.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow4.php) |Describes how to use BatchGetRow to process returned results.|
-| [BatchGetRowWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRowWithColumnFilter.php) |Describes how to use BatchGetRow with conditional filtering.|
+|[BatchGetRow1.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow1.php)|Describes how to use BatchGetRow to read multiple rows from a table.|
+|[BatchGetRow2.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow2.php)|Describes how to use BatchGetRow to read multiple rows from multiple tables.|
+|[BatchGetRow3.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow3.php)|Describes how to use BatchGetRow to read multiple rows from a table with the specified columns.|
+|[BatchGetRow4.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow4.php)|Describes how to use BatchGetRow to process returned results.|
+|[BatchGetRowWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRowWithColumnFilter.php)|Describes how to use BatchGetRow with conditional filtering.|
 
 ## BatchWriteRow { .section}
 
- [Description](https://help.aliyun.com/document_detail/27311.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to insert, modify, or delete several rows of data in one or more tables.
 
@@ -236,7 +236,7 @@ The process for constructing a BatchWriteRow operation is the same as that for c
 
 When calling the BatchWriteRow operation, you must check the response. During batch writing, some rows may be written while other rows may fail to be written. If the operation fails for some rows, the system may not throw an exception but stores the index and error messages of the failed rows in BatchWriteRowResponse. Some failed operations may be ignored if you do not check them. In some situations, the BatchWriteRow operation may throw an exception. For example, if the server detects that incorrect parameters exist in some operations, it may throw a parameter error exception. If an exception is thrown, none of the operations in the request is completed.
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -250,12 +250,13 @@ When calling the BatchWriteRow operation, you must check the response. During ba
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function batchWriteRow(array $request);  
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
+
 
 $result = $client->batchWriteRow([
     'tables' => [                                            // REQUIRED
@@ -303,10 +304,10 @@ $result = $client->batchWriteRow([
     ]
 ]);
 
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   This operation is a combination of PutRow, UpdateRow, and DeleteRow.
     -   The operation\_type parameter is added to distinguish operation types.
@@ -314,7 +315,7 @@ $result = $client->batchWriteRow([
 -   The tables parameter is organized in the unit of tables, which specifies the information about the rows to be written, modified, or deleted for subsequent operations on tables.
 
     -   table\_name: required. This parameter specifies the name of the table.
-    -   condition: For more information, see [Conditional update]().
+    -   condition: For more information, see [Conditional update](intl.en-US/SDK Reference/PHP SDK/Conditional update.md#).
         -   row\_existence: the row existence condition.
         -   column\_condition: the column-based condition.
     -   operation\_type: the operation type. This parameter can be set to OperationTypeConst::CONST\_PUT, OperationTypeConst::CONST\_UPDATE, or OperationTypeConst::CONST\_DELETE, which respectively indicate the PUT, UPDATE, and DELETE types.
@@ -328,7 +329,7 @@ $result = $client->batchWriteRow([
             -   A value of ReturnTypeConst::CONST\_PK indicates that the value of the auto-increment primary key column is returned.
 
 
-**Result format**
+ **Result format** 
 
 ```language-php
   [
@@ -361,18 +362,18 @@ $result = $client->batchWriteRow([
           // Other tables
       ]
   ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
--    [Description](https://help.aliyun.com/document_detail/27311.html) \(This section describes scenarios where processing all rows fails or processing partial rows fails. Make sure that you have read this section.\)
+-   [API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#) \(This section describes scenarios where processing all rows fails or processing partial rows fails. Make sure that you have read this section.\)
 -   The tables parameter is organized in the unit of tables. The tables correspond to requests one by one.
     -   table\_name: the name of the table.
     -   is\_ok: indicates whether the row operation is successful. A value of true indicates that the row is written. In this case, error is invalid. A value of false indicates that the row fails to be written.
     -   error: the error information in the response when the operation fails.
-        -   code: the error code for the operation on the current row. For more information, see [Error codes](https://help.aliyun.com/document_detail/27300.html).
-        -   message: the error message for the operation on the current row. For more information, see [Error codes](https://help.aliyun.com/document_detail/27300.html).
+        -   code: the error code for the operation on the current row.
+        -   message: the error message for the operation on the current row.
     -   consumed: the number of CUs consumed by this operation.
         -   capacity\_unit: the number of read and write CUs consumed.
             -   read: the number of read CUs consumed.
@@ -380,7 +381,7 @@ $result = $client->batchWriteRow([
     -   primary\_key: the primary key value, which is consistent with that in the request. If you set the return type to return the value of the auto-increment primary key, this primary key value is returned.
     -   attribute\_columns: the attribute value. It is currently empty.
 
-**Example**
+ **Example** 
 
 The following code provides an example of how to import 30 rows of data at a time:
 
@@ -431,22 +432,22 @@ The following code provides an example of how to import 30 rows of data at a tim
         }
       }
     }
-
+			
 ```
 
 For more information, see the sample documents listed in the following table.
 
 |Document|Description|
 |:-------|:----------|
-| [BatchWriteRow1.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow1.php) |Describes how to perform multiple PUT operations in BatchWriteRow.|
-| [BatchWriteRow2.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow2.php) |Describes how to perform multiple UPDATE operations in BatchWriteRow.|
-| [BatchWriteRow3.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow3.php) |Describes how to perform multiple DELETE operations in BatchWriteRow.|
-| [BatchWriteRow4.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow4.php) |Describes how to simultaneously perform the UPDATE, PUT, and DELETE operations in BatchWriteRow.|
-| [BatchWriteRowWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRowWithColumnFilter.php) |Describes how to use BatchWriteRow with conditional update.|
+|[BatchWriteRow1.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow1.php)|Describes how to perform multiple PUT operations in BatchWriteRow.|
+|[BatchWriteRow2.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow2.php)|Describes how to perform multiple UPDATE operations in BatchWriteRow.|
+|[BatchWriteRow3.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow3.php)|Describes how to perform multiple DELETE operations in BatchWriteRow.|
+|[BatchWriteRow4.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow4.php)|Describes how to simultaneously perform the UPDATE, PUT, and DELETE operations in BatchWriteRow.|
+|[BatchWriteRowWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRowWithColumnFilter.php)|Describes how to use BatchWriteRow with conditional update.|
 
 ## GetRange { .section}
 
- [Description](https://help.aliyun.com/document_detail/27309.html) 
+[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 You can call this operation to read data within the specified primary key range.
 
@@ -454,7 +455,7 @@ This operation is used to read data within a range. In Table Store tables, all r
 
 The GetRange operation allows you to read data in a forward or backward direction based on a given range. You can also limit the number of rows to be read. If the range is large and the number of scanned rows or the volume of data exceeds the limit, the scan stops and the read rows and the next primary key are returned. If not all rows are read, you can initiate a request to start from where the last operation left off and read the remaining rows based on the next primary key returned by the previous operation.
 
-**Operation**
+ **Operation** 
 
 ```language-php
     /**
@@ -470,12 +471,13 @@ The GetRange operation allows you to read data in a forward or backward directio
      * @throws OTSServerException Indicates that the Table Store server returns an error.
      */
     public function getRange(array $request); 
-
+			
 ```
 
-**Request format**
+ **Request format** 
 
 ```language-php
+
 
 $result = $client->getRange([
     'table_name' => '<string>',                                     // REQUIRED
@@ -508,10 +510,10 @@ $result = $client->getRange([
     'column_filter' =>  <ColumnCondition>
 ]);
 
-
+			
 ```
 
-**Request format description**
+ **Request format description** 
 
 -   Difference from GetRow
     -   The primary\_key parameter is changed to the inclusive\_start\_primary\_key and exclusive\_end\_primary\_key parameters. The range is a left-closed right-open interval.
@@ -519,14 +521,14 @@ $result = $client->getRange([
     -   The limit parameter is added to limit the number of returned rows.
 -   table\_name: required. This parameter specifies the name of the table.
 -   inclusive\_start\_primary\_key: the primary key from which the read starts. If the specified row exists, it is included in the response. This parameter is required.
-    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
     -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
     -   The value of PrimaryKeyValue can be an integer or a string.
     -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, or PrimaryKeyTypeConst::CONST\_BINARY, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), and BINARY types. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
     -   A primary key column can also be of the INF\_MIN or INF\_MAX type. INF\_MIN columns are always smaller than other columns, while INF\_MAX columns are always larger than other columns.
     -   If PrimaryKeyType is set to PrimaryKeyTypeConst::CONST\_INF\_MIN or PrimaryKeyTypeConst::CONST\_INF\_MAX, you can set PrimaryKeyValue to null.
 -   exclusive\_end\_primary\_key: the primary key at which the read ends. No matter whether the specified row exists, it is excluded from the response. This parameter is required.
-    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns. For more information, see [Table Store Data Model and Query Operations](https://yq.aliyun.com/articles/38621).
+    -   The primary key of a table can include multiple primary key columns. The primary key columns are sorted by the order they are added. For example, the primary key structure PRIMARY KEY \(A, B, C\) is different from PRIMARY KEY \(A, C, B\). Table Store sorts rows based on the values of all primary key columns.
     -   Each item consists of the primary key name, primary key value \(PrimaryKeyValue\), and primary key type \(PrimaryKeyType, which is optional\).
     -   The value of PrimaryKeyValue can be an integer or a string.
     -   PrimaryKeyType can be set to PrimaryKeyTypeConst::CONST\_INTEGER, PrimaryKeyTypeConst::CONST\_STRING, or PrimaryKeyTypeConst::CONST\_BINARY, which respectively indicate the INTEGER, STRING \(UTF-8 encoded string\), and BINARY types. If the type is INTEGER or STRING, it can be ignored. Otherwise, the type must be specified.
@@ -537,7 +539,7 @@ $result = $client->getRange([
     -   If the number of rows queried exceeds this value, the response includes a breakpoint to record the position where the read ends in this operation, so that the next read can start from this position. This value must be greater than 0.
     -   Whether or not this value is set, Table Store returns a maximum of 5,000 rows of data, and the total data size does not exceed 4 MB.
 -   max\_versions: the maximum number of versions from which data is read.
--   time\_range: the range of versions from which data is read. For more information, see [TimeRange](https://help.aliyun.com/document_detail/50585.html).
+-   time\_range: the range of versions from which data is read. For more information, see [TimeRange](../../../../intl.en-US/API Reference/Data Types/TimeRange.md#).
     -   start\_time: the start timestamp, in milliseconds. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively. To query data within a range, specify start\_time and end\_time. The range is a left-closed right-open interval.
     -   end\_time: the end timestamp, in milliseconds. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively.
     -   specific\_time: the specific timestamp. To query data at a specific time, specify specific\_time. You can set either specific\_time or \[start\_time, end\_time\). The unit of this parameter is millisecond. The minimum and maximum values of the timestamp are 0 and INT64. MAX, respectively.
@@ -546,12 +548,12 @@ $result = $client->getRange([
     -   If you only specify time\_range, all data within the range is returned.
     -   If you specify both max\_versions and time\_range, data of up to the specified number of versions within the version range is returned from the latest to the earliest.
 -   columns\_to\_get: the set of columns to be read. If you do not specify this parameter, all columns are read.
--   start\_column: the start column to be read, which is used for reading wide rows. The returned result includes the start column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of start\_column is "b", the reading starts from column "b", and columns "b" and "c" are returned. For more information, see [Wide-row reading](https://help.aliyun.com/document_detail/44573.html).
+-   start\_column: the start column to be read, which is used for reading wide rows. The returned result includes the start column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of start\_column is "b", the reading starts from column "b", and columns "b" and "c" are returned.
 -   end\_column: the end column to be read, which is used for reading wide rows. The returned result does not include the end column. The column names are sorted lexicographically. Assume that a table contains columns "a", "b", and "c". If the value of end\_column is "b", the reading ends at column "b", and column "a" is returned.
 -   token: the starting position of a wide row to be read next time. This parameter is currently unavailable.
--   column\_filter: the filtering condition. Only rows meeting the condition are returned. This parameter is similar to column\_condition in condition. For more information, see [Filter]().
+-   column\_filter: the filtering condition. Only rows meeting the condition are returned. This parameter is similar to column\_condition in condition. For more information, see [Filter](intl.en-US/SDK Reference/PHP SDK/Filter.md#).
 
-**Result format**
+ **Result format** 
 
 ```language-php
 [
@@ -582,12 +584,12 @@ $result = $client->getRange([
         // Other rows
     ]
 ]
-
+			
 ```
 
-**Result format description**
+ **Result format description** 
 
--    [Description](https://help.aliyun.com/document_detail/27309.html) \(This section describes the operation in detail. Make sure that you have read this section.\)
+-   [API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
         -   read: the number of read CUs consumed.
@@ -607,7 +609,7 @@ $result = $client->getRange([
     -   If this parameter is not specified, the response for this GetRange operation contains all data within the request range.
     -   If this parameter is specified, the response for this GetRange operation includes only the data in the range \[inclusive\_start\_primary\_key, next\_start\_primary\_key\). To obtain the remaining data, set inclusive\_start\_primary\_key to the value of next\_start\_primary\_key, and retain the value of exclusive\_end\_primary\_key in the original request to perform the subsequent GetRange operation.
 
-**Example**
+ **Example** 
 
 The following code provides an example of how to read data within the specified range:
 
@@ -633,19 +635,19 @@ The following code provides an example of how to read data within the specified 
     ];
     $response = $otsClient->getRange ($request);
     print "Read CU Consumed: {$response['consumed']['capacity_unit']['read']}\n";
-    
+
     foreach ($response['rows'] as $rowData) {
       // Process each row of data.
     }
-
+			
 ```
 
 For more information, see the sample documents listed in the following table.
 
 |Document|Description|
 |:-------|:----------|
-| [GetRange1.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRange1.php) |Describes how to use GetRange.|
-| [GetRange2.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRange2.php) |Describes how to use GetRange to obtain the specified columns.|
-| [GetRange3.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRange3.php) |Describes how to use GetRange to obtain the specified number of rows.|
-| [GetRangeWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRangeWithColumnFilter.php) |Describes how to use GetRange with conditional filtering.|
+|[GetRange1.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRange1.php)|Describes how to use GetRange.|
+|[GetRange2.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRange2.php)|Describes how to use GetRange to obtain the specified columns.|
+|[GetRange3.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRange3.php)|Describes how to use GetRange to obtain the specified number of rows.|
+|[GetRangeWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/GetRangeWithColumnFilter.php)|Describes how to use GetRange with conditional filtering.|
 
