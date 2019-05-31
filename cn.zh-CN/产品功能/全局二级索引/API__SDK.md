@@ -16,8 +16,6 @@ CreateIndex用于在已有的主表上创建索引表。
 
 DeleteIndex用于删除指定主表下面的指定索引表，此主表上的其它索引表不受影响。
 
-详情请参见[DeleteIndex](../../../../intl.zh-CN/API 参考/API 概览/DeleteIndex.md#)。
-
 ## 删除主表 {#section_ess_zxf_ffb .section}
 
 DeleteTable用于删除主表，且主表下面的所有索引表都会被删除。详情请参见[DeleteTable](../../../../intl.zh-CN/API 参考/API 概览/DeleteTable.md#)。
