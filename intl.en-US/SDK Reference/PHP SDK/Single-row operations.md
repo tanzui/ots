@@ -4,7 +4,7 @@ The Table Store SDK provides the PutRow, GetRow, UpdateRow, and DeleteRow operat
 
 ## PutRow {#section_nw3_42k_2fb .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[PutRow](../../../../intl.en-US/API Reference/Operations/PutRow.md#)
 
 You can call this operation to insert a row of data. If the row does not exist, this operation inserts a row. If the row exists, this operation overwrites it. \(This means that all columns and column values of all versions of the existing row are deleted\).
 
@@ -207,7 +207,7 @@ $response = $otsClient->putRow ($request);
 
 ## GetRow { .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[OperationsSummary](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
 The GetRow operation specifies the table name and the primary key of a row. The two possible reading results are as follows:
 
@@ -377,7 +377,7 @@ $response = $otsClient->getRow ($request);
 
 ## UpdateRow { .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[UpdateRow](../../../../intl.en-US/API Reference/Operations/UpdateRow.md#)
 
 You can call this operation to update a single row of data. If no row exists, a new row is added.
 
@@ -577,7 +577,7 @@ $request = [
 
 ## DeleteRow { .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[DeleteRow](../../../../intl.en-US/API Reference/Operations/DeleteRow.md#)
 
 You can call this operation to delete a row. No error is reported regardless of whether the specified row exists.
 
