@@ -4,7 +4,7 @@ The Table Store SDK provides multi-row operations, such as BatchGetRow, BatchWri
 
 ## BatchGetRow {#section_ihj_rfk_2fb .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[BatchGetRow](../../../../intl.en-US/API Reference/Operations/BatchGetRow.md#)
 
 You can call this operation to read several rows of data from one or more tables.
 
@@ -141,7 +141,7 @@ $result = $client->batchGetRow([
 
  **Result format description** 
 
--   [API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#) \(This section describes scenarios where reading all rows fails or reading partial rows fails. Make sure that you have read this section.\)
+-   [BatchGetRow](../../../../intl.en-US/API Reference/Operations/BatchGetRow.md#) \(This section describes scenarios where reading all rows fails or reading partial rows fails. Make sure that you have read this section.\)
 -   MaxCompute
 
 -   The tables parameter is organized in the unit of tables. The tables correspond to requests one by one.
@@ -224,7 +224,7 @@ For more information, see the sample documents listed in the following table.
 
 ## BatchWriteRow { .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[BatchWriteRow](../../../../intl.en-US/API Reference/Operations/BatchWriteRow.md#)
 
 You can call this operation to insert, modify, or delete several rows of data in one or more tables.
 
@@ -256,8 +256,6 @@ When calling the BatchWriteRow operation, you must check the response. During ba
  **Request format** 
 
 ```language-php
-
-
 $result = $client->batchWriteRow([
     'tables' => [                                            // REQUIRED
         [
@@ -302,9 +300,7 @@ $result = $client->batchWriteRow([
         ],
         // Other tables
     ]
-]);
-
-			
+]);          
 ```
 
  **Request format description** 
@@ -367,7 +363,7 @@ $result = $client->batchWriteRow([
 
  **Result format description** 
 
--   [API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#) \(This section describes scenarios where processing all rows fails or processing partial rows fails. Make sure that you have read this section.\)
+-    [BatchWriteRow](../../../../intl.en-US/API Reference/Operations/BatchWriteRow.md#)\(This section describes scenarios where processing all rows fails or processing partial rows fails. Make sure that you have read this section.\)
 -   The tables parameter is organized in the unit of tables. The tables correspond to requests one by one.
     -   table\_name: the name of the table.
     -   is\_ok: indicates whether the row operation is successful. A value of true indicates that the row is written. In this case, error is invalid. A value of false indicates that the row fails to be written.
@@ -447,7 +443,7 @@ For more information, see the sample documents listed in the following table.
 
 ## GetRange { .section}
 
-[API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[GetRange](../../../../intl.en-US/API Reference/Operations/GetRange.md#)
 
 You can call this operation to read data within the specified primary key range.
 
@@ -477,6 +473,7 @@ The GetRange operation allows you to read data in a forward or backward directio
  **Request format** 
 
 ```language-php
+
 
 
 $result = $client->getRange([
@@ -589,7 +586,7 @@ $result = $client->getRange([
 
  **Result format description** 
 
--   [API description](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+-   [GetRange](../../../../intl.en-US/API Reference/Operations/GetRange.md#)
 -   consumed: the number of CUs consumed by this operation.
     -   capacity\_unit: the number of read and write CUs consumed.
         -   read: the number of read CUs consumed.
