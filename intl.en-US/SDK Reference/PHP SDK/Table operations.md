@@ -4,7 +4,7 @@ The Table Store SDK provides CreateTable, ListTable, DeleteTable, UpdateTable, D
 
 ## CreateTable {#section_shf_4ck_2fb .section}
 
-[OperationsSummary](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
+[CreateTable](../../../../intl.en-US/API Reference/Operations/CreateTable.md#)
 
 You can call this operation to create a table. When creating a table in Table Store, you must specify TableMeta and TableOptions. You can also set ReservedThroughput.
 
@@ -29,6 +29,7 @@ After you create the table, the server loads splits of the table to a specified 
 **Request format**
 
 ```language-php
+
 
 
 $result = $client->createTable([
@@ -217,6 +218,7 @@ For more information about ReservedThroughput, TableOptions, and StreamSpecifica
 **Request format**
 
 ```language-php
+
 
 
 $result = $client->updateTable([
@@ -532,6 +534,7 @@ You can call this operation to logically split data in a table into several part
  **Request format** 
 
 ```language-php
+
 
 
 $result = $client->ComputeSplitsBySize([
