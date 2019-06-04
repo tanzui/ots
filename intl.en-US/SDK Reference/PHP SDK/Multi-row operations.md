@@ -18,10 +18,9 @@ Similar to the use of the BatchWriteRow operation, when using the BatchGetRow op
 
  **Operation** 
 
-```language-php
+``` {#codeblock_rnc_7nv_6eg .language-php}
     /**
      * Read the specified rows of data.
-     * Description: https://help.aliyun.com/document_detail/27310.html
      * Note that if the BatchGetRow operation fails for some rows, the system does not throw an exception but stores information about the failed rows in $response. For more information, see the example of handling the return result of BatchGetRow.
      * @api
      * @param [] $request Request parameters.
@@ -35,7 +34,7 @@ Similar to the use of the BatchWriteRow operation, when using the BatchGetRow op
 
  **Request format** 
 
-```language-php
+``` {#codeblock_tmy_ibw_9z8 .language-php}
 $result = $client->batchGetRow([
     'tables' => [                                            // REQUIRED
         [
@@ -100,7 +99,7 @@ $result = $client->batchGetRow([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_lpe_qkr_tht .language-php}
 [
     'tables' => [
         [
@@ -167,7 +166,7 @@ $result = $client->batchGetRow([
 
 The following code provides an example of how to read 30 rows of data at a time:
 
-```language-php
+``` {#codeblock_xkl_dyg_i8d .language-php}
     // Read data from three tables, 10 rows per table.
     $tables = array();
     for($i = 0; $i < 3; $i++) {
@@ -222,7 +221,7 @@ For more information, see the sample documents listed in the following table.
 |[BatchGetRow4.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRow4.php)|Describes how to use BatchGetRow to process returned results.|
 |[BatchGetRowWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchGetRowWithColumnFilter.php)|Describes how to use BatchGetRow with conditional filtering.|
 
-## BatchWriteRow { .section}
+## BatchWriteRow {#section_ej9_6nw_1xo .section}
 
 [BatchWriteRow](../../../../intl.en-US/API Reference/Operations/BatchWriteRow.md#)
 
@@ -238,10 +237,9 @@ When calling the BatchWriteRow operation, you must check the response. During ba
 
  **Operation** 
 
-```language-php
+``` {#codeblock_ift_q0b_462 .language-php}
     /**
      * Write, update, or delete the specified rows of data.
-     * Description: https://help.aliyun.com/document_detail/27311.html
      * Note that if the BatchWriteRow operation fails for some rows, the system does not throw an exception but stores information about the failed rows in $response. For more information, see the example of handling the return result of BatchWriteRow.
      * @api
      * @param [] $request Request parameters.
@@ -255,7 +253,7 @@ When calling the BatchWriteRow operation, you must check the response. During ba
 
  **Request format** 
 
-```language-php
+``` {#codeblock_rrr_znx_rwc .language-php}
 $result = $client->batchWriteRow([
     'tables' => [                                            // REQUIRED
         [
@@ -327,7 +325,7 @@ $result = $client->batchWriteRow([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_iwn_b0k_r8p .language-php}
   [
       'tables' => [
           [
@@ -363,7 +361,7 @@ $result = $client->batchWriteRow([
 
  **Result format description** 
 
--    [BatchWriteRow](../../../../intl.en-US/API Reference/Operations/BatchWriteRow.md#)\(This section describes scenarios where processing all rows fails or processing partial rows fails. Make sure that you have read this section.\)
+-   [BatchWriteRow](../../../../intl.en-US/API Reference/Operations/BatchWriteRow.md#)\(This section describes scenarios where processing all rows fails or processing partial rows fails. Make sure that you have read this section.\)
 -   The tables parameter is organized in the unit of tables. The tables correspond to requests one by one.
     -   table\_name: the name of the table.
     -   is\_ok: indicates whether the row operation is successful. A value of true indicates that the row is written. In this case, error is invalid. A value of false indicates that the row fails to be written.
@@ -381,7 +379,7 @@ $result = $client->batchWriteRow([
 
 The following code provides an example of how to import 30 rows of data at a time:
 
-```language-php
+``` {#codeblock_nfz_h66_h04 .language-php}
     // Insert data into three tables, 10 rows per table.
     $tables = array();
     for($i = 0; $i < 3; $i++) {
@@ -441,7 +439,7 @@ For more information, see the sample documents listed in the following table.
 |[BatchWriteRow4.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRow4.php)|Describes how to simultaneously perform the UPDATE, PUT, and DELETE operations in BatchWriteRow.|
 |[BatchWriteRowWithColumnFilter.php](https://github.com/aliyun/aliyun-tablestore-php-sdk/blob/master/examples/BatchWriteRowWithColumnFilter.php)|Describes how to use BatchWriteRow with conditional update.|
 
-## GetRange { .section}
+## GetRange {#section_was_eks_sn4 .section}
 
 [GetRange](../../../../intl.en-US/API Reference/Operations/GetRange.md#)
 
@@ -453,13 +451,12 @@ The GetRange operation allows you to read data in a forward or backward directio
 
  **Operation** 
 
-```language-php
+``` {#codeblock_b0g_213_ifw .language-php}
     /**
      * Read data between the start primary key and the end primary key.
      * Note that the server may truncate this range. You need to determine whether to call the GetRange operation again based on next_start_primary_key in the response.
      * You can specify the maximum number of rows to be read.
      * When specifying the start and end primary keys, you can use INF_MIN and INF_MAX to represent the minimum and maximum values. For more information, see the following code example.
-     * Description: https://help.aliyun.com/document_detail/27309.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -472,7 +469,8 @@ The GetRange operation allows you to read data in a forward or backward directio
 
  **Request format** 
 
-```language-php
+``` {#codeblock_sn6_5j0_oje .language-php}
+
 
 
 
@@ -552,7 +550,7 @@ $result = $client->getRange([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_oaz_hdi_wjn .language-php}
 [
     'consumed' => [
         'capacity_unit' => [
@@ -610,7 +608,7 @@ $result = $client->getRange([
 
 The following code provides an example of how to read data within the specified range:
 
-```language-php
+``` {#codeblock_ixl_cii_wcc .language-php}
     // Read data with UID within the range [1, 4).
     // The complete primary key is required for defining the range boundary. If the queried range does not involve the range of values in a column, set the column to be infinitely great or small.
     $startPK = [
