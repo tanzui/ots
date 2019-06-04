@@ -12,10 +12,9 @@ When performing PutRow, you can use conditional update to set conditions for the
 
  **Operation** 
 
-```language-php
+``` {#codeblock_rf2_5d3_htt .language-php}
     /**
      * Write a row of data. If the row already exists, the data of the row is overwritten. The number of the consumed capacity units (CUs) is returned.
-     * Description: https://help.aliyun.com/document_detail/27306.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -28,7 +27,7 @@ When performing PutRow, you can use conditional update to set conditions for the
 
  **Request format** 
 
-```language-php
+``` {#codeblock_nbw_8aq_q09 .language-php}
 $result = $client->putRow([
     'table_name' => '<string>', // REQUIRED
     'condition' => [
@@ -74,7 +73,7 @@ $result = $client->putRow([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_18t_a1f_5rz .language-php}
 [
     'consumed' => [
         'capacity_unit' => [
@@ -105,7 +104,7 @@ $result = $client->putRow([
 
 The following code provides an example of how to write a row with 10 attribute columns and write one version of data for each column. The version number \(timestamp\) is specified by the server.
 
-```language-php
+``` {#codeblock_apb_yvm_wf0 .language-php}
 $attr = array();
 for($i = 0; $i < 10; $i++) {
     $attr[] = ['Col'. $i, $i]; 
@@ -127,7 +126,7 @@ $response = $otsClient->putRow ($request);
 
 The following code provides an example of how to write a row with 10 attribute columns and write three versions of data for each column. The version number \(timestamp\) is specified by the client.
 
-```language-php
+``` {#codeblock_vy1_ltu_9cu .language-php}
 $attr = array();
 $timestamp = getMicroTime();
 for($i = 0; $i < 10; $i++) {
@@ -152,7 +151,7 @@ $response = $otsClient->putRow ($request);
 
 The following code provides an example of how to write data if the target row does not exist:
 
-```language-php
+``` {#codeblock_57a_hjk_6e6 .language-php}
 $attr = array();
 $timestamp = getMicroTime();
 for($i = 0; $i < 10; $i++) {
@@ -177,7 +176,7 @@ $response = $otsClient->putRow ($request);
 
 The following code provides an example of how to write data if the target row already exists and the value of Col0 is greater than 100:
 
-```language-php
+``` {#codeblock_uk8_0la_be3 .language-php}
 $attr = array();
 $timestamp = getMicroTime();
 for($i = 0; $i < 10; $i++) {
@@ -205,7 +204,7 @@ $response = $otsClient->putRow ($request);
 			
 ```
 
-## GetRow { .section}
+## GetRow {#section_xn9_re1_xab .section}
 
 [OperationsSummary](../../../../intl.en-US/API Reference/Operations/OperationsSummary.md#)
 
@@ -216,10 +215,9 @@ The GetRow operation specifies the table name and the primary key of a row. The 
 
  **Operation** 
 
-```language-php
+``` {#codeblock_g23_0si_cco .language-php}
     /**
      * Read a row of data.
-     * Description: https://help.aliyun.com/document_detail/27305.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -232,7 +230,7 @@ The GetRow operation specifies the table name and the primary key of a row. The 
 
  **Request format** 
 
-```language-php
+``` {#codeblock_zis_9nt_e2t .language-php}
 $result = $client->getRow([
     'table_name' => '<string>',                     // REQUIRED
     'primary_key' => [                              // REQUIRED
@@ -284,7 +282,7 @@ $result = $client->getRow([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_l0t_nlp_h5e .language-php}
 [
     'consumed' => [
         'capacity_unit' => [
@@ -327,7 +325,7 @@ $result = $client->getRow([
 
 The following code provides an example of how to read the latest version of a column in a row:
 
-```language-php
+``` {#codeblock_mpj_ifm_9zm .language-php}
 $request = [
     'table_name' => 'MyTable',
     'primary_key' => [ // The primary key.
@@ -356,7 +354,7 @@ Note:
 
 The following code provides an example of how to set a filter:
 
-```language-php
+``` {#codeblock_oe3_sx9_5ss .language-php}
 $request = [
     'table_name' => 'MyTable',
     'primary_key' => [ // The primary key.
@@ -375,7 +373,7 @@ $response = $otsClient->getRow ($request);
 			
 ```
 
-## UpdateRow { .section}
+## UpdateRow {#section_dyw_xej_sa5 .section}
 
 [UpdateRow](../../../../intl.en-US/API Reference/Operations/UpdateRow.md#)
 
@@ -394,10 +392,9 @@ When performing UpdateRow, you can use conditional update to set conditions for 
 
  **Operation** 
 
-```language-php
+``` {#codeblock_bvy_0cg_t0t .language-php}
     /**
      * Update a row of data.
-     * Description: https://help.aliyun.com/document_detail/27307.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -410,7 +407,7 @@ When performing UpdateRow, you can use conditional update to set conditions for 
 
  **Request format** 
 
-```language-php
+``` {#codeblock_gj3_fe6_9bv .language-php}
 $result = $client->updateRow([
     'table_name' => '<string>', // REQUIRED
     'condition' => [
@@ -475,7 +472,7 @@ $result = $client->updateRow([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_0p8_th0_bom .language-php}
 [
     'consumed' => [
         'capacity_unit' => [
@@ -506,7 +503,7 @@ $result = $client->updateRow([
 
 The following code provides an example of how to update several columns, delete the specified version of a column, and delete the specified column:
 
-```language-php
+``` {#codeblock_bo7_t2k_rfg .language-php}
 $request = [
     'table_name' => 'MyTable',
     'condition' => RowExistenceExpectationConst::CONST_IGNORE,
@@ -541,7 +538,7 @@ Note:
 
 The following code provides an example of how to set update conditions:
 
-```language-php
+``` {#codeblock_6cm_2w4_2h8 .language-php}
 $request = [
     'table_name' => 'MyTable',
     'condition' => RowExistenceExpectationConst::CONST_IGNORE,
@@ -575,7 +572,7 @@ $request = [
 			
 ```
 
-## DeleteRow { .section}
+## DeleteRow {#section_kx3_d3v_mdc .section}
 
 [DeleteRow](../../../../intl.en-US/API Reference/Operations/DeleteRow.md#)
 
@@ -585,10 +582,9 @@ When performing DeleteRow, you can use conditional update to set conditions for 
 
  **Operation** 
 
-```language-php
+``` {#codeblock_rbw_r6v_04h .language-php}
     /**
      * Delete a row of data.
-     * Description: https://help.aliyun.com/document_detail/27308.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -601,7 +597,7 @@ When performing DeleteRow, you can use conditional update to set conditions for 
 
  **Request format** 
 
-```language-php
+``` {#codeblock_s9y_e50_0i4 .language-php}
 $result = $client->deleteRow([
     'table_name' => '<string>', // REQUIRED
     'condition' => [
@@ -640,7 +636,7 @@ $result = $client->deleteRow([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_sx0_cx9_blj .language-php}
 [
     'consumed' => [
         'capacity_unit' => [
@@ -671,7 +667,7 @@ $result = $client->deleteRow([
 
 The following code provides an example of how to delete a row of data:
 
-```language-php
+``` {#codeblock_n2m_jue_yam .language-php}
 $request = [
     'table_name' => 'MyTable',
     'condition' => RowExistenceExpectationConst::CONST_IGNORE,
@@ -691,7 +687,7 @@ $response = $otsClient->deleteRow($request);
 
 The following code provides an example of how to set deletion conditions:
 
-```language-php
+``` {#codeblock_b1c_5vr_n3k .language-php}
 $request = [
     'table_name' => 'MyTable',
     'condition' => [
