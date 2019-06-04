@@ -4,7 +4,7 @@ The Table Store SDK provides CreateTable, ListTable, DeleteTable, UpdateTable, D
 
 ## CreateTable {#section_shf_4ck_2fb .section}
 
-[CreateTable](../../../../intl.en-US/API Reference/Operations/CreateTable.md#)
+API: [CreateTable](../../../../intl.en-US/API Reference/Operations/CreateTable.md#)
 
 You can call this operation to create a table. When creating a table in Table Store, you must specify TableMeta and TableOptions. You can also set ReservedThroughput.
 
@@ -12,10 +12,9 @@ After you create the table, the server loads splits of the table to a specified 
 
 **Operation**
 
-```language-php
+``` {#codeblock_sq2_bl2_8sh .language-php}
      /**
      * Create a table. Set the number, name, sequence, and type of primary key columns, reserved read/write throughput, time to live (TTL), and Stream options.
-     * Description: https://help.aliyun.com/document_detail/27312.html
      * @api
      * @param [] $request Request parameters.
      * @return [] The response is empty. If the CreateTable operation succeeds, no message is returned. An empty array is returned here to be consistent with other operations.
@@ -28,10 +27,7 @@ After you create the table, the server loads splits of the table to a specified 
 
 **Request format**
 
-```language-php
-
-
-
+``` {#codeblock_sfx_vs1_kzv .language-php}
 $result = $client->createTable([
     'table_meta' => [                  // REQUIRED
         'table_name' => '<string>', 
@@ -57,7 +53,6 @@ $result = $client->createTable([
         'expiration_time' => <integer>
     ]
 ]);
-
 			
 ```
 
@@ -91,7 +86,7 @@ $result = $client->createTable([
 
 **Result format**
 
-```language-php
+``` {#codeblock_rds_b28_9oc .language-php}
     []
 			
 ```
@@ -104,7 +99,7 @@ The response is empty. If an error occurs, the system throws an exception.
 
 The following code provides an example of how to create a table with three primary key columns. Set the reserved read/write throughput to 0 and TTL to -1, and enable Stream.
 
-```language-php
+``` {#codeblock_bky_9iv_361 .language-php}
         // Create a schema for the primary key columns, including the number, names, and types of the primary key columns
         // The first primary key column (partition column) is named PK0 and belongs to the integer type.
         // The second primary key column is named PK1 and belongs to the string type.
@@ -137,16 +132,17 @@ The following code provides an example of how to create a table with three prima
 			
 ```
 
-## ListTable { .section}
+## ListTable {#section_36r_sjx_ysj .section}
+
+API: [ListTable](../../../../intl.en-US/API Reference/Operations/ListTable.md#)
 
 You can call this operation to obtain the names of all tables created in the current instance.
 
 **Operation**
 
-```language-php
+``` {#codeblock_anu_0tu_11z .language-php}
     /**
      * Obtain the names of all tables created in the current instance.
-     * Description: https://help.aliyun.com/document_detail/27313.html
      * @api
      * @param [] $request Request parameters, which are empty.
      * @return [] Response. 
@@ -159,7 +155,7 @@ You can call this operation to obtain the names of all tables created in the cur
 
 **Request format**
 
-```language-php
+``` {#codeblock_ppi_812_zq0 .language-php}
 $result = $client->listTable([]);
 			
 ```
@@ -170,7 +166,7 @@ Currently, no parameter is required in the request.
 
 **Result format**
 
-```language-php
+``` {#codeblock_0hq_sgc_008 .language-php}
     [
         '<string>',
         '<string>',
@@ -187,12 +183,14 @@ The result is a list of strings. Each item indicates a table name.
 
 The following code provides an example of how to obtain the names of all tables in an instance:
 
-```language-php
+``` {#codeblock_p4s_dug_dfc .language-php}
     $result = $otsClient->listTable([]);
 			
 ```
 
-## UpdateTable { .section}
+## UpdateTable {#section_rdb_0a5_j6l .section}
+
+API: [UpdateTable](../../../../intl.en-US/API Reference/Operations/UpdateTable.md#)
 
 You can call this operation to update ReservedThroughput, TableOptions, and StreamSpecification of a table.
 
@@ -200,11 +198,10 @@ For more information about ReservedThroughput, TableOptions, and StreamSpecifica
 
 **Operation**
 
-```language-php
+``` {#codeblock_143_hnf_fax .language-php}
     /**
      * Update a table, including the reserved read/write throughput, configuration information, and Stream configuration of the table.
      * This operation can be used to increase or decrease the reserved read/write throughput.
-     * Description: https://help.aliyun.com/document_detail/27315.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -217,10 +214,7 @@ For more information about ReservedThroughput, TableOptions, and StreamSpecifica
 
 **Request format**
 
-```language-php
-
-
-
+``` {#codeblock_pr1_u3y_q58 .language-php}
 $result = $client->updateTable([
     'table_name' => '<string>',         // REQUIRED
     'reserved_throughput' => [         
@@ -238,9 +232,7 @@ $result = $client->updateTable([
         'enable_stream' => true || false,
         'expiration_time' => <integer>
     ]
-]);
-
-			
+]);      
 ```
 
  **Request format description** 
@@ -266,7 +258,7 @@ $result = $client->updateTable([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_v4c_3ec_t2j .language-php}
 [
     'capacity_unit_details' => [
         'capacity_unit' => [
@@ -287,9 +279,7 @@ $result = $client->updateTable([
         'expiration_time' => <integer>,
         'last_enable_time' => <integer>
     ]
-]
-
-			
+]           
 ```
 
  **Result format description** 
@@ -311,7 +301,7 @@ $result = $client->updateTable([
 
 The following code provides an example of how to update the read CU and write CU of a table to 1 and 2, respectively:
 
-```language-php
+``` {#codeblock_rn0_3nq_ubb .language-php}
     $result = $client->updateTable([
         'table_name' => 'SampleTable',
         'reserved_throughput' => [         
@@ -326,7 +316,7 @@ The following code provides an example of how to update the read CU and write CU
 
 The following code provides an example of how to set the TTL of a table to one day \(86400s\), retain two versions, and set the maximum deviation to 10s:
 
-```language-php
+``` {#codeblock_cz6_u5b_6nh .language-php}
     $result = $client->updateTable([
         'table_name' => 'SampleTable',
         'table_options' => [ 
@@ -340,7 +330,7 @@ The following code provides an example of how to set the TTL of a table to one d
 
 The following code provides an example of how to enable Stream for the table and set the expiration time to 24 hours:
 
-```language-php
+``` {#codeblock_hku_08l_i0g .language-php}
     $result = $client->updateTable([
         'table_name' => 'SampleTable',
         'stream_spec' => [
@@ -351,16 +341,17 @@ The following code provides an example of how to enable Stream for the table and
 			
 ```
 
-## DescribeTable { .section}
+## DescribeTable {#section_bj3_alf_3bp .section}
+
+API: [DescribeTable](../../../../intl.en-US/API Reference/Operations/DescribeTable.md#)
 
 You can call this operation to query TableMeta, TableOptions, ReservedThroughputDetails, and StreamDetails of a table. TableMeta and TableOptions have already been described in the CreateTable section. Besides containing the reserved read/write throughput, ReservedThroughputDetails shows the last time the throughput was increased or decreased. StreamDetails shows the detailed information about Stream.
 
  **Operation** 
 
-```language-php
+``` {#codeblock_9nb_6cm_66o .language-php}
     /**
      * Obtain information about a table, including the primary key design and the reserved read/write throughput.
-     * Description: https://help.aliyun.com/document_detail/27316.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response. 
@@ -373,11 +364,10 @@ You can call this operation to query TableMeta, TableOptions, ReservedThroughput
 
  **Request format** 
 
-```language-php
+``` {#codeblock_z38_kf6_do3 .language-php}
 $result = $client->describeTable([
      'table_name' => '<string>', // REQUIRED
-]);
-			
+]);      
 ```
 
  **Request format description** 
@@ -386,7 +376,7 @@ $result = $client->describeTable([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_m7u_ggc_z2j .language-php}
 [
     'table_meta' => [
         'table_name' => '<string>',
@@ -414,9 +404,7 @@ $result = $client->describeTable([
         'expiration_time' => <integer>,
         'last_enable_time' => <integer>
     ]
-]
-
-			
+]      
 ```
 
  **Result format description** 
@@ -447,24 +435,24 @@ $result = $client->describeTable([
 
 The following code provides an example of how to obtain the descriptive information of a table:
 
-```language-php
+``` {#codeblock_s4d_tot_0gm .language-php}
     $result = $client->describeTable([
          'table_name' => 'mySampleTable',
     ]);
-    var_dump($result);
-			
+    var_dump($result); 
 ```
 
-## DeleteTable { .section}
+## DeleteTable {#section_tmp_omc_ypx .section}
+
+API: [DeleteTable](../../../../intl.en-US/API Reference/Operations/DeleteTable.md#)
 
 You can call this operation to delete a specified table from an instance.
 
  **Operation** 
 
-```language-php
+``` {#codeblock_isb_vqo_5ok .language-php}
      /**
      * Delete a table based on the table name.
-     * Description: https://help.aliyun.com/document_detail/27314.html
      * @api
      * @param [] $request Request parameters.
      * @return [] The response is empty. If the DeleteTable operation succeeds, no message is returned. An empty array is returned here to be consistent with other operations.
@@ -477,7 +465,7 @@ You can call this operation to delete a specified table from an instance.
 
  **Request format** 
 
-```language-php
+``` {#codeblock_mje_o2i_kv6 .language-php}
 $result = $client->deleteTable([
      'table_name' => '<string>', // REQUIRED
 ]);
@@ -490,9 +478,8 @@ table\_name: the name of the table.
 
  **Result format** 
 
-```language-php
-    []
-			
+``` {#codeblock_vmy_vel_010 .language-php}
+    []         
 ```
 
  **Result format description** 
@@ -503,24 +490,24 @@ The response is empty. If an error occurs, the system throws an exception.
 
 The following code provides an example of how to delete a table:
 
-```language-php
+``` {#codeblock_woj_4xd_678 .language-php}
 $result = $otsClient->deleteTable([
     'table_name' => 'MyTable'
-]);
-			
+]);          
 ```
 
-## ComputeSplitsBySize { .section}
+## ComputeSplitsBySize {#section_0n4_a97_tbv .section}
+
+API: [ComputeSplitPointsBySize](../../../../intl.en-US/API Reference/Operations/ComputeSplitPointsBySize.md#)
 
 You can call this operation to logically split data in a table into several partitions whose sizes are close to the specified size, and return the split points between the partitions and prompt about hosts where the partitions reside. This operation is generally used for execution plans on compute engines, such as concurrency plans.
 
  **Operation** 
 
-```language-php
+``` {#codeblock_u31_6fc_vfy .language-php}
     /**
      * Logically split data in a table into several partitions whose sizes are close to the specified size, and return the split points between the partitions and prompt about hosts where the partitions reside.
      * This operation is generally used for execution plans on compute engines, such as concurrency plans.
-     * Description: https://help.aliyun.com/document_detail/53813.html
      * @api
      * @param [] $request Request parameters.
      * @return [] Response.
@@ -533,16 +520,14 @@ You can call this operation to logically split data in a table into several part
 
  **Request format** 
 
-```language-php
+``` {#codeblock_lux_wu1_ai4 .language-php}
 
 
 
 $result = $client->ComputeSplitsBySize([
     'table_name' => '<string>', // REQUIRED
     'split_size' => <integer>   // REQUIRED
-]);
-
-			
+]);          
 ```
 
  **Request format description** 
@@ -552,7 +537,7 @@ $result = $client->ComputeSplitsBySize([
 
  **Result format** 
 
-```language-php
+``` {#codeblock_oap_flt_l8l .language-php}
 [
     'consumed' => [
         'capacity_unit' => [
@@ -600,7 +585,7 @@ $result = $client->ComputeSplitsBySize([
 
 The following code provides an example of how to specify the size to split data:
 
-```language-php
+``` {#codeblock_4gk_8iy_35b .language-php}
     $result = $client->ComputeSplitsBySize([
         'table_name' => 'MyTable', 
         'split_size' => 1
@@ -609,7 +594,6 @@ The following code provides an example of how to specify the size to split data:
         print_r($split['location']);    
         print_r($split['lower_bound']);    
         print_r($split['upper_bound']);    
-    }
-			
+    }        
 ```
 
