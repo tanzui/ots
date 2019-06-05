@@ -14,7 +14,7 @@ Grid模型（网格模型）是表格存储针对多维网格数据设计的模�
 -   经度
 -   纬度
 
- **多维网格数据面临哪些挑战** 
+ **挑战** 
 
 -   **数据规模大** 
 
@@ -30,13 +30,13 @@ Grid模型（网格模型）是表格存储针对多维网格数据设计的模�
 
 ## Grid模型介绍 {#section_lpv_amd_qv0 .section}
 
- **模型优势** 
+ **优势** 
 
 -   数据存储量无上限，解决了海量格点数据的规模问题。
 -   根据多维格点数据的特点，对数据进行了恰当的切分，大大提升了通过各种不同维度条件来查询数据的性能，解决了从海量格点数据进行快速检索的需求。
 -   利用了表格存储的多元索引，增加了数据集的元数据管理功能，可以通过多种组合条件筛选数据集，解决了海量格点数据集的管理问题。
 
- **模型元素** 
+ **元素** 
 
 在Grid模型设计中，一个五维网格数据为一个网格的数据集（GridDataSet）。按照维度顺序，五维分别为：
 
@@ -64,9 +64,9 @@ Grid模型（网格模型）是表格存储针对多维网格数据设计的模�
 -   meta表示这个数据集的元数据，例如GridDataSetId、各维度长度、自定义属性等。
 -   data表示这个数据集里实际的网格数据。data相比meta在数据大小上要大很多。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314830/155912051648133_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/314830/155970522548133_zh-CN.png)
 
-## 使用 {#section_2b0_vy7_o49 .section}
+## Grid模型实现 {#section_2b0_vy7_o49 .section}
 
 具体参见[基于TableStore的海量气象格点数据解决方案](https://yq.aliyun.com/articles/698313)。
 
