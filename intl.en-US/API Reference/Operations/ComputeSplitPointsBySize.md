@@ -2,17 +2,17 @@
 
 Logically splits data in a table into several shards whose sizes are close to the specified size, and returns the split points between the shards and prompt about machines where the shards are located. This API is generally used for execution plans like concurrency of plans on a computing engine.
 
-## Request structure { .section}
+## Request structure {#section_8pu_eqe_ogg .section}
 
-```
+``` {#codeblock_wih_s0k_sj3}
 message ComputeSplitPointsBySizeRequest {
     required string table_name = 1;
     required int64 split_size = 2; // in 100MB
 }
-
+			
 ```
 
-table\_name：
+table\_name:
 
 -   Type: string
 -   Required parameter: Yes
@@ -24,9 +24,9 @@ split\_size:
 -   Required parameter: Yes
 -   The approximate size of each shard, in the unit of 100 MB.
 
-## Response message structure { .section}
+## Response message structure {#section_is6_9gh_gis .section}
 
-```
+``` {#codeblock_f3r_znm_uix}
 message ComputeSplitPointsBySizeResponse {
     required ConsumedCapacity consumed = 1;
     repeated PrimaryKeySchema schema = 2;
@@ -56,7 +56,7 @@ message ComputeSplitPointsBySizeResponse {
      }
      repeated SplitLocation locations = 4;
 }
-
+			
 ```
 
 consumed:
@@ -72,16 +72,16 @@ schema:
 split\_points:
 
 -   Type: repeated bytes
--   The split points between shards. The split points must increase monotonically between the shards. Each split point is a [Plainbuffer-encoded](reseller.en-US/API Reference/Data Types/PlainBuffer.md#) line and contains only primary keys. The last -inf of each split point is not transmitted for a smaller volume of data transmitted.
+-   The split points between shards. The split points must increase monotonically between the shards. Each split point is a [Plainbuffer-encoded](intl.en-US/API Reference/Data Types/PlainBuffer.md#) line and contains only primary keys. The last -inf of each split point is not transmitted for a smaller volume of data transmitted.
 
 locations:
 
 -   Type: repeated SplitLocation
 -   The prompt about the machines where the split points are located. It can be null.
 
-For example, a table contains three columns of primary keys, where the first column is of string type. After this API is called, five shards are obtained, which are:`(-inf,-inf,-inf)` to `("a",-inf,-inf)`、`("a",-inf,-inf)` to `("b",-inf,-inf)`、`("b",-inf,-inf)` to `("c",-inf,-inf)`、`("c",-inf,-inf)` to `("d",-inf,-inf)` and `("d",-inf,-inf)` to `(+inf,+inf,+inf)`。 The first three shards are located in “machine-A”, while the last two in “machine-B”. In this case, split\_points is \(example\) `[("a"),("b"),("c"),("d")]`, while locations is \(example\) `"machine-A"*3, "machine-B"*2`.
+For example, a table contains three columns of primary keys, where the first column is of string type. After this API is called, five shards are obtained, which are:`(-inf,-inf,-inf)` to `("a",-inf,-inf)`， `("a",-inf,-inf)` to `("b",-inf,-inf)`， `("b",-inf,-inf)` to `("c",-inf,-inf)`， `("c",-inf,-inf)` to `("d",-inf,-inf)` and `("d",-inf,-inf)` to `(+inf,+inf,+inf)`. The first three shards are located in “machine-A”, while the last two in “machine-B”. In this case, split\_points is \(example\) `[("a"),("b"),("c"),("d")]`, while locations is \(example\) `"machine-A"*3, "machine-B"*2`.
 
-## Capacity unit consumption { .section}
+## Capacity unit consumption {#section_4tw_ake_72l .section}
 
 The number of consumed read service capacity units is the same as that of the shards. No write service capacity unit is consumed.
 
