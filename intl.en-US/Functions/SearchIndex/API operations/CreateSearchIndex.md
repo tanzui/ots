@@ -13,7 +13,7 @@ Parameters:
         -   RoutingFields: specifies the routing fields. You can specify some primary key columns as routing fields. Table Store distributes data that is written to a Search Index structure to different partitions based on the specified routing fields.
     -   FieldSchemas
         -   FieldName: the required name of the field of String type. This field name must be a column name in the table.
-        -   FieldType: the required type of the field. For more information, see [Overview](intl.en-US/Functions/SearchIndex/API operations/Overview.md#).
+        -   FieldType: the required type of the field.
         -   Index: specifies whether to create an index for the field. This is an optional parameter of Boolean type. Default value: true.
         -   IndexOptions: specifies whether to store terms such as position and offset to an inverted chain. You can use the default value of the optional parameter.
         -   Analyzer: the type of the tokenizer. This is an optional parameter. Valid values: single\_word and max\_word.
