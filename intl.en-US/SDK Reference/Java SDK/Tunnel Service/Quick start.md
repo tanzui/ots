@@ -4,7 +4,7 @@ This topic describes how to use the Java SDK to start Tunnel Service. Example co
 
 1.  Initialize a Tunnel client.
 
-    ```
+    ``` {#codeblock_os4_jvs_61s}
     // Set endPoint to the endpoint of the Table Store instance, such as https://instance.cn-hangzhou.ots.aliyuncs.com.
     // Set accessKeyId and accessKeySecret to the AccessKeyId and AccessKeySecret for accessing the Table Store service.
     // Set instanceName to the name of the target instance.
@@ -19,7 +19,7 @@ This topic describes how to use the Java SDK to start Tunnel Service. Example co
 
     Create a testing table or prepare an existing table before creating the tunnel. To create a testing table, you can use the createTable method in the SyncClient class or go to the Table Store console.
 
-    ```
+    ``` {#codeblock_5zx_mes_27o}
     // You can create three types of tunnels: TunnelType.BaseData, TunnelType.Stream, and TunnelType.BaseAndStream.
     // The following example shows how to create a BaseAndStream tunnel. To create the other types of tunnels, set TunnelType in CreateTunnelRequest to the required type.
     final String tableName = "testTable";
@@ -31,9 +31,9 @@ This topic describes how to use the Java SDK to start Tunnel Service. Example co
     System.out.println("Create Tunnel, Id: " + tunnelId);
     ```
 
-3.  Customize the data consumption callback to start automatic data consumption.
+3.  Customize the data consumption callback to start automatic data consumption. For more information, see [Configure the data consumption framework](intl.en-US/SDK Reference/Java SDK/Tunnel Service/Configure the data consumption framework.md#).
 
-    ```
+    ``` {#codeblock_4ky_dmn_oyb}
     // Customize the data consumption callback or call the IChannelProcessor operation. Specify the process and shutdown methods.
     private static class SimpleProcessor implements IChannelProcessor {
         @Override
@@ -57,7 +57,7 @@ This topic describes how to use the Java SDK to start Tunnel Service. Example co
     
     // By default, TunnelWorkerConfig starts the thread pool for reading data and processing data. A single server starts multiple TunnelWorkers.
     // We recommend that you share the same TunnelWorkerConfig. TunnelWorkerConfig provides more advanced parameters.
-    // For more information, see https://help.aliyun.com/document_detail/108058.html.
+    
     TunnelWorkerConfig config = new TunnelWorkerConfig(new SimpleProcessor());
     // Configure TunnelWorker and start automatic data processing.
     TunnelWorker worker = new TunnelWorker(tunnelId, tunnelClient, config);
