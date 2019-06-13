@@ -1,6 +1,8 @@
 # Meta管理 {#concept_263745 .concept}
 
-Meta管理提供了增、删、改、单行读、多条件组合查询等接口。其中多条件组合查询功能基于多元索引，只有设置了IndexSchema的MetaStore才支持。索引类型支持LONG、DOUBLE、BOOLEAN、KEYWORD、GEO\_POINT等类型，属性包含Index、Store和Array，其含义与多元索引相同，具体请参考[概述](../../../../cn.zh-CN/产品功能/多元索引/使用多元索引/概述.md#)。
+Meta管理提供了增、删、改、单行读、多条件组合查询等接口。
+
+Meta管理的多条件组合查询功能基于多元索引，只有设置了IndexSchema的MetaStore才支持。索引类型支持LONG、DOUBLE、BOOLEAN、KEYWORD、GEO\_POINT等类型，属性包含Index、Store和Array，其含义与多元索引相同，具体请参考[概述](../../../../cn.zh-CN/产品功能/多元索引/使用多元索引/概述.md#)。
 
 ## Insert {#section_y2j_db3_etm .section}
 
