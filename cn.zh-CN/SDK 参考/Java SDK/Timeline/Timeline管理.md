@@ -1,6 +1,8 @@
 # Timeline管理 {#concept_263746 .concept}
 
-Timeline管理提供了消息模糊查询、多条件组合查询接口。查询功能基于多元索引，只有设置了IndexSchema的TimelineStore才支持。索引类型支持LONG、DOUBLE、BOOLEAN、KEYWORD、GEO\_POINT、TEXT等类型，属性包含Index、Store、Array以及分词器，其含义与多元索引相同，具体请参考[概述](../../../../cn.zh-CN/产品功能/多元索引/使用多元索引/概述.md#)。
+Timeline管理提供了消息模糊查询、多条件组合查询接口。
+
+Timeline管理的查询功能基于多元索引，只有设置了IndexSchema的TimelineStore才支持。索引类型支持LONG、DOUBLE、BOOLEAN、KEYWORD、GEO\_POINT、TEXT等类型，属性包含Index、Store、Array以及分词器，其含义与多元索引相同，具体请参考[概述](../../../../cn.zh-CN/产品功能/多元索引/使用多元索引/概述.md#)。
 
 ## Search {#section_72k_ksv_htb .section}
 
