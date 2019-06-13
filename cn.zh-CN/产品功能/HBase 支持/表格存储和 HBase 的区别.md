@@ -6,13 +6,13 @@ Table Store HBase Client 的使用方式与 HBase 类似，但存在一些区别
 
 不支持多列族，只支持单列族。
 
-## Row和Cell { .section}
+## Row和Cell {#section_9e5_9yr_s9v .section}
 
 -   不支持设置 ACL
 -   不支持设置 Cell Visibility
 -   不支持设置 Tag
 
-## GET { .section}
+## GET {#section_hzl_cec_y3i .section}
 
 表格存储只支持单列族，所以不支持列族相关的接口，包括：
 
@@ -20,7 +20,7 @@ Table Store HBase Client 的使用方式与 HBase 类似，但存在一些区别
 -   setMaxResultsPerColumnFamily\(int limit\)
 -   setRowOffsetPerColumnFamily\(int offset\)
 
-## SCAN { .section}
+## SCAN {#section_6kn_hb4_2yj .section}
 
 类似于 GET，既不支持列族相关的接口，也不能设置优化类的部分接口，包括：
 
@@ -30,28 +30,28 @@ Table Store HBase Client 的使用方式与 HBase 类似，但存在一些区别
 -   setLoadColumnFamiliesOnDemand\(boolean value\)
 -   setSmall\(boolean small\)
 
-## Batch { .section}
+## Batch {#section_kve_zgj_tn5 .section}
 
 暂时不支持 BatchCallback。
 
-## Mutations 和 Deletions { .section}
+## Mutations 和 Deletions {#section_gps_9yr_h48 .section}
 
 -   不支持删除特定列族
 -   不支持删除最新时间戳的版本
 -   不支持删除小于某个时间戳的所有版本
 
-## Increment 和 Append { .section}
+## Increment 和 Append {#section_xrm_d6o_k73 .section}
 
 暂时不支持
 
-## Filter { .section}
+## Filter {#section_fqi_rcu_47y .section}
 
 -   支持 ColumnPaginationFilter
 -   支持 FilterList
 -   部分支持 SingleColumnValueFilter，比较器仅支持 BinaryComparator
 -   其他 Filter 暂时都不支持
 
-## Optimization { .section}
+## Optimization {#section_jtr_3r7_7rm .section}
 
 HBase 的部分接口涉及到访问、存储优化等，这些接口目前没有开放：
 
@@ -60,7 +60,7 @@ HBase 的部分接口涉及到访问、存储优化等，这些接口目前没�
 -   IsolationLevel：默认为 READ\_COMMITTED，不允许用户更改
 -   Consistency：默认为 STRONG，不允许用户更改
 
-## Admin { .section}
+## Admin {#section_y75_7uw_r1x .section}
 
 HBase 中的接口`org.apache.hadoop.hbase.client.Admin`主要是指管控类的 API，而其中大部分的 API 在表格存储中是不需要的。
 
@@ -123,23 +123,23 @@ HBase 中的接口`org.apache.hadoop.hbase.client.Admin`主要是指管控类的
     -   stopRegionServer\(String hostnamePort\)
     -   unassign\(byte\[\] regionName, boolean force\)
 
-## Snapshots { .section}
+## Snapshots {#section_ws9_dco_lmd .section}
 
 不支持 Snapshots 相关的接口。
 
-## Replication { .section}
+## Replication {#section_8pk_pgs_mgd .section}
 
 不支持 Replication 相关的接口。
 
-## Coprocessors { .section}
+## Coprocessors {#section_etn_c3a_fnv .section}
 
 不支持 Coprocessors 相关的接口。
 
-## Distributed procedures { .section}
+## Distributed procedures {#section_vof_692_eh0 .section}
 
 不支持 Distributed procedures 相关的接口。
 
-## Table management { .section}
+## Table management {#section_tfl_ywz_tbp .section}
 
 表格存储自动执行 Table 相关的操作，用户无需关注，因此不支持以下接口：
 
@@ -153,7 +153,7 @@ HBase 中的接口`org.apache.hadoop.hbase.client.Admin`主要是指管控类的
 -   split\(TableName tableName\)
 -   split\(TableName tableName, byte\[\] splitPoint\)
 
-## 限制项 { .section}
+## 限制项 {#section_ipw_h4p_0ir .section}
 
-表格存储是云服务，为了整体性能最优，对部分参数做了限制，且不支持用户通过配置修改，具体限制项请参见[表格存储限制项](../../../../intl.zh-CN/使用限制/使用限制.md#)。
+表格存储是云服务，为了整体性能最优，对部分参数做了限制，且不支持用户通过配置修改，具体限制项请参见[表格存储限制项](../../../../cn.zh-CN/使用限制/使用限制.md#)。
 
