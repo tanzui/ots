@@ -1,12 +1,12 @@
 # 从 HBase 迁移到表格存储 {#concept_50127_zh .concept}
 
-Table Store HBase Client 是基于 HBase Client 的封装，使用方法和 HBase Client 基本一致，但是也有一些事项需要注意。
+Table Store HBase Client 是基于 HBase Client 的封装，使用方法和 HBase Client 基本一致，但仍存在一些差别，本文主要为您介绍如何从 HBase 迁移到表格存储及注意事项。
 
 ## 依赖 {#section_alf_thn_cfb .section}
 
 Table Store HBase Client 1.2.0 版本中依赖了 HBase Client 1.2.0 版本和 Table Store JAVA SDK 4.2.1 版本。pom.xml 配置如下：
 
-```language-xml
+``` {#codeblock_upa_eh6_hi2 .language-xml}
  <dependencies>
         <dependency>
             <groupId>com.aliyun.openservices</groupId>
@@ -14,12 +14,12 @@ Table Store HBase Client 1.2.0 版本中依赖了 HBase Client 1.2.0 版本和 T
             <version>1.2.0</version>
         </dependency>
     </dependencies>
-
+			
 ```
 
 如果需要使用其他版本的 HBase Client 或 Table Store JAVA SDK，可以使用 exclusion 标签。下面示例中使用 HBase Client 1.2.1 版本和 Table Store JAVA SDK 4.2.0 版本。
 
-```language-xml
+``` {#codeblock_nub_6qp_spt .language-xml}
    <dependencies>
         <dependency>
             <groupId>com.aliyun.openservices</groupId>
@@ -48,29 +48,29 @@ Table Store HBase Client 1.2.0 版本中依赖了 HBase Client 1.2.0 版本和 T
             <version>4.2.0</version>
         </dependency>
     </dependencies>
-
+			
 ```
 
 HBase Client 1.2.x 和 其他版本（如 1.1.x）存在接口变化，而 Table Store HBase Client 1.2.x 版本只能兼容 HBase Client 1.2.x。
 
 如果需要使用 HBase Client 1.1.x 版本，请使用 Table Store HBase Client 1.1.x 版本。
 
-如果需要使用 HBase Client 0.x.x 版本，请参考[迁移较早版本的 HBase](intl.zh-CN/产品功能/HBase 支持/迁移较早版本的 HBase.md#)。
+如果需要使用 HBase Client 0.x.x 版本，请参考[迁移较早版本的 HBase](cn.zh-CN/产品功能/HBase 支持/如何兼容Hbase 1.0以前的版本.md#)。
 
-## 配置文件 { .section}
+## 配置文件 {#section_vzm_50w_ah6 .section}
 
-从 HBase Client 迁移到 Table Store HBase Client，需要在配置文件中修改以下两点。
+从 HBase Client 迁移到 Table Store HBase Client，需要在配置文件中修改以下两点：
 
 -   HBase Connection类型
 
     Connection 需要配置为 TableStoreConnection。
 
-    ```language-java
+    ``` {#codeblock_b78_uwk_3s5 .language-java}
         <property>
             <name>hbase.client.connection.impl</name>
             <value>com.alicloud.tablestore.hbase.TablestoreConnection</value>
         </property>
-    
+    					
     ```
 
 -   表格存储的配置项
@@ -79,58 +79,58 @@ HBase Client 1.2.x 和 其他版本（如 1.1.x）存在接口变化，而 Table
 
     -   必须配置以下四个配置项才能成功访问表格存储：
 
-        ```language-xml
+        ``` {#codeblock_5tp_zvg_8s5 .language-xml}
          <property>
-        			<name>tablestore.client.endpoint</name>
-        			<value></value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.instancename</name>
-        			<value></value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.accesskeyid</name>
-        			<value></value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.accesskeysecret</name>
-        			<value></value>
-        		</property>
-        
+                    <name>tablestore.client.endpoint</name>
+                    <value></value>
+                </property>
+                <property>
+                    <name>tablestore.client.instancename</name>
+                    <value></value>
+                </property>
+                <property>
+                    <name>tablestore.client.accesskeyid</name>
+                    <value></value>
+                </property>
+                <property>
+                    <name>tablestore.client.accesskeysecret</name>
+                    <value></value>
+                </property>
+        							
         ```
 
     -   下面为可选配置项：
 
-        ```language-xml
-        		<property>
-        			<name>hbase.client.tablestore.family</name>
-        			<value>f1</value>
-        		</property>
-        		<property>
-        			<name>hbase.client.tablestore.family.$tablename</name>
-        			<value>f2</value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.max.connections</name>
-        			<value>300</value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.socket.timeout</name>
-        			<value>15000</value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.connection.timeout</name>
-        			<value>15000</value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.operation.timeout</name>
-        			<value>2147483647</value>
-        		</property>
-        		<property>
-        			<name>tablestore.client.retries</name>
-        			<value>3</value>
-        		</property>
-        
+        ``` {#codeblock_iyy_rbu_clu .language-xml}
+                <property>
+                    <name>hbase.client.tablestore.family</name>
+                    <value>f1</value>
+                </property>
+                <property>
+                    <name>hbase.client.tablestore.family.$tablename</name>
+                    <value>f2</value>
+                </property>
+                <property>
+                    <name>tablestore.client.max.connections</name>
+                    <value>300</value>
+                </property>
+                <property>
+                    <name>tablestore.client.socket.timeout</name>
+                    <value>15000</value>
+                </property>
+                <property>
+                    <name>tablestore.client.connection.timeout</name>
+                    <value>15000</value>
+                </property>
+                <property>
+                    <name>tablestore.client.operation.timeout</name>
+                    <value>2147483647</value>
+                </property>
+                <property>
+                    <name>tablestore.client.retries</name>
+                    <value>3</value>
+                </property>
+        							
         ```
 
         -   hbase.client.tablestore.family 与 hbase.client.tablestore.family.$tablename
