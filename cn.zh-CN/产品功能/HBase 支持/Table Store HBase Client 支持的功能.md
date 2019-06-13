@@ -1,8 +1,10 @@
 # Table Store HBase Client 支持的功能 {#concept_50126_zh .concept}
 
+本文主要为您介绍Table Store HBase Client 支持的功能和操作。
+
 ## 表格存储与 HBase 的 API 区别 {#section_dc5_l5m_cfb .section}
 
-作为 NoSQL 数据库服务，表格存储对用户屏蔽了数据表分裂、Dump、Compact、Region Server 等底层相关的细节，用户只需要关心数据的使用。因此，虽然在[数据模型](../../../../intl.zh-CN/数据模型/前言.md#)及功能上相近，但表格存储并不完全与 HBase 相同，两者在 API 上有所区别。也正因如此，Table Store Hbase Client 与原生的 HBase API 仍然有一些区别。
+作为 NoSQL 数据库服务，表格存储为您屏蔽了数据表分裂、Dump、Compact、Region Server 等底层相关的细节，您只需要关心数据的使用。因此，虽然与HBase在[数据模型](../../../../cn.zh-CN/数据模型/前言.md#)及功能上相近，Table Store Hbase Client 与原生的 HBase API 仍然有一些区别。
 
 ## 支持的功能 {#section_mq2_dzm_cfb .section}
 
@@ -137,7 +139,7 @@
  |
 
 
-## 不支持的方法 { .section}
+## 不支持的方法 {#section_7w4_qgg_qvj .section}
 
 -   Namespaces
 
