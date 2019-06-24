@@ -79,7 +79,7 @@ locations:
 -   Type: repeated SplitLocation
 -   The prompt about the machines where the split points are located. It can be null.
 
-For example, a table contains three columns of primary keys, where the first column is of string type. After this API is called, five shards are obtained, which are:`(-inf,-inf,-inf)` to `("a",-inf,-inf)`， `("a",-inf,-inf)` to `("b",-inf,-inf)`， `("b",-inf,-inf)` to `("c",-inf,-inf)`， `("c",-inf,-inf)` to `("d",-inf,-inf)` and `("d",-inf,-inf)` to `(+inf,+inf,+inf)`. The first three shards are located in “machine-A”, while the last two in “machine-B”. In this case, split\_points is \(example\) `[("a"),("b"),("c"),("d")]`, while locations is \(example\) `"machine-A"*3, "machine-B"*2`.
+For example, a table contains three columns of primary keys, where the first column is of string type. After this API is called, five shards are obtained, which are:`(-inf,-inf,-inf)` to `("a",-inf,-inf)`, `("a",-inf,-inf)` to `("b",-inf,-inf)`, `("b",-inf,-inf)` to `("c",-inf,-inf)`, `("c",-inf,-inf)` to `("d",-inf,-inf)` and `("d",-inf,-inf)` to `(+inf,+inf,+inf)`. The first three shards are located in “machine-A”, while the last two in “machine-B”. In this case, split\_points is \(example\) `[("a"),("b"),("c"),("d")]`, while locations is \(example\) `"machine-A"*3, "machine-B"*2`.
 
 ## Capacity unit consumption {#section_4tw_ake_72l .section}
 
