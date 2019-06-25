@@ -1,10 +1,8 @@
 # STS临时授权访问 {#concept_27364_zh .concept}
 
-上面章节只用到了 RAM 的子账号功能，这些子账号都是可以长期正常使用的，发生泄露后如果无法及时解除权限，会非常危险。
+STS 可以指定复杂的策略来对特定的用户进行限制，仅提供最小的权限。
 
-当开发者的 app 被用户使用之后，用户的数据要写入 ram-test-dev 这个实例。当 app 的用户数据很多时，要求能够安全地授权给众多的 app 用户上传数据，并且保证多个用户之间存储的隔离。
-
-类似这种场景需要临时访问权限，应该使用 STS 来完成。STS 可以指定复杂的策略来对特定的用户进行限制，仅提供最小的权限。
+当开发者的 APP 被用户使用之后，用户的数据要写入 ram-test-dev 这个实例。当 APP 的用户数据很多时，要求能够安全地授权给众多的 APP 用户上传数据，并且保证多个用户之间存储的隔离。这种场景需要临时访问权限，建议使用 STS 来完成。
 
 ## 创建角色 {#section_zzy_2ms_cfb .section}
 
@@ -15,35 +13,35 @@
     3.  选择角色类型。这里选择**用户角色**。
     4.  填写类型信息。因为角色是被阿里云账号使用过的，因此选择默认的即可。然后单击**下一步**。
     5.  配置角色基本信息。本实例中角色名称填写 RamTestAppReadOnly，然后单击**创建**。
-    6.  完成角色创建后，单击**关闭。**
+    6.  完成角色创建后，单击**关闭。** 
 3.  创建完角色之后，角色是没有任何权限的，因此需要新建一个自定义的授权策略。
     1.  选择**策略管理** \> **新建授权策略**。
     2.  选择**空白模板**。
     3.  填写**授权策略名称**。该示例中填写ram-test-app-readonly，策略内容填写如下：
 
-        ```
+        ``` {#codeblock_9p6_nid_noe}
         {
         "Statement": [
-        	{
-        	  "Effect": "Allow",
-        	  "Action": [
-        		"ots:BatchGet*",
-        		"ots:Describe*",
-        		"ots:Get*",
-        		"ots:List*"
-        	  ],
-        	  "Resource": [
-        		"acs:ots:*:*:instance/ram-test-app",
-        		"acs:ots:*:*:instance/ram-test-app/table/*"
-        	  ]
-        	}
+            {
+              "Effect": "Allow",
+              "Action": [
+                "ots:BatchGet*",
+                "ots:Describe*",
+                "ots:Get*",
+                "ots:List*"
+              ],
+              "Resource": [
+                "acs:ots:*:*:instance/ram-test-app",
+                "acs:ots:*:*:instance/ram-test-app/table/*"
+              ]
+            }
         ],
         "Version": "1"
         }
-        
+        									
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305066512253_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/156144984012253_zh-CN.png)
 
         该策略内容表示对 ram-test-app 授予只读权限。
 
@@ -52,7 +50,7 @@
     1.  在角色管理页面，单击 RamTestAppReadOnly 右侧操作栏中的**授权**按钮。
     2.  将 ram-test-app-readonly 权限添加至右侧栏中。完成给该角色赋予对 ram-test-app 拥有只读的权限。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/155305066511784_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20297/156144984111784_zh-CN.png)
 
     3.  单击**确定**。
 
@@ -60,34 +58,34 @@
 
 5.  参考步骤 2 ~ 步骤 4，建立一个 RamTestAppWrite 的角色，并赋予该角色写 ram-test-app 的自定义授权，步骤 3 中填写的策略内容如下：
 
-    ```
-    	{
+    ``` {#codeblock_1ud_jme_kax}
+        {
      "Statement": [
-    		{
-    		  "Effect": "Allow",
-    		  "Action": [
-    			"ots:Create*",
-    			"ots:Insert*",
-    			"ots:Put*",
-    			"ots:Update*",
-    			"ots:Delete*",
-    			"ots:BatchWrite*"
-    		  ],
-    		  "Resource": [
-    			"acs:ots:*:*:instance/ram-test-app",
-    			"acs:ots:*:*:instance/ram-test-app/table/*"
-    		  ]
-    		}
+            {
+              "Effect": "Allow",
+              "Action": [
+                "ots:Create*",
+                "ots:Insert*",
+                "ots:Put*",
+                "ots:Update*",
+                "ots:Delete*",
+                "ots:BatchWrite*"
+              ],
+              "Resource": [
+                "acs:ots:*:*:instance/ram-test-app",
+                "acs:ots:*:*:instance/ram-test-app/table/*"
+              ]
+            }
      ],
      "Version": "1"
-    	}
-    
+        }
+    						
     ```
 
 
 在角色管理页面，可以看到已经新建好了 RamTestAppReadOnly 和 RamTestAppWrite 两个角色，分别表示了对于 ram-test-app 的读和写权限。
 
-## 临时授权访问 { .section}
+## 临时授权访问 {#section_jmr_0bc_se4 .section}
 
 创建角色后，就可以使用临时授权来访问表格存储了。
 
@@ -101,7 +99,7 @@
     4.  填写授权策略名称，并将如下内容填写至策略内容栏。
 
         -   AliyunSTSAssumeRolePolicy2016011401
-        ```
+        ``` {#codeblock_9gr_96n_sy6}
         {
         "Version": "1",
         "Statement": [
@@ -112,11 +110,11 @@
             }
         ]
         }
-        
+        							
         ```
 
         -   AliyunSTSAssumeRolePolicy2016011402
-        ```
+        ``` {#codeblock_n55_uhp_mts}
         {
         "Version": "1",
         "Statement": [
@@ -127,7 +125,7 @@
             }
         ]
         }
-        
+        							
         ```
 
         **说明：** 下文中 Resource 后面填写的内容表示某个角色 ID，角色的 ID 可以在角色管理页面，单击**管理**按钮，进入角色详情的页面中找到。
@@ -140,11 +138,11 @@
 
     上述准备工作完成后，就可以正式使用 STS 来进行授权访问。这里需要使用 STS 的 Python 命令行工具，该工具安装包的下载地址：[sts.py](https://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/cn/oss/0.4.30/assets/tool/sts.py)。
 
-    具体的调用方法如下，更详细的参数解释可以参考[STS帮助文档](https://www.alibabacloud.com/help/doc-detail/28756.htm)。
+    具体的调用方法如下，更详细的参数解释可以参考[STS 帮助文档](https://help.aliyun.com/document_detail/28756.html)。
 
-    ```
+    ``` {#codeblock_bny_y08_rnc}
     $python ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=usr001 Policy='{"Version":"1","Statement":[{"Effect":"Allow","Action":["ots:ListTable","ots:DescribeTable"],"Resource":["acs:ots:*:*:ram-test-app","acs:ots:*:*:ram-test-app/*"]}]}' DurationSeconds=1000 --id=id --secret=secret
-    
+    					
     ```
 
     参数说明：
@@ -153,9 +151,9 @@
     |:-|:-|
     |RoleArn|指需要扮演的角色 ID。角色的 ID 可以在角色管理页面，单击**管理**按钮进入角色详情的页面中找到。|
     |RoleSessionName|指临时凭证的名称，一般来说建议使用不同的应用程序用户来区分。|
-    |Policy|指在扮演角色时额外加上的一个权限限制。**说明：** 这里传入的 Policy 是用来限制扮演角色之后的临时凭证的权限。最后临时凭证获得的权限是角色的权限和这里传入的 Policy 的交集。在扮演角色时传入 Policy 是为了灵活性，比如上传文件时可以根据不同的用户添加对于上传文件路径的限制。
+    |Policy|指在扮演角色时额外加上的一个权限限制。 **说明：** 这里传入的 Policy 是用来限制扮演角色之后的临时凭证的权限。最后临时凭证获得的权限是角色的权限和这里传入的 Policy 的交集。在扮演角色时传入 Policy 是为了灵活性，比如上传文件时可以根据不同的用户添加对于上传文件路径的限制。
 
-|
+ |
     |DurationSeconds|指临时凭证的有效期。单位是秒，最小为 900，最大为 3600。|
     |id and secret|指需要扮演角色的子账号的 AccessKey 的 AccessKeyID 和 AccessKeySecret。|
 
@@ -165,12 +163,12 @@
 
     使用 ram\_test\_app 这个子账号直接来访问，请将下面的 AccessKey 换成自己测试用的 AccessKey。
 
-    ```
+    ``` {#codeblock_2xa_1mh_v0i}
     python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id <yourAccessKeyId> --key <yourAccessKeySecret>
     You cannot access the instance!
     ErrorCode: OTSNoPermissionAccess
     ErrorMessage: You have no permission to access the requested resource, please contact the resource owner.
-    
+    					
     ```
 
     由于 ram\_test\_app 这个子账号没有访问权限，因此访问失败。
@@ -181,7 +179,7 @@
 
     1.  使用 STS 来获取临时凭证。
 
-        ```
+        ``` {#codeblock_ckg_d62_1ap}
         python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappwrite RoleSessionName=session001 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:Create*","ots:BatchWrite*","ots:Put*","ots:Insert*","ots:Update*","ots:Delete*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=<yourAccessKeyId> --secret=<yourAccessKeySecret>
         {
         "AssumedRoleUser": {
@@ -195,17 +193,17 @@
         }, 
         "RequestId": "5F92B248-F200-40F8-A05A-C9C7D018E351"
         }
-        
+        							
         ```
 
     2.  使用 CLI 工具写入数据（版本 V1.2 开始支持 token 参数，待发布）。
 
-        ```
-        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id <yourAccessKeyId> --key <yourAccessKeySecret> --token=CAE****0ZQ==
+        ``` {#codeblock_sty_nnw_u05}
+            python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id <yourAccessKeyId> --key <yourAccessKeySecret> --token=CAE****0ZQ==
         
-        	OTS-TableStoreTest>$ put test_write_read '001' age:integer=30
-        	A new row has been put in table test_write_read
-        
+            OTS-TableStoreTest>$ put test_write_read '001' age:integer=30
+            A new row has been put in table test_write_read
+        							
         ```
 
 -   使用临时授权读取数据
@@ -214,7 +212,7 @@
 
     1.  使用 STS 来获取临时凭证。
 
-        ```
+        ``` {#codeblock_uc7_fmc_v54}
         python2.7 ./sts.py AssumeRole RoleArn=acs:ram::198***237:role/ramtestappreadonly RoleSessionName=session002 Policy='{"Statement": [{"Effect": "Allow","Action": ["ots:BatchGet*","ots:Describe*","ots:Get*","ots:List*"],"Resource": ["acs:ots:*:*:instance/ram-test-app","acs:ots:*:*:instance/ram-test-app/table/*"]}],"Version": "1"}' --id=6iT***lRt --secret=****
         {
         "AssumedRoleUser": {
@@ -229,17 +227,17 @@
         }, 
         "RequestId": "EE788165-B760-4014-952C-E58ED229C80D"
         }
-        
+        							
         ```
 
     2.  使用 CLI 工具读取数据（版本 V1.2 开始支持 token 参数，待发布）。
 
-        ```
-        	python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS***Q8Q --key **** --token=CAE****Q==
+        ``` {#codeblock_mzy_hmj_gga}
+            python2.7 ots_console --url https://TableStoreTest.cn-hangzhou.ots.aliyuncs.com --id STS***Q8Q --key **** --token=CAE****Q==
         
-        	OTS-TableStoreTest>: get test_write_read '001'
-        	age:INTEGER='30'
-        
+            OTS-TableStoreTest>: get test_write_read '001'
+            age:INTEGER='30'
+        							
         ```
 
 -   使用临时授权访问控制台
@@ -252,16 +250,16 @@
     4.  登录成功后，单击页面右上角的用户名，然后单击**切换身份**，进入角色切换页面。
     5.  输入企业姓名和角色名，然后单击**切换**。
 
-## 使用临时授权调用 JAVA SDK { .section}
+## 使用临时授权调用 JAVA SDK {#section_fgm_81g_owv .section}
 
 请参考以下方式创建 OTSClient 对象，传入 STS Token 的 AccessKeyId、AccessKeySecret 和 Token 等参数。
 
-```
+``` {#codeblock_692_9hu_529}
 OTSClient client = new OTSClient(otsEndpoint, stsAccessKeyId, stsAccessKeySecret, instanceName, stsToken);
-
+			
 ```
 
-## 总结 { .section}
+## 总结 {#section_nmt_ddt_3qq .section}
 
 本章主要介绍了如何使用 STS 来临时授权用户访问表格存储。在典型的移动开发场景中，通过使用 STS，不同的 app 用户需要访问 app 时，可以通过获取到的临时授权来访问表格存储，临时授权可以指定过期时间，因此大大降低了泄露子账号信息的危害。在获取临时授权的时候，可以根据 app 用户的不同，传入不同的授权策略来限制用户的访问权限，比如限制用户访问的表路径，从而达到隔离不同 app 用户的存储空间的目的。
 
