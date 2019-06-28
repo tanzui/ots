@@ -1,6 +1,8 @@
 # Table Store HBase Client {#concept_50125_zh .concept}
 
-除了使用现有的 SDK 以及 Restful API 来访问表格存储，我们还提供了 Table Store HBase Client。使用开源 HBase API 的 JAVA 应用可以通过 Table Store HBase Client 来直接访问表格存储服务。Table Store HBase Client 基于表格存储 4.2.x 以上版本的 JAVA SDK，支持 1.x.x 版本以上的开源 HBase API。
+除了使用现有的 SDK 以及 Restful API 来访问表格存储，我们还提供了 Table Store HBase Client。使用开源 HBase API 的 JAVA 应用可以通过 Table Store HBase Client 来直接访问表格存储服务。
+
+Table Store HBase Client 基于表格存储 4.2.x 以上版本的 JAVA SDK，支持 1.x.x 版本以上的开源 HBase API。
 
 Table Store HBase Client 可以从以下三个途径获取：
 
