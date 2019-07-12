@@ -1,0 +1,13 @@
+# Timeline快速入门 {#concept_1130217 .concept}
+
+本文主要为您介绍如何通过示例代码快速使用Timeline模型。
+
+## 操作步骤 {#section_ans_uis_ycl .section}
+
+1.  登录表格存储控制台，并创建表格存储实例。详情参见[创建实例](../../../../cn.zh-CN/快速入门/创建实例.md#)。
+2.  下载并安装表格存储Java SDK包，详情参见[安装](../../../../cn.zh-CN/SDK 参考/Java SDK/安装.md#)。
+3.  使用实例服务地址及账户秘钥初始化对接实例，详情参见[初始化](../../../../cn.zh-CN/SDK 参考/Java SDK/初始化.md#)。
+4.  通过[示例代码](https://github.com/aliyun/tablestore-timeline/blob/master/src/test/java/examples/v2/TimelineV2.java)快速使用Timeline模型。
+
+如果您希望了解更多关于Timeline模型的操作，参见[Timeline SDK](../../../../cn.zh-CN/SDK 参考/Java SDK/Timeline/概述.md#)。
+
