@@ -68,5 +68,3 @@ You have [activated Table Store](intl.en-US/Quick Start/Sign up for Table Store.
 
 You can view the consumption logs of incremental data in the data consumption standard output. You can also log on to the Table Store console or call the DescribeTunnel operation to view the consumption latency and the number of consumed rows in each channel.
 
-![](images/36974_en-US.png)
-
