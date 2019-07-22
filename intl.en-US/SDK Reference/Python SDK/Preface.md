@@ -2,21 +2,23 @@
 
 This document describes how to install and use Python SDK v4.x.x for Table Store. Make sure that you have activated Alibaba Cloud Table Store and created an AccessKeyID and AccessKeySecret.
 
--   If you have not activated Alibaba Cloud Table Store or want to learn more about this service, visit the Table Store product homepage.
+-   If you have not activated Alibaba Cloud Table Store or want to learn more about this service, visit the [Table Store product homepage](https://www.alibabacloud.com/product/table-store).
 
--   If you have not created an AccessKeyID and AccessKeySecret, log on to the [AccessKey console](https://partners-intl.console.aliyun.com/#/ak) to create an AccessKey.
+-   If you have not created an AccessKeyID and AccessKeySecret, log on to the [AccessKey console](https://ak-console.aliyun.com/#/accesskey) to create an AccessKey.
 
 
 ## Download the SDK {#section_zjm_mv2_2fb .section}
 
--    [SDK](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/27352/cn_zh/1526039079957/aliyun-tablestore-python-sdk-4.3.7.tar.gz) 
+-   [SDK](https://tablestore-doc.oss-cn-hangzhou.aliyuncs.com/aliyun-tablestore-sdk/python/aliyun-tablestore-python-sdk-5.1.0.tar.gz)
 
--    [GitHub](https://github.com/aliyun/aliyun-tablestore-python-sdk) 
+-   [GitHub](https://github.com/aliyun/aliyun-tablestore-python-sdk)
 
 
-For more information about version history, [click here](reseller.en-US/SDK Reference/Download SDK/Python SDK.md#).
+For more information about version history, [click here](intl.en-US/SDK Reference/Download SDK/Python SDK.md#).
 
-## Compatibility { .section}
+## Compatibility {#section_i33_sv1_sv8 .section}
+
+-   Table Store is compatible with Python SDK v5.x.x.
 
 -   Table Store is compatible with Python SDK v4.x.x.
 
@@ -31,7 +33,7 @@ For more information about version history, [click here](reseller.en-US/SDK Refe
     -   The put\_row, update\_row, and delete\_row operations are added with the return\_type parameter. Currently, only RT\_PK is supported, indicating that the returned value contains the PK value of the current row.
     -   The values returned by the put\_row, update\_row, and delete\_row operations are added with return\_row. If return\_type is specified as RT\_PK in a request, return\_row contains the PK value of the current row.
 
-## Version { .section}
+## Version {#section_8qn_yqx_7vv .section}
 
-Latest version: 4.3.0
+Latest version: 5.1.0
 
