@@ -4,54 +4,49 @@
 
 Applicable to Python 2 and Python 3.
 
-## Installation { .section}
+## Installation {#section_y55_j4h_1m5 .section}
 
 -   Method 1: Install Python by using pip.
 
     The command is as follows.
 
-    ```language-shell
-    	sudo pip install tablestore
-    
+    ``` {#codeblock_ljf_ut5_kzf .language-shell}
+        sudo pip install tablestore
     ```
 
 -   Method 2: Install Python by using GitHub.
 
     Make sure you have installed [git](https://git-scm.com/downloads), and then run the following command.
 
-    ```language-shell
+    ``` {#codeblock_5nm_yj6_z6z .language-shell}
     git clone https://github.com/aliyun/aliyun-tablestore-python-sdk.git
     sudo python setup.py  install
-    
     ```
 
 -   Method 3: Install Python by using source code.
-    1.  Download the [Python SDK](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/27352/cn_zh/1526039079957/aliyun-tablestore-python-sdk-4.3.7.tar.gz).
+    1.  Download the [Python SDK](https://tablestore-doc.oss-cn-hangzhou.aliyuncs.com/aliyun-tablestore-sdk/python/aliyun-tablestore-python-sdk-5.1.0.tar.gz).
     2.  Decompress the SDK, and then run the following command.
 
-        ```language-shell
+        ``` {#codeblock_wgz_3t5_xqn .language-shell}
         sudo python setup.py install
-        
         ```
 
 
-## Verify SDK { .section}
+## Verify SDK {#section_w56_oq4_8bf .section}
 
 Enter python on the command line and press ENTER to check the version.
 
-```language-shell
+``` {#codeblock_vqp_hmr_xfy .language-shell}
 >>> import tablestore
 >>> tablestore.__version__
-'4.3.7'
-
+'5.1.0'
 ```
 
-## Uninstall SDK { .section}
+## Uninstall SDK {#section_fjb_czo_ibc .section}
 
 Uninstall python SDK by using pip.
 
-```language-shell
+``` {#codeblock_rd5_8gl_3z2 .language-shell}
 sudo pip uninstall tablestore
-
 ```
 
