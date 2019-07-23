@@ -1,5 +1,7 @@
 # 命令行工具TablestoreCli {#concept_34160_zh .concept}
 
+本文主要为您介绍如何使用命令行工具TablestoreCli。
+
 ## 快速开始 {#section_xpm_m54_dfb .section}
 
 TablestoreCli是以命令行方式管理Tablestore数据的工具，提供简洁、方便的管理命令，支持Windows、Linux、 Mac平台。
