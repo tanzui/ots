@@ -2,6 +2,33 @@
 
 4.0.0 以上版本的 SDK 支持数据多版本和生命周期，但是该版本 SDK 不兼容 2.x.x 系列的 SDK。
 
+## 版本号：5.1.0 {#section_hho_rbh_a48 .section}
+
+发布时间：2019-07-01
+
+下载地址：[5.1.0](https://tablestore-doc.oss-cn-hangzhou.aliyuncs.com/aliyun-tablestore-sdk/java/tablestore-5.1.0-release.zip)
+
+更新日志：多元索引增加更多分词类型。
+
+## 版本号：5.0.0 {#section_jzo_79s_fms .section}
+
+发布时间：2019-06-10
+
+下载地址：[5.0.0](https://tablestore-doc.oss-cn-hangzhou.aliyuncs.com/aliyun-tablestore-sdk/java/tablestore-5.0.0-release.zip)
+
+更新日志：
+
+-   出于各SDK版本号统一的目的，版本号提升到5.x，与4.x版本sdk接口兼容。
+-   多元索引新增exists query。
+
+## 版本号：4.12.1 {#section_gbt_jal_ofx .section}
+
+发布时间：2019-05-08
+
+下载地址：[4.12.1](https://tablestore-doc.oss-cn-hangzhou.aliyuncs.com/aliyun-tablestore-sdk/java/tablestore-4.12.1-release.zip)
+
+更新日志：新增TimelineV2模型。
+
 ## 版本号：4.11.0 {#section_ls4_d2c_6f7 .section}
 
 发布时间：2019-04-12
@@ -9,17 +36,6 @@
 下载地址：[4.11.0](https://oss.sonatype.org/service/local/artifact/maven/redirect?r=releases&g=com.aliyun.openservices&a=tablestore&v=4.11.0&e=zip&c=release)
 
 更新日志：新增Timestream模型
-
-## 版本号：4.10.2 {#section_kzf_x1c_bhb .section}
-
-发布时间：2019-03-11
-
-下载地址：[tablestore-4.10.2](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/108096/cn_zh/1552274752739/tablestore-4.10.2-release.zip)
-
-更新日志：
-
--   Remove log4j2 implement and log4j2.xml.
--   TunnelWorker: fix auto retry logic when network condition is too bad.
 
 ## 版本号：4.10.0 {#section_phw_ldk_wgb .section}
 
@@ -29,8 +45,8 @@
 
 更新日志：新增通道服务功能
 
--   新增通道服务管控接口
--   新增全增量一体化数据处理框架
+-   新增通道服务管控接口。
+-   新增全增量一体化数据处理框架。
 
 ## 版本号：4.8.0 {#section_ods_3kq_dgb .section}
 
@@ -74,7 +90,7 @@ SearchIndex相关
 
 更新日志：提供按照指定大小将全表数据逻辑分片的功能。
 
-## 版本号：4.2.1 { .section}
+## 版本号：4.2.1 {#section_huq_ud6_jza .section}
 
 发布时间：2017-01-18
 
@@ -82,7 +98,7 @@ SearchIndex相关
 
 更新日志：修复PrimaryKeyValue和PrimaryKeySchema无法放入HashMap的问题。
 
-## 版本号：4.2.0 { .section}
+## 版本号：4.2.0 {#section_4s8_ib0_0en .section}
 
 发布时间：2016-11-29
 
@@ -98,7 +114,7 @@ SearchIndex相关
 
 更新日志：DescribeTable 接口返回分片间的分隔点，可用于确定分片范围。
 
-## 版本号：4.0.0 { .section}
+## 版本号：4.0.0 {#section_4hv_u12_djx .section}
 
 发布时间：2016-08-01
 
@@ -106,10 +122,10 @@ SearchIndex相关
 
 更新日志：
 
--   新增[数据生命周期 TTL](../../../../../cn.zh-CN/数据模型/Wide Column/数据版本和生命周期.md#section_cv2_kyf_cfb)。
--   新增[数据多版本](../../../../../cn.zh-CN/数据模型/Wide Column/数据版本和生命周期.md#)。
+-   新增[数据生命周期 TTL](../../../../cn.zh-CN/开发指南/Wide column模型/数据版本和生命周期.md#section_cv2_kyf_cfb)。
+-   新增[数据多版本](../../../../cn.zh-CN/开发指南/Wide column模型/数据版本和生命周期.md#)。
 
-## 版本号：2.2.5 { .section}
+## 版本号：2.2.5 {#section_3fc_n35_4x4 .section}
 
 发布时间：2016-08-23
 
@@ -117,7 +133,7 @@ SearchIndex相关
 
 更新日志：解决 OTSWriter 中可能导致程序 Hang 的一个 bug。
 
-## 版本号：2.2.4 { .section}
+## 版本号：2.2.4 {#section_tww_fms_lgm .section}
 
 发布时间：2016-05-12
 
@@ -128,7 +144,7 @@ SearchIndex相关
 -   新增 condition update。
 -   新增 filter。
 
-## 版本号：2.1.2 { .section}
+## 版本号：2.1.2 {#section_dlu_qao_8wj .section}
 
 发布时间：2015-12-31
 
@@ -136,7 +152,7 @@ SearchIndex相关
 
 更新日志：根据按量计费方式，重新调整了示例代码中的预留 CU 设置。
 
-## 版本号 2.1.1 { .section}
+## 版本号 2.1.1 {#section_8da_xa2_l8p .section}
 
 发布时间：2015-12-30
 
@@ -144,7 +160,7 @@ SearchIndex相关
 
 更新日志：由于 JodaTime 2.4 在 Java 8 下有序列化时间格式不正确的 bug，所以将 SDK 依赖的 JodaTime 版本从 2.4 提升到 2.9.1。
 
-## 版本号 2.1.0 { .section}
+## 版本号 2.1.0 {#section_8y6_b48_879 .section}
 
 发布时间：2015-11-12
 
@@ -169,7 +185,7 @@ SearchIndex相关
 -   ClientConfiguration 中部分配置项的名称有调整，比如在配置项名称中加入了时间单位。
 -   新 SDK 的包依赖有变化，比如使用了 HttpAsyncClient 和 Jodatime 等，如果您在运行中有遇到问题，需要考虑是否引入了冲突的依赖。
 
-## 版本号 2.0.4 { .section}
+## 版本号 2.0.4 {#section_5b1_da6_oa6 .section}
 
 发布时间：2015-09-25
 
