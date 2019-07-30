@@ -2,7 +2,7 @@
 
 The Table Store SDK provides the following multi-row operation APIs: BatchGetRow, BatchWriteRow, GetRange, and GetByIterator.
 
-## BatchGetRow { .section}
+## BatchGetRow {#section_lmf_6z9_bau .section}
 
 Reads several data rows in batches from one or more tables.
 
@@ -12,41 +12,41 @@ Compared to the execution of a large number of GetRow operations, the BatchGetRo
 
 **API**
 
-```language-go
-	//Return multiple data rows in a table
-	//
-	// @param BatchGetRowRequest             Encapsulate the parameters required to perform the BatchGetRow operation
-	// @return  BatchGetRowResponse          Content of the response to the BatchGetRow operation
-	BatchGetRow(request *BatchGetRowRequest) (*BatchGetRowResponse, error)
-
+``` {#codeblock_vtb_yp7_njp .language-go}
+    //Return multiple data rows in a table
+    //
+    // @param BatchGetRowRequest             Encapsulate the parameters required to perform the BatchGetRow operation
+    // @return  BatchGetRowResponse          Content of the response to the BatchGetRow operation
+    BatchGetRow(request *BatchGetRowRequest) (*BatchGetRowResponse, error)
+			
 ```
 
 **Example**
 
 Read 10 data rows in batches.
 
-```
+``` {#codeblock_8wf_trb_511}
 batchGetReq := &tablestore.BatchGetRowRequest{}
 mqCriteria := &tablestore.MultiRowQueryCriteria{}
 
 for i := 0; i < 10; i++ {
-	pkToGet := new(tablestore.PrimaryKey)
-	pkToGet.AddPrimaryKeyColumn("pk1", "pk1value1")
-	pkToGet.AddPrimaryKeyColumn("pk2", int64(i))
-	pkToGet.AddPrimaryKeyColumn("pk3", []byte("pk3"))
-	mqCriteria.AddRow(pkToGet)
-	mqCriteria.MaxVersion = 1
+    pkToGet := new(tablestore.PrimaryKey)
+    pkToGet.AddPrimaryKeyColumn("pk1", "pk1value1")
+    pkToGet.AddPrimaryKeyColumn("pk2", int64(i))
+    pkToGet.AddPrimaryKeyColumn("pk3", []byte("pk3"))
+    mqCriteria.AddRow(pkToGet)
+    mqCriteria.MaxVersion = 1
 }
 mqCriteria.TableName = tableName
 batchGetReq.MultiRowQueryCriteria = append(batchGetReq.MultiRowQueryCriteria, mqCriteria)
 batchGetResponse, err := client.BatchGetRow(batchGetReq)
 
 if err ! = nil {
-	fmt.Println("batachget failed with error:", err)
+    fmt.Println("batachget failed with error:", err)
 } else {
-	fmt.Println("batchget finished")
+    fmt.Println("batchget finished")
 }
-
+			
 ```
 
 **Note:** 
@@ -54,7 +54,7 @@ if err ! = nil {
 -   BatchGetRow supports filtering using conditional statements.
 -   Obtain the full sample codes at [BatchGetRow@GitHub](https://github.com/aliyun/aliyun-tablestore-go-sdk/blob/master/sample/MultipleRowOperation.go).
 
-## BatchWriteRow { .section}
+## BatchWriteRow {#section_4it_01n_bo3 .section}
 
 Inserts, modifies, or deletes several data rows in batches in one or more tables.
 
@@ -62,41 +62,41 @@ It is essentially a set of multiple PutRow, UpdateRow, and DeleteRow operations.
 
 **API**
 
-```language-go
-	// Add, delete, or modify multiple data rows in multiple tables
-	//
-	// @param BatchWriteRowRequest             Encapsulate the parameters required to perform the BatchWriteRow operation
-	// @return  BatchWriteRowResponse          Content of the response to the BatchWriteRow operation
-	BatchWriteRow(request *BatchWriteRowRequest) (*BatchWriteRowResponse,error)
-
+``` {#codeblock_gd6_kbh_vio .language-go}
+    // Add, delete, or modify multiple data rows in multiple tables
+    //
+    // @param BatchWriteRowRequest             Encapsulate the parameters required to perform the BatchWriteRow operation
+    // @return  BatchWriteRowResponse          Content of the response to the BatchWriteRow operation
+    BatchWriteRow(request *BatchWriteRowRequest) (*BatchWriteRowResponse,error)
+			
 ```
 
 **Example**
 
 Write 100 data rows in batches.
 
-```language-go
-	batchWriteReq := &tablestore.BatchWriteRowRequest{}
-	for i := 0; i < 100; i++ {
-		putRowChange := new(tablestore.PutRowChange)
-		putRowChange.TableName = tableName
-		putPk := new(tablestore.PrimaryKey)
-		putPk.AddPrimaryKeyColumn("pk1", "pk1value1")
-		putPk.AddPrimaryKeyColumn("pk2", int64(i))
-		putPk.AddPrimaryKeyColumn("pk3", []byte("pk3"))
-		putRowChange.PrimaryKey = putPk
-		putRowChange.AddColumn("col1", "fixvalue")
-		putRowChange.SetCondition(tablestore.RowExistenceExpectation_IGNORE)
-		batchWriteReq.AddRowChange(putRowChange)
-	}
+``` {#codeblock_9bc_b0s_j26 .language-go}
+    batchWriteReq := &tablestore.BatchWriteRowRequest{}
+    for i := 0; i < 100; i++ {
+        putRowChange := new(tablestore.PutRowChange)
+        putRowChange.TableName = tableName
+        putPk := new(tablestore.PrimaryKey)
+        putPk.AddPrimaryKeyColumn("pk1", "pk1value1")
+        putPk.AddPrimaryKeyColumn("pk2", int64(i))
+        putPk.AddPrimaryKeyColumn("pk3", []byte("pk3"))
+        putRowChange.PrimaryKey = putPk
+        putRowChange.AddColumn("col1", "fixvalue")
+        putRowChange.SetCondition(tablestore.RowExistenceExpectation_IGNORE)
+        batchWriteReq.AddRowChange(putRowChange)
+    }
 
-	response, err := client.BatchWriteRow(batchWriteReq)
-	if err ! = nil {
-		fmt.Println("batch request failed with:", response)
-	} else {
-		fmt.Println("batch write row finished")
-	}
-
+    response, err := client.BatchWriteRow(batchWriteReq)
+    if err ! = nil {
+        fmt.Println("batch request failed with:", response)
+    } else {
+        fmt.Println("batch write row finished")
+    }
+			
 ```
 
 **Note:** 
@@ -104,72 +104,66 @@ Write 100 data rows in batches.
 -   BatchWriteRow supports filtering using conditional statements.
 -   Obtain the full sample codes at [BatchWriteRow@GitHub](https://github.com/aliyun/aliyun-tablestore-go-sdk/blob/master/sample/MultipleRowOperation.go).
 
-## GetRange { .section}
+## GetRange {#section_hvr_3h8_pny .section}
 
 This API reads data within the specified primary key range.
 
 **API**
 
-```language-go
-	// Read multiple data rows within the specified range in a table.
-	//
-	// @param GetRangeRequest            Encapsulate the parameters required to perform the GetRange operation
-	// @return GetRangeResponse          Content of the response to the GetRange operation
-	GetRange(request *GetRangeRequest) (*GetRangeResponse,error)
-
+``` {#codeblock_t9o_fdz_i49 .language-go}
+    // Read multiple data rows within the specified range in a table.
+    //
+    // @param GetRangeRequest            Encapsulate the parameters required to perform the GetRange operation
+    // @return GetRangeResponse          Content of the response to the GetRange operation
+    GetRange(request *GetRangeRequest) (*GetRangeResponse,error)
+			
 ```
 
 **Example**
 
 Read data within the specified range.
 
-```language-go
+``` {#codeblock_kni_df4_11t .language-go}
 getRangeRequest := &tablestore.GetRangeRequest{}
-	rangeRowQueryCriteria := &tablestore.RangeRowQueryCriteria{}
-	rangeRowQueryCriteria.TableName = tableName
+    rangeRowQueryCriteria := &tablestore.RangeRowQueryCriteria{}
+    rangeRowQueryCriteria.TableName = tableName
 
-	startPK := new(tablestore.PrimaryKey)
-	startPK.AddPrimaryKeyColumnWithMinValue("pk1")
-	startPK.AddPrimaryKeyColumnWithMinValue("pk2")
-	startPK.AddPrimaryKeyColumnWithMinValue("pk3")
-	endPK := new(tablestore.PrimaryKey)
-	endPK.AddPrimaryKeyColumnWithMaxValue("pk1")
-	endPK.AddPrimaryKeyColumnWithMaxValue("pk2")
-	endPK.AddPrimaryKeyColumnWithMaxValue("pk3")
-	rangeRowQueryCriteria.StartPrimaryKey = startPK
-	rangeRowQueryCriteria.EndPrimaryKey = endPK
-	rangeRowQueryCriteria.Direction = tablestore.FORWARD
-	rangeRowQueryCriteria.MaxVersion = 1
-	rangeRowQueryCriteria.Limit = 10
-	getRangeRequest.RangeRowQueryCriteria = rangeRowQueryCriteria
+    startPK := new(tablestore.PrimaryKey)
+    startPK.AddPrimaryKeyColumnWithMinValue("pk1")
+    startPK.AddPrimaryKeyColumnWithMinValue("pk2")
+    startPK.AddPrimaryKeyColumnWithMinValue("pk3")
+    endPK := new(tablestore.PrimaryKey)
+    endPK.AddPrimaryKeyColumnWithMaxValue("pk1")
+    endPK.AddPrimaryKeyColumnWithMaxValue("pk2")
+    endPK.AddPrimaryKeyColumnWithMaxValue("pk3")
+    rangeRowQueryCriteria.StartPrimaryKey = startPK
+    rangeRowQueryCriteria.EndPrimaryKey = endPK
+    rangeRowQueryCriteria.Direction = tablestore.FORWARD
+    rangeRowQueryCriteria.MaxVersion = 1
+    rangeRowQueryCriteria.Limit = 10
+    getRangeRequest.RangeRowQueryCriteria = rangeRowQueryCriteria
 
-	getRangeResp, err := client.GetRange(getRangeRequest)
+    getRangeResp, err := client.GetRange(getRangeRequest)
 
-	fmt.Println("get range result is " ,getRangeResp)
+    fmt.Println("get range result is " ,getRangeResp)
 
-	for ; ; {
-		if err ! = nil {
-			fmt.Println("get range failed with error:", err)
-		}
-		if (len(getRangeResp.Rows) > 0) {
-			for _, row := range getRangeResp.Rows {
-				fmt.Println("range get row with key", row.PrimaryKey.PrimaryKeys[0]. Value, row.PrimaryKey.PrimaryKeys[1]. Value, row.PrimaryKey.PrimaryKeys[2]. Value)
-			}
-			if getRangeResp.NextStartPrimaryKey == nil {
-				break
-			} else {
-				fmt.Println("next pk is :", getRangeResp.NextStartPrimaryKey.PrimaryKeys[0]. Value, getRangeResp.NextStartPrimaryKey.PrimaryKeys[1]. Value, getRangeResp.NextStartPrimaryKey.PrimaryKeys[2]. Value)
-				getRangeRequest.RangeRowQueryCriteria.StartPrimaryKey = getRangeResp.NextStartPrimaryKey
-				getRangeResp, err = client.GetRange(getRangeRequest)
-			}
-		} else {
-			break
-		}
-
-		fmt.Println("continue to query rows")
-	}
-	fmt.Println("putrow finished")
-
+    for {
+        if err != nil {
+            fmt.Println("get range failed with error:", err)
+        }
+        for _, row := range getRangeResp.Rows {
+            fmt.Println("range get row with key", row.PrimaryKey.PrimaryKeys[0].Value, row.PrimaryKey.PrimaryKeys[1].Value, row.PrimaryKey.PrimaryKeys[2].Value)
+        }
+        if getRangeResp.NextStartPrimaryKey == nil {
+            break
+        } else {
+            fmt.Println("next pk is :", getRangeResp.NextStartPrimaryKey.PrimaryKeys[0].Value, getRangeResp.NextStartPrimaryKey.PrimaryKeys[1].Value, getRangeResp.NextStartPrimaryKey.PrimaryKeys[2].Value)
+            getRangeRequest.RangeRowQueryCriteria.StartPrimaryKey = getRangeResp.NextStartPrimaryKey
+            getRangeResp, err = client.GetRange(getRangeRequest)
+        }
+        fmt.Println("continue to query rows")
+    }
+    fmt.Println("putrow finished")
 ```
 
 **Note:** 
