@@ -27,7 +27,7 @@ No prior configurations required.
 
     -   If you have already created a Table Store data source, skip this step.
     -   If you do not want to create a data source, you can specify the endpoint, instanceName, AccessKeyID, and AccessKeySecret on the subsequent configuration page.
-    For more information about how to create a data source, see [Create a Table Store data source](intl.en-US//MaxCompute/Incremental synchronization (wizard mode).md#section_qns_bd5_cfb).
+    For more information about how to create a data source, see [Create a Table Store data source](intl.en-US/hide/MaxCompute/Incremental synchronization (wizard mode).md#section_qns_bd5_cfb).
 
 2.  Create an OSS data source.
 
