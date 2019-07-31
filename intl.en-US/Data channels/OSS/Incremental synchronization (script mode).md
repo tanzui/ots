@@ -27,7 +27,7 @@ No prior configurations required.
 
     -   If you have already created a Table Store data source, skip this step.
     -   If you do not want to create a data source, you can specify the endpoint, instanceName, AccessKeyID, and AccessKeySecret on the subsequent configuration page.
-    For more information about how to create a data source, see [Create a Table Store data source](reseller.en-US/Data channels/MaxCompute/Incremental synchronization (wizard mode).md#section_qns_bd5_cfb).
+    For more information about how to create a data source, see [Create a Table Store data source](intl.en-US//MaxCompute/Incremental synchronization (wizard mode).md#section_qns_bd5_cfb).
 
 2.  Create an OSS data source.
 
@@ -43,7 +43,7 @@ No prior configurations required.
 4.  Set configuration items.
     1.  On the configuration page, templates of OTSStreamReader and OSSWriter are provided. Complete the configurations by referring to the following annotations.
 
-        ```
+        ``` {#codeblock_rh6_qup_mvp}
         {
         "type": "job",
         "version": "1.0",
@@ -96,12 +96,14 @@ No prior configurations required.
         }
         ```
 
+        **Note:** For detailed configuration description, see [OTSstreamReader](../../../../intl.en-US/User Guide/Data integration/Task configuration/Configure reader plug-in/Configure OTSStream Reader.md#)and [OTSstreamWriter](../../../../intl.en-US/User Guide/Data integration/Task configuration/Configure writer plug-in/Configure Table Store (OTS) Writer.md#).
+
     2.  Click **Save**.
 5.  Run the task.
     1.  Click **operation**.
     2.  In the dialog box that appears, set the variable parameters.
     3.  Click **OK**.
-    4.  After the task is completed, log on to the [OSS console](https://partners-intl.console.aliyun.com/#/oss) to verify whether files are backed up.
+    4.  After the task is completed, log on to the [OSS console](https://oss.console.aliyun.com/overview) to verify whether files are backed up.
 6.  Configure scheduling.
     1.  Click **Submit**.
     2.  In the dialog box that appears, set the scheduling parameters.
@@ -136,7 +138,7 @@ No prior configurations required.
     4.  You can view the log when a task is running or after it is completed.
 8.  Check the data exported to OSS.
 
-    Log on to the [OSS console](https://partners-intl.console.aliyun.com/#/oss) to check whether a new file is generated and whether the file content is correct.
+    Log on to the [OSS console](https://oss.console.aliyun.com/overview?spm=a2c4g.11186623.2.13.308b2f02zFs7NH) to check whether a new file is generated and whether the file content is correct.
 
 
 Once the preceding settings are completed, data in Table Store can be automatically synchronized to OSS at a latency of 5 to 10 minutes.
