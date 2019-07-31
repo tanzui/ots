@@ -4,7 +4,7 @@
 
 This document explains how to establish a seamless connection between Table Store and MaxCompute under an Alibaba Cloud account.
 
-As a big data computing service, MaxCompute provides a fast and fully-hosted PB-level data warehousing solution, which allows you to analyze and process mass data economically and efficiently. You can use a simple DDL statement to create an external table on MaxCompute and associate MaxCompute tables with external data sources to provide various data access and output capabilities. MaxCompute tables can contain only structured data while external tables can contain either structured or non-structured data.
+As a big data computing service, [MaxCompute](https://www.alibabacloud.com/product/maxcompute) provides a fast and fully-hosted PB-level data warehousing solution, which allows you to analyze and process mass data economically and efficiently. You can use a simple DDL statement to create an external table on MaxCompute and associate MaxCompute tables with external data sources to provide various data access and output capabilities. MaxCompute tables can contain only structured data while external tables can contain either structured or non-structured data.
 
 Both Table Store and MaxCompute have their own type systems, and the following table shows their mappings.
 
@@ -20,26 +20,26 @@ Both Table Store and MaxCompute have their own type systems, and the following t
 
 Preparations before accessing Table Store using MaxCompute:
 
-1.  Activate the MaxCompute service.
-2.  Create a [MaxCompute project](https://partners-intl.aliyun.com/help/doc-detail/30263.htm).
-3.  Create an [AccessKey](https://partners-intl.aliyun.com/help/doc-detail/53045.htm).
+1.  Activate the [MaxCompute service](https://www.alibabacloud.com/product/maxcompute).
+2.  Create a [Create workspace](../../../../intl.en-US/User Guide/Workbench/Workspace list.md#section_jhg_s4g_r2b).
+3.  Create an [AccessKey](https://www.alibabacloud.com/help/doc-detail/53045.htm).
 4.  In the RAM console, authorize MaxCompute to access Table Store.
-    -   Method 1: Log on with an Alibaba Cloud account and [click here for quick authorization](https://partners-intl.console.aliyun.com/#/ram).
+    -   Method 1: Log on with an Alibaba Cloud account and [click here for quick authorization](https://ram.console.aliyun.com).
 
     -   Method 2: Perform manual authorization using the following steps.
 
-        1.  Log on to the [RAM console](https://partners-intl.console.aliyun.com/#/ram).
+        1.  Log on to the [RAM console](https://ram.console.aliyun.com/?spm=a2c4g.11186623.2.20.447730b3NxdBQA).
         2.  On the Roles page, create a user role AliyunODPSDefaultRole.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017811954_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454440911954_en-US.png)
 
         3.  On the Role Details page, set the policy content.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017811955_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454440911955_en-US.png)
 
             The policy content is set as follows.
 
-            ```
+            ``` {#codeblock_3s4_5um_ir1}
             {
             "Statement": [
             {
@@ -58,11 +58,11 @@ Preparations before accessing Table Store using MaxCompute:
 
         4.  On the Policies page, create an authorization policy AliyunODPSRolePolicy.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017811956_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454440911956_en-US.png)
 
             The policy content is set as follows.
 
-            ```
+            ``` {#codeblock_q39_618_ppy}
             {
             "Version": "1",
             "Statement": [
@@ -89,22 +89,22 @@ Preparations before accessing Table Store using MaxCompute:
 
         5.  On the Roles page, grant the AliyunODPSRolePolicy permission to the role AliyunODPSDefaultRole.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017811957_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454440911957_en-US.png)
 
-5.  [Create an instance](../../../../reseller.en-US/Quick Start/Create an instance.md#) and [create a table](../../../../reseller.en-US/Quick Start/Create a table.md#) in the Table Store console.
+5.  [Create an instance](../../../../intl.en-US/Quick Start/Create an instance.md#) and [create a table](../../../../intl.en-US/Quick Start/Create a table.md#) in the Table Store console.
 
     In this example, the Table Store instance and data table are detailed as follows:
 
     -   Instance name: cap1
     -   Data table name: vehicle\_track
     -   Primary key information: vid \(integer\), gt \(integer\)
-    -   Endpoint: `https://cap1.cn-hangzhou.ots-internal.aliyuncs.com`
+    -   Endpoint: `https://cap1.cn-hangzhou.ots-internal.aliyuncs.com` 
 
         **Note:** We recommend that you use the private network address of Table Store when accessing Table Store using MaxCompute.
 
     -   Set the network type of the instance to **Any Network**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017811958_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454441011958_en-US.png)
 
 
 ## Step 1. Install and configure the client {#section_v4j_ssh_dfb .section}
@@ -115,7 +115,7 @@ Preparations before accessing Table Store using MaxCompute:
 
 2.  Edit the conf/odps\_config.ini file to configure the client.
 
-    ```
+    ``` {#codeblock_x4h_b6x_jhi}
     access_id=*******************
     access_key=*********************
      # The AccessID and AccessKey of your Alibaba Cloud account can be viewed on the "Management Console" > "AccessKeys" page on the Alibaba Cloud official website.
@@ -137,7 +137,7 @@ Preparations before accessing Table Store using MaxCompute:
 
     The display of tables in the current MaxCompute project indicates that the preceding configuration is correct.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017811959_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454441011959_en-US.png)
 
 
 ## Step 2. Create an external table {#section_qkd_hth_dfb .section}
@@ -151,7 +151,7 @@ In this example, the associated table is detailed as follows:
 -   Primary Key information: vid \(int\); gt \(int\)
 -   Endpoint: `https://cap1.cn-hangzhou.ots-internal.aliyuncs.com`
 
-```
+``` {#codeblock_zks_shh_jrg}
 CREATE EXTERNAL TABLE IF NOT EXISTS ots_vehicle_track
 (
 vid bigint,
@@ -178,7 +178,7 @@ Parameters are described as follows.
 |\(2\)|SERDEPROPERITES|The interface that provides parameter options. When TableStoreStorageHandler is used, two options, tablestore.columns.mapping and tablestore.table.name, must be specified.|
 |\(3\)|tablestore.columns.mapping|Required option. Table Store columns to be accessed by MaxCompute include primary key and attribute columns. In Table Store, columns with `:`, such as :vid and :gt in this example, are primary key columns, and others are attribute columns. When specifying a mapping, you must provide all primary key columns of the specified Table Store table, and the attribute columns to be accessed by MaxCompute.
 
-|
+ |
 |\(4\)|tablestore.table.name|The name of Table Store tables to be accessed. If the specified Table Store table name is incorrect \(it does not exist\), an error is reported. MaxCompute does not create any Table Store table proactively.|
 |\(5\)|LOCATION|The instance information of Table Store to be accessed, including the instance name and endpoint.|
 
@@ -186,7 +186,7 @@ Parameters are described as follows.
 
 When an external table is created, Table Store data is introduced into the MaxCompute ecosystem and can be accessed using MaxCompute SQL commands.
 
-```
+``` {#codeblock_uok_f3h_n9b}
 // Provides statistics on the average speed and oil consumption of vehicles with a VID less than 4 before the time stamp 1469171387)
 select vid,count(*),avg(speed),avg(oil_consumption) from ots_vehicle_track where vid <4 and gt<1469171387  group by vid;
 ```

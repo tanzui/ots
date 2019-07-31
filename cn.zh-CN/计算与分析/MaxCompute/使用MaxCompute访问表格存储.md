@@ -1,8 +1,8 @@
 # 使用MaxCompute访问表格存储 {#concept_omw_smj_bfb .concept}
 
-## 背景信息 {#section_u2y_dqh_dfb .section}
+本文主要为您介绍如何在同一个云账号下实现表格存储和 MaxCompute 之间的无缝连接。
 
-本文介绍如何在同一个云账号下实现表格存储和 MaxCompute 之间的无缝连接。
+## 背景信息 {#section_u2y_dqh_dfb .section}
 
 [MaxCompute](https://www.alibabacloud.com/product/maxcompute)是一项大数据计算服务，它能提供快速、完全托管的 PB 级数据仓库解决方案，使您可以经济并高效地分析处理海量数据。您只需通过一条简单的 DDL 语句，即可在 MaxCompute 上创建一张外部表，建立 MaxCompute 表与外部数据源的关联，提供各种数据的接入和输出能力。MaxCompute 表是结构化的数据，而外部表可以不限于结构化数据。
 
@@ -21,7 +21,7 @@
 使用 MaxCompute 访问表格存储前，您需要完成以下准备工作：
 
 1.  开通[MaxCompute服务](https://www.alibabacloud.com/product/maxcompute)。
-2.  创建[MaxCompute项目](https://www.alibabacloud.com/help/doc-detail/30263.htm)。
+2.  创建 [创建工作空间](../../../../intl.zh-CN/使用指南/管理控制台/工作空间列表.md#section_jhg_s4g_r2b)。
 3.  创建[AccessKey](https://www.alibabacloud.com/help/doc-detail/53045.htm)。
 4.  创建[AccessKey](https://partners-intl.aliyun.com/help/product/53045.htm)。
 5.  在 RAM 控制台授权 MaxCompute 访问表格存储的权限。
@@ -32,15 +32,15 @@
         1.  登录 [RAM 控制台](https://ram.console.aliyun.com/?spm=a2c4g.11186623.2.20.447730b3NxdBQA)。
         2.  在角色管理页面，创建用户角色 AliyunODPSDefaultRole。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017011954_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454439911954_zh-CN.png)
 
         3.  在角色详情页面，设置策略内容。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017011955_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454439911955_zh-CN.png)
 
             策略内容如下：
 
-            ```
+            ``` {#codeblock_new_t86_d1l}
             {
             "Statement": [
             {
@@ -59,11 +59,11 @@
 
         4.  在策略管理页面，新建授权策略 AliyunODPSRolePolicy。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017011956_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454439911956_zh-CN.png)
 
             策略内容如下：
 
-            ```
+            ``` {#codeblock_y5i_a6i_j08}
             {
             "Version": "1",
             "Statement": [
@@ -90,7 +90,7 @@
 
         5.  在角色管理页面，将 AliyunODPSRolePolicy 权限授权给 AliyunODPSDefaultRole 角色。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017111957_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454439911957_zh-CN.png)
 
 6.  在表格存储控制台[创建实例](../../../../intl.zh-CN/快速入门/创建实例.md#)和[创建数据表](../../../../intl.zh-CN/快速入门/创建数据表.md#)。
 
@@ -99,13 +99,13 @@
     -   实例名称：cap1
     -   数据表名称：vehicle\_track
     -   主键信息：vid \(integer\)，gt \(integer\)
-    -   访问域名：`https://cap1.cn-hangzhou.ots-internal.aliyuncs.com`
+    -   访问域名：`https://cap1.cn-hangzhou.ots-internal.aliyuncs.com` 
 
         **说明：** 使用 MaxCompute 访问表格存储时，建议使用表格存储的私网地址。
 
     -   设置实例网络类型为**允许任意网络访问**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017111958_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454439911958_zh-CN.png)
 
 
 ## 步骤 1. 安装并配置客户端 {#section_v4j_ssh_dfb .section}
@@ -116,7 +116,7 @@
 
 2.  编辑 conf/odps\_config.ini 文件，对客户端进行配置，如下所示：
 
-    ```
+    ``` {#codeblock_mdh_75b_1oj}
     access_id=*******************
     access_key=*********************
      # Accesss ID 及 Access Key 是用户的云账号信息，可登录阿里云官网，进入管理控制台 — accesskeys 页面进行查看。
@@ -138,7 +138,7 @@
 
     如果显示当前 MaxCompute 项目中的表，则表述上述配置正确。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/153968017111959_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156454440011959_zh-CN.png)
 
 
 ## 步骤 2. 创建外部表 {#section_qkd_hth_dfb .section}
@@ -152,7 +152,7 @@
 -   主键信息：vid \(int\); gt \(int\)
 -   访问域名：`https://cap1.cn-hangzhou.ots-internal.aliyuncs.com`
 
-```
+``` {#codeblock_2at_ypq_987}
 CREATE EXTERNAL TABLE IF NOT EXISTS ots_vehicle_track
 (
 vid bigint,
@@ -185,7 +185,7 @@ LOCATION 'tablestore://cap1.cn-hangzhou.ots-internal.aliyuncs.com'; -- (5)
 
 创建外部表后，Table Store 的数据便引入到了 MaxCompute 生态中，您可通过 MaxCompute SQL 命令来访问 Table Store 数据。
 
-```
+``` {#codeblock_25k_b52_jyy}
 // 统计编号 4 以下的车辆在时间戳 1469171387 以前的平均速度和平均油耗
 select vid,count(*),avg(speed),avg(oil_consumption) from ots_vehicle_track where vid <4 and gt<1469171387  group by vid;
 ```
