@@ -161,7 +161,3 @@ HBase Client 1.2.x 和 其他版本（如 1.1.x）存在接口变化，而 Table
             请求失败时，重试次数，默认是 3 次。
 
 
-## 相关文档 {#section_tz2_vnx_ll2 .section}
-
-[将HBase全量数据同步到表格存储](../../../../intl.zh-CN/数据同步迁移/将HBase全量数据同步到表格存储.md#)
-
