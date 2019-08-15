@@ -16,8 +16,6 @@ The following tokenization methods are supported:
     -   caseSensitive: specifies whether this method is case-sensitive. The default value is false. False indicates that all English letters are converted to lowercase letters.
     -   delimitWord: specifies whether to tokenize alphanumeric characters. The default value is false.
 
-\[DO NOT TRANSLATE\]
-
 English letters or numbers are tokenized based on spaces or punctuation, and English letters are converted to lowercase letters. For example, "Hang Zhou" is tokenized into "hang" and "zhou". You can use MatchQuery or MatchPhraseQuery to query data that contains "hang", "HANG", or "Hang". If you do not need the system to automatically convert English letters to lowercase letters, you can set the caseSensitive parameter to true.
 
 Alphanumeric characters such as product models cannot be tokenized by this method because there are no spaces or punctuation between letters and numbers. For example, "IPhone6" remains "IPhone6" after tokenization. When querying by MatchQuery or MatchPhraseQuery, you can retrieve data only by specifying "iphone6" to query. You can set the delimitWord parameter to true to separate English letters from numbers. This way, "iphone6" is tokenzied into "iphone" and "6".
@@ -44,8 +42,6 @@ Delimiter tokenization, or custom tokenization, can address this need. Users seg
 
 In addition to word-level tokenization, search index also provides semantic-level tokenization. By using this method, text is tokenized into minimum semantic units.
 
-\[DO NOT TRANSLATE\] \[DO NOT TRANSLATE\]
-
 In most cases, this method can meet basic requirements in the full-text search scenario.
 
  **Maximum semantic unit-based tokenization** 
@@ -56,8 +52,6 @@ In most cases, this method can meet basic requirements in the full-text search s
     -   None
 
 Aside from the minimum semantic unit-based tokenization, the more complex maximum semantic unit-based tokenization is provided to obtain as many semantic units as possible. However, different semantic units may overlap. The total length of the tokenized words is greater than the length of the original text. The index fields are increased.
-
-\[DO NOT TRANSLATE\] \[DO NOT TRANSLATE\]
 
 This method can generate more tokens and increase the probability of obtaining results. However, the index fields are greatly increased. MatchPhraseQuery also tokenizes words in the same way. This way, tokens may overlap and data may not be retrieved. Therefore, This tokenization method is more suitable for MatchQuery.
 
