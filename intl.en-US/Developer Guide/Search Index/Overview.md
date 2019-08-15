@@ -52,7 +52,7 @@ You can customize the timestamp whenever you write data to an attribute column t
 
 Search index can solve complex query problems in big data scenarios. Other systems such as databases and search engines can also solve data query problems. The differences between Table Store and databases and search engines are illustrated as follows:
 
-![](images/55724_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21708/156586025955765_en-US.png)
 
 Table Store can provide all features of databases and search engines, except for join operations, transactions, and relevance of search results. Table Store also has high data reliability of databases and supports advanced queries of search engines. Therefore, Table Store can replace the common `database plus search engine architecture`. If you do not need join operations, transactions, and relevance of search results, we recommend that you use search index of Table Store.
 
