@@ -30,8 +30,6 @@ Aside from queries based on primary key columns in the primary table, Table Stor
  |
 |Search index|Search index uses inverted indexes, Bkd-trees, and column-oriented storage to meet various query scenarios.|All query and analysis scenarios that the table and the global secondary index do not support.|
 
-**Note:** For more information about index comparison, see [Description of Table Store Indexes](https://yq.aliyun.com/articles/692837).
-
 ## Precautions {#section_gs7_x2x_m3y .section}
 
  **Index synchronization** 
