@@ -10,11 +10,11 @@
 
 消息系统中，消息存储是最基本的功能。对于消息存储（提供消息的读、写、持久化），一方面需要持久化写入，保证消息数据的不丢失，另一方面，适合用户的快速、高效查询。在IM场景中，写入方式通常是单行、批量写入，而读取需要按照消息队列范围读取。有时用户还有对于历史消息的模糊查询需求，这时就需要使用多维检索、全文检索的能力。
 
-消息的存储都是基于Timeline模型，具体模型参见[Tablestore发布Timeline 2.0模型](https://yq.aliyun.com/go/articleRenderRedirect?spm=a2c4e.11153940.0.0.5c3772f6RHSKjM&url=https%3A%2F%2Fyq.aliyun.com%2Farticles%2F702419)
+消息的存储都是基于Timeline模型，具体模型参见[Tablestore发布Timeline 2.0模型](https://yq.aliyun.com/go/articleRenderRedirect?spm=a2c4e.11153940.0.0.5c3772f6RHSKjM&url=https%3A%2F%2Fyq.aliyun.com%2Farticles%2F702419)。
 
 表设计：im\_timeline\_store\_table
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867456556_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069456556_zh-CN.png)
 
 ## 存储库 {#section_2oc_jcc_lqk .section}
 
@@ -22,7 +22,7 @@
 
 存储库是聊天会话消息所对应的存储表，消息以会话分类存储，每个会话是一个消息队列。单个消息队列（TimelineQueue）通过timelineId唯一标识，所有消息基于sequenceId有序排列。消息体中含有发送人、消息id（消息去重）、消息发送时间、消息体内容、消息类型（类型包含图片、文件、普通文本，本文仅适用文本）等。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867556557_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069556557_zh-CN.png)
 
 如上图，当用户点击某一个会话时，窗口会展示相应会话的最新一页消息。图片里的消息都是从存储库拉取的，通过timelineId获取该会话的Queue实例，然后调用Queue的scan接口与ScanParam参数（sequenceId范围+倒序）拉取最新的一页消息。当用户向上滚动，展示完这一页消息后，客户端会基于第一次请求的最小sequencId发起第二次请求，获取第二页消息记录，单页消息数通常选择20-30条。会话的消息可以选择在客户端持久化，然后在感知到新消息之后更新本地消息，增加缓存减少网络IO。
 
@@ -54,7 +54,7 @@
     }
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867556559_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069556559_zh-CN.png)
 
 存储库的消息需要永久保存，是整个应用的全量消息存储。存储库数据过期时间（TTL）需要设为-1。
 
@@ -62,7 +62,7 @@
 
 全文检索能力就是对存储库的消息内容做模糊查询，因而需要对存储库的数据建立多元索引。具体索引字段，需要根据设计需求设计。如钉钉公开群的检索，需要对群ID、消息发送人、消息类型、消息内容、以及时间建立索引，其中消息内容需要使用分词字符串类型，从而提供模糊查询的能力。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867556560_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069556560_zh-CN.png)
 
 **核心代码** 
 
@@ -93,7 +93,7 @@ public List<AppMessage> fetchConversationMessage(String timelineId, long sequenc
 }
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867556563_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069556563_zh-CN.png)
 
 另外，为了做消息的权限管理，仅允许用户检索自己有权限查看的消息，可在消息体字段中扩展接收人ID数组，这样对所有群做检索时，需要增加接收人字段为自己的用户ID这一必要条件，即可实现消息内容的权限限制。 样例中没有实现这一功能，用户可根据需求自己增加、修改。
 
@@ -103,7 +103,7 @@ public List<AppMessage> fetchConversationMessage(String timelineId, long sequenc
 
 当客户端在线时，应用的系统服务会维护客户端的长连接，因而可以感知客户端在线。当用户的同步库有新消息写入时（即有新消息），应用会发出信号通知客户端有新消息，然后客户端会基于同步库checkpoint点，拉取同步库中该sequenceId之后的所有新消息，统计各会话的新消息数，并更新checkpoint点。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867556587_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069656587_zh-CN.png)
 
 如上图，对于一个在线客户端，每个会话都会维护一个未读消息的计数（小红点），也会有一个总未读数的计数，这个数量一般会存储在客户端本地，或者通过redis持久化。这些未读消息，指的就是通过同步库拉取并统计过，但是还未被用户点开的消息数量。在拉取到新消息列表后，客户端（或应用层）会遍历所有新消息，然后将新消息所对应会话的未读计数累加1，这样实现了未读消息的即时感知与更新。只有当用户点开会话后，会话的未读计数才会清零。
 
@@ -138,7 +138,7 @@ public List<AppMessage> fetchSyncMessage(String userId, long lastSequenceId) {
 
 在统计到会话列表中不存在的会话时，客户端会做一次额外请求。通过timelineID获取会话的基本描述信息，如群头像或好友的头像、群名称等，并初始化未读数计时器0，然后累加新消息数、更新最新消息摘要等。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867656640_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069656640_zh-CN.png)
 
 同步库对于IM场景下的新消息即时感知统计这一核心功能，就是通过写入冗余的方式，提升新消息读取统计的效率与速度。对于IM场景没有收件箱的概念，因而同步库中冗余消息并没有永久保存的价值，提供7天过期时间已经足够保证功能正常。用户可以根据自身需求，调整同步库的数据过期时间（TTL）。
 
@@ -160,7 +160,7 @@ public List<AppMessage> fetchSyncMessage(String userId, long lastSequenceId) {
 
  **表设计：im\_user\_table**
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867656643_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069656643_zh-CN.png)
 
 用户元数据以user\_id为标识，与同步库中的timeline\_id一一对应。用户同步新消息时，只会拉取同步库中自己对应的单个消息队列（TimelineQueue）。因此，为了唯一ID的方便管理，我们可以选择user\_id与用户同步库的timeline\_id使用同一个值。这样一来，在消息写扩散时，只需知道群内用户的user\_id列表回好友user\_id，即可以完成写扩算。
 
@@ -174,7 +174,7 @@ public List<AppMessage> fetchSyncMessage(String userId, long lastSequenceId) {
 -   用户标签：多元索引，数组字符串索引提供签检索、嵌套索引提供多标签打分检索排序
 -   附近的人：多元索引，GEO索引查询附近、特定地理围栏的人
 
-详细的多元索引，参见[简介](../../../../cn.zh-CN/开发指南/多元索引/简介.md#) 。
+更多关于多元索引，参见[多元索引简介](../../../../cn.zh-CN/开发指南/多元索引/简介.md#)。
 
 ## 会话元数据 {#section_jwj_wbr_o8t .section}
 
@@ -182,7 +182,7 @@ public List<AppMessage> fetchSyncMessage(String userId, long lastSequenceId) {
 
 在Timeline模型中，提供了Timeline Meta的管理能力，只需通过相应的接口便可实现会话meta的管理。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867656646_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069756646_zh-CN.png)
 
 存储库中管理的是会话的消息队列（TimelineQueue），这里与会话元数据中的行一一对应。客户端用户选中特定会话后，应用从相应的消息队列倒序批量拉取消息展示到客户端，群聊单聊的使用方式一样，因而并不做会话类型的区分。
 
@@ -211,7 +211,7 @@ public List<AppMessage> fetchSyncMessage(String userId, long lastSequenceId) {
 
 表设计：im\_user\_relation\_table
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867756649_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069756649_zh-CN.png)
 
 基于该单聊关系表，还可以建立多元索引，方便用户好友列表的获取，同时支持加好友时间排序、昵称排序等功能。如果考虑到延时、费用等因素，即时使用多元索引，直接通过getRange接口也可以快速拉、高效的获取自己所有好友列表，实现好友关系的维护与查询。
 
@@ -271,7 +271,7 @@ public void breakupFriendship(String userA, String userB) {
 }
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867756652_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069756652_zh-CN.png)
 
 ## 群聊关系 {#section_fzc_vqc_gta .section}
 
@@ -283,7 +283,7 @@ public void breakupFriendship(String userA, String userB) {
 
 表设计：im\_group\_relation\_table
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867756653_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069756653_zh-CN.png)
 
 基于群关系表，可以直接基于关系主表通过getRange的方式获取单个群内所有的用户。在做写扩散时，可以直接获取群内用户ID列表，提升写扩散的效率。同时，也方便展示群内用户列表。
 
@@ -328,7 +328,7 @@ public List<Conversation> listMySingleConversations(String userId) {
 }
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867756655_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069856655_zh-CN.png)
 
 **功能：人与群聊会话的关系** 
 
@@ -336,7 +336,7 @@ public List<Conversation> listMySingleConversations(String userId) {
 
 二级索引：im\_group\_relation\_global\_index
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867756657_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069856657_zh-CN.png)
 
  **核心代码** 
 
@@ -378,11 +378,11 @@ public List<Conversation> listMyGroupConversations(String userId) {
 }
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867856659_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069856659_zh-CN.png)
 
 **即时感知** 
 
-让客户端即时感知消息的实现方案，可以参考[Feed 流设计总纲](https://yq.aliyun.com/go/articleRenderRedirect?spm=a2c4e.11153940.0.0.5c3772f6egEct5&url=https%3A%2F%2Fyq.aliyun.com%2Farticles%2F706808)一文中会话池的维护方式，这里作简要描述，不会在样例中实现。
+让客户端即时感知消息的实现方案，可以参考[Feed 流设计总纲](https://yq.aliyun.com/go/articleRenderRedirect?spm=a2c4e.11153940.0.0.5c3772f6egEct5&url=https%3A%2F%2Fyq.aliyun.com%2Farticles%2F706808)中会话池的维护方式，这里作简要描述，不会在样例中实现。
 
 ## 会话池方案 {#section_vcp_mw4_xeb .section}
 
@@ -444,15 +444,15 @@ instanceName：使用的实例名
 
 样例中共有三个入口，用户需要根据先后顺序执行，使用后及时释放资源，避免不必要的费用浪费。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867856688_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069856688_zh-CN.png)
 
 ## 项目结构 {#section_kxs_ba8_5uw .section}
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156635867856697_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1423207/156638069956697_zh-CN.png)
 
 ## 专家服务 {#section_ajw_hsi_4zg .section}
 
 表格存储 提供专业的免费的技术咨询服务，欢迎加入我们的钉钉讨论群。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1135425/156635867853785_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1135425/156638069953785_zh-CN.png)
 
