@@ -44,7 +44,7 @@
 
     **说明：** 使用 MySQL Client 时，可以使用 create database 或 create schema 语句创建 database 映射。但是控制台目前只支持 create schema 语句创建 database 映射。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771312014_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092712014_zh-CN.png)
 
 2.  在 tp\_tpch001 的 Database 下建立表格的映射。在建立 DLA 的表格映射前，首先需要在 Table Store 中创建数据表。
 
@@ -57,11 +57,11 @@
 
     **说明：** 建立 DLA 映射表时，指定的 Primary Key 必须与 Table Store 表格定义 Primary Key 列表一致。Primary Key 用于唯一确定一行的数据，一旦映射表的 Primary Key 列表与 Table Store 表格的 PK 不一致，可能导致 SQL 查询结果出现非预期错误。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771412015_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092712015_zh-CN.png)
 
     例如，您的 Table Store 实例 sh\_tpch 中包含 test001 表格，其中只有一列 pk0。使用 show 命令可查看该表已创建成功：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771412016_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092812016_zh-CN.png)
 
 3.  使用select语句执行SQL查询：
     -   查出所有数据：
@@ -71,7 +71,7 @@
         							
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771412017_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092812017_zh-CN.png)
 
     -   执行count统计：
 
@@ -80,7 +80,7 @@
         							
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771512018_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092912018_zh-CN.png)
 
     -   执行sum统计：
 
@@ -89,7 +89,7 @@
         							
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771512019_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092912019_zh-CN.png)
 
 
 执行SQL查询时，可以选择同步执行结果，返回满足条件的前 10,000 条记录；如要获取大结果集数据，请选择异步执行，并使用show query\_id的方式异步获取结果：
@@ -99,9 +99,9 @@ show query_task where id = '59a05af7_1531893489231';
 			
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771512020_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638092912020_zh-CN.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156568771612021_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20335/156638093012021_zh-CN.png)
 
 其他执行语句，请查看如下说明文档：
 
