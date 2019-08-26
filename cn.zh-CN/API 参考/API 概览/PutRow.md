@@ -2,18 +2,20 @@
 
 您可以使用PutRow接口插入数据到指定的行。
 
-**说明：** 如果指定行不存在，则新增一行；若指定行存在，则覆盖原有行。
+**说明：** 
 
-## 请求消息结构 { .section}
+-   如果指定行不存在，则新增一行；若指定行存在，则覆盖原有行。
+-   返回结果中如没有出现报错表示本次操作成功。
 
-```language-protobuf
+## 请求消息结构 {#section_qh9_vdw_zuc .section}
+
+``` {#codeblock_fku_ojp_ymw .language-protobuf}
 message PutRowRequest {
     required string table_name = 1;
     required bytes row = 2; // Plainbuffer编码为二进制
     required Condition condition = 3;
     optional ReturnContent return_content = 4; 
-}
-			
+}           
 ```
 
 |名称|类型|是否必选|描述|
@@ -38,14 +40,13 @@ message PutRowRequest {
 
  |
 
-## 响应消息结构 { .section}
+## 响应消息结构 {#section_31q_5ln_hff .section}
 
-```language-protobuf
+``` {#codeblock_2ov_tom_brw .language-protobuf}
 message PutRowResponse {
     required ConsumedCapacity consumed = 1;
     optional bytes row = 2;
-}
-			
+}         
 ```
 
 |名称|类型|描述|
@@ -86,7 +87,7 @@ message PutRowResponse {
 
     -   操作失败，则消耗 1 单位写 CU 和 1 单位读 CU。
 
-    关于数据大小的计算请参见[产品定价](../../../../cn.zh-CN/产品定价/计量项和计费说明.md#)。
+    关于数据大小的计算请参见[产品定价](../../../../cn.zh-CN/产品定价/计费概述.md#)。
 
 -   如果返回内部错误（HTTP 状态码：5XX），则此次操作不消耗服务能力单元；其他错误情况消耗 1 个写服务能力单元。
 
