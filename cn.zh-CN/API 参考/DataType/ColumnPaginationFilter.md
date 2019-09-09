@@ -30,9 +30,9 @@ limit:
 
 Filter
 
-[GetRow](intl.zh-CN/API 参考/API 概览/GetRow.md#)
+[GetRow](cn.zh-CN/API 参考/API 概览/GetRow.md#)
 
-[GetRange](intl.zh-CN/API 参考/API 概览/GetRange.md#)
+[GetRange](cn.zh-CN/API 参考/API 概览/GetRange.md#)
 
-[BatchGetRow](intl.zh-CN/API 参考/API 概览/BatchGetRow.md#)
+[BatchGetRow](cn.zh-CN/API 参考/API 概览/BatchGetRow.md#)
 
