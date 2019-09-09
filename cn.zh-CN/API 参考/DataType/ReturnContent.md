@@ -13,7 +13,7 @@ message ReturnContent {
 
 return\_type:
 
--   类型：[ReturnType](intl.zh-CN/API 参考/DataType/ReturnType.md#) 
+-   类型：[ReturnType](cn.zh-CN/API 参考/DataType/ReturnType.md#) 
 
 -   描述：返回数据的类型。
 
