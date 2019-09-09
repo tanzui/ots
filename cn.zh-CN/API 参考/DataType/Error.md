@@ -28,7 +28,7 @@ message:
 
 ## 相关操作 { .section}
 
-[BatchGetRow](intl.zh-CN/API 参考/API 概览/BatchGetRow.md#)
+[BatchGetRow](cn.zh-CN/API 参考/API 概览/BatchGetRow.md#)
 
-[BatchWriteRow](intl.zh-CN/API 参考/API 概览/BatchWriteRow.md#)
+[BatchWriteRow](cn.zh-CN/API 参考/API 概览/BatchWriteRow.md#)
 
