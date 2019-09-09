@@ -35,28 +35,28 @@ message DescribeTableResponse {
 
 table\_meta:
 
--   类型: [TableMeta](intl.zh-CN/API 参考/DataType/TableMeta.md#) 
+-   类型: [TableMeta](cn.zh-CN/API 参考/DataType/TableMeta.md#) 
 
 -   该表的Schema，与建表时给出的Schema相同。
 
 
 reserved\_throughput\_details:
 
--   类型：[ReservedThroughputDetails](intl.zh-CN/API 参考/DataType/ReservedThroughputDetails.md#) 
+-   类型：[ReservedThroughputDetails](cn.zh-CN/API 参考/DataType/ReservedThroughputDetails.md#) 
 
 -   该表的预留读/写吞吐设置信息除了包含当前的预留读/写吞吐设置值之外，还包含了最近一次更新该表的预留读/写吞吐设置的时间和当日已下调预留读/写吞吐的次数。
 
 
 table\_options:
 
--   类型：[TableOptions](intl.zh-CN/API 参考/DataType/TableOptions.md#) 
+-   类型：[TableOptions](cn.zh-CN/API 参考/DataType/TableOptions.md#) 
 
 -   当前最新的table\_options参数值。
 
 
 StreamSpecification:
 
--   类型:[StreamSpecification](intl.zh-CN/API 参考/DataType/StreamSpecification.md#)
+-   类型:[StreamSpecification](cn.zh-CN/API 参考/DataType/StreamSpecification.md#)
 
 -   是否必要参数：否
 
