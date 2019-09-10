@@ -6,18 +6,18 @@ It is essentially a set of multiple PutRow, UpdateRow, and DeleteRow operations.
 
 Compared to the execution of a large number of write operations, the use of the BatchWriteRow operation can reduce the request response time and increase the data write rate.
 
-## Request structure: { .section}
+## Request structure: {#section_pv6_c78_nhs .section}
 
-```language-pb
+``` {#codeblock_3ht_rue_krd .language-pb}
 message BatchWriteRowRequest {
     repeated TableInBatchWriteRowRequest tables = 1;
 }
-
+			
 ```
 
 tables:
 
--   Type: repeated [TableInBatchWriteRowRequest](reseller.en-US/API Reference/Data Types/TableInBatchWriteRowRequest.md#) 
+-   Type: repeated [TableInBatchWriteRowRequest](intl.en-US/API Reference/Data Types/TableInBatchWriteRowRequest.md#)
 
 -   Required parameter: Yes
 
@@ -29,11 +29,11 @@ tables:
 
     -   `tables` contains tables with the same name.
 
-    -   The name of any table in `tables` does not comply with the [Table naming conventions](../../../../reseller.en-US/Functions/Table Store tables.md#section_wml_skg_cfb).
+    -   The name of any table in `tables` does not comply with the [Naming conventions and data types](../../../../intl.en-US/Developer Guide/Wide column model/Naming conventions and data types.md#).
 
     -   The primary key is not specified for any row in `tables`, the primary key column name does not comply with the conventions, or the primary key column type is incorrect.
 
-    -   For any attribute column in `tables`, the column name does not comply with the [Column naming conventions](../../../../reseller.en-US/Data Models/Wide Column/Basic concepts/Primary key and attribute.md#).
+    -   For any attribute column in `tables`, the column name does not comply with the [Naming conventions and data types](../../../../intl.en-US/Developer Guide/Wide column model/Naming conventions and data types.md#).
 
     -   Any row in `tables` has an attribute column with the same name as the primary key column.
 
@@ -50,18 +50,18 @@ tables:
     -   In `tables`, any UpdateRowInBatchWriteRowRequest contains more than 1024 ColumnUpdate objects.
 
 
-## Response message structure: { .section}
+## Response message structure: {#section_oee_r27_r5i .section}
 
-```language-pb
+``` {#codeblock_pvf_bcp_jgp .language-pb}
 message BatchWriteRowResponse {
     repeated TableInBatchWriteRowResponse tables = 1;
 }
-
+			
 ```
 
 tables:
 
--   Type: [TableInBatchWriteRowResponse](reseller.en-US/API Reference/Data Types/TableInBatchWriteRowResponse.md#) 
+-   Type: [TableInBatchWriteRowResponse](intl.en-US/API Reference/Data Types/TableInBatchWriteRowResponse.md#)
 
 -   The response information corresponding to the operations for each table, including whether or not execution was successful, error codes, and the capacity units consumed.
 
@@ -78,6 +78,6 @@ Capacity unit consumption:
 
 -   If request time-out occurs and the results are undefined, a capacity unit may or may not be consumed.
 
--   In other situations, each PutRowInBatchWriteRowRequest, UpdateRowInBatchWriteRowRequestDelete, and RowInBatchWriteRowRequest operation corresponds to a separate write operation when the number of write capacity units are counted. For more information, see [PutRow](reseller.en-US/API Reference/Operations/PutRow.md#)，[UpdateRow](reseller.en-US/API Reference/Operations/UpdateRow.md#) and [DeleteRow](reseller.en-US/API Reference/Operations/DeleteRow.md#).
+-   In other situations, each PutRowInBatchWriteRowRequest, UpdateRowInBatchWriteRowRequestDelete, and RowInBatchWriteRowRequest operation corresponds to a separate write operation when the number of write capacity units are counted. For more information, see [PutRow](intl.en-US/API Reference/Operations/PutRow.md#), [UpdateRow](intl.en-US/API Reference/Operations/UpdateRow.md#) and [DeleteRow](intl.en-US/API Reference/Operations/DeleteRow.md#).
 
 
