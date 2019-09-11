@@ -17,7 +17,7 @@ message BatchWriteRowRequest {
 
 tables:
 
--   Type: repeated [TableInBatchWriteRowRequest](intl.en-US/API Reference/Data Types/TableInBatchWriteRowRequest.md#)
+-   Type: repeated [TableInBatchWriteRowRequest](reseller.en-US/API Reference/Data Types/TableInBatchWriteRowRequest.md#)
 
 -   Required parameter: Yes
 
@@ -29,15 +29,15 @@ tables:
 
     -   `tables` contains tables with the same name.
 
-    -   The name of any table in `tables` does not comply with the [Naming conventions and data types](../../../../intl.en-US/Developer Guide/Wide column model/Naming conventions and data types.md#).
+    -   The name of any table in `tables` does not comply with the [Naming conventions and data types](../../../../reseller.en-US/Developer Guide/Wide column model/Naming conventions and data types.md#).
 
     -   The primary key is not specified for any row in `tables`, the primary key column name does not comply with the conventions, or the primary key column type is incorrect.
 
-    -   For any attribute column in `tables`, the column name does not comply with the [Naming conventions and data types](../../../../intl.en-US/Developer Guide/Wide column model/Naming conventions and data types.md#).
+    -   For any attribute column in `tables`, the column name does not comply with the [Naming conventions and data types](../../../../reseller.en-US/Developer Guide/Wide column model/Naming conventions and data types.md#).
 
     -   Any row in `tables` has an attribute column with the same name as the primary key column.
 
-    -   The value of any primary key or attribute column in `tables` exceeds the [Restricted items]().
+    -   The value of any primary key or attribute column in `tables` exceeds the [Limits](../../../../reseller.en-US/Developer Guide/Limits.md#).
 
     -   Any table in `tables` contains rows with identical primary keys.
 
@@ -61,7 +61,7 @@ message BatchWriteRowResponse {
 
 tables:
 
--   Type: [TableInBatchWriteRowResponse](intl.en-US/API Reference/Data Types/TableInBatchWriteRowResponse.md#)
+-   Type: [TableInBatchWriteRowResponse](reseller.en-US/API Reference/Data Types/TableInBatchWriteRowResponse.md#)
 
 -   The response information corresponding to the operations for each table, including whether or not execution was successful, error codes, and the capacity units consumed.
 
@@ -78,6 +78,6 @@ Capacity unit consumption:
 
 -   If request time-out occurs and the results are undefined, a capacity unit may or may not be consumed.
 
--   In other situations, each PutRowInBatchWriteRowRequest, UpdateRowInBatchWriteRowRequestDelete, and RowInBatchWriteRowRequest operation corresponds to a separate write operation when the number of write capacity units are counted. For more information, see [PutRow](intl.en-US/API Reference/Operations/PutRow.md#), [UpdateRow](intl.en-US/API Reference/Operations/UpdateRow.md#) and [DeleteRow](intl.en-US/API Reference/Operations/DeleteRow.md#).
+-   In other situations, each PutRowInBatchWriteRowRequest, UpdateRowInBatchWriteRowRequestDelete, and RowInBatchWriteRowRequest operation corresponds to a separate write operation when the number of write capacity units are counted. For more information, see [PutRow](reseller.en-US/API Reference/Operations/PutRow.md#), [UpdateRow](reseller.en-US/API Reference/Operations/UpdateRow.md#) and [DeleteRow](reseller.en-US/API Reference/Operations/DeleteRow.md#).
 
 
