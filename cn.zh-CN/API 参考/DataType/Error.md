@@ -4,31 +4,31 @@
 
 ## 数据结构 {#section_j5n_mqq_dfb .section}
 
-```language-xml
+``` {#codeblock_vp6_czr_0jt .language-xml}
 Error {
     required string code = 1;
     optional string message = 2;
 }
-
+				
 ```
 
-code:
+code：
 
 -   类型：string
 
--   描述：当前单行操作的错误码，具体含义可参考[错误码]()。
+-   描述：当前单行操作的错误码。
 
 
-message:
+message：
 
 -   类型：string
 
--   描述：当前单行操作的错误信息，具体含义可参考[错误码]()。
+-   描述：当前单行操作的错误信息，具体含义可参考错误码。
 
 
-## 相关操作 { .section}
+## 相关操作 {#section_vd6_9uu_ebz .section}
 
-[BatchGetRow](cn.zh-CN/API 参考/API 概览/BatchGetRow.md#)
+[BatchGetRow](intl.zh-CN/API 参考/API 概览/BatchGetRow.md#)
 
-[BatchWriteRow](cn.zh-CN/API 参考/API 概览/BatchWriteRow.md#)
+[BatchWriteRow](intl.zh-CN/API 参考/API 概览/BatchWriteRow.md#)
 
