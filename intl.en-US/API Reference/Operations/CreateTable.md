@@ -66,6 +66,6 @@ message CreateTableResponse {
 
 -   No read/write operation can be performed on a table immediately after it is created. Generally, a read/write operation can be performed on a new table one minute after it is created.
 
--   A single instance can contain up to 64 tables. To request raising the limit, [open a ticket](https://selfservice.console.aliyun.com/ticket/createIndex).
+-   A single instance can contain up to 64 tables.
 
 
