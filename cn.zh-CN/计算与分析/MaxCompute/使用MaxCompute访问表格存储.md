@@ -21,76 +21,9 @@
 使用 MaxCompute 访问表格存储前，您需要完成以下准备工作：
 
 1.  开通 [MaxCompute 服务](https://www.aliyun.com/product/odps?spm=a2c4g.11186623.2.16.447730b3NxdBQA)。
-2.  创建 [创建工作空间](../../../../cn.zh-CN/使用指南/管理控制台/工作空间列表.md#section_jhg_s4g_r2b)。
+2.  创建 [创建工作空间](../../../../cn.zh-CN/管理控制台/工作空间列表.md#section_jhg_s4g_r2b)。
 3.  创建 [AccessKey](https://help.aliyun.com/document_detail/53045.html?spm=a2c4g.11186623.2.18.447730b3NxdBQA)。
-4.  在 RAM 控制台授权 MaxCompute 访问表格存储的权限。 
-    -   方法一：登录阿里云账号[单击此处完成一键授权](https://ram.console.aliyun.com)。
-
-    -   方法二：进行手动授权。步骤如下：
-
-        1.  登录 [RAM 控制台](https://ram.console.aliyun.com/?spm=a2c4g.11186623.2.20.447730b3NxdBQA)。
-        2.  在角色管理页面，创建用户角色 AliyunODPSDefaultRole。
-
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156646310511954_zh-CN.png)
-
-        3.  在角色详情页面，设置策略内容。
-
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156646310511955_zh-CN.png)
-
-            策略内容如下：
-
-            ``` {#codeblock_trd_ab9_ng0}
-            {
-            "Statement": [
-            {
-            "Action": "sts:AssumeRole",
-            "Effect": "Allow",
-            "Principal": {
-             "Service": [
-               "odps.aliyuncs.com"
-             ]
-            }
-            }
-            ],
-            "Version": "1"
-            }
-            ```
-
-        4.  在策略管理页面，新建授权策略 AliyunODPSRolePolicy。
-
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156646310611956_zh-CN.png)
-
-            策略内容如下：
-
-            ``` {#codeblock_v1c_6ta_1l3}
-            {
-            "Version": "1",
-            "Statement": [
-             {
-               "Action": [
-                 "ots:ListTable",
-                 "ots:DescribeTable",
-                 "ots:GetRow",
-                 "ots:PutRow",
-                 "ots:UpdateRow",
-                 "ots:DeleteRow",
-                 "ots:GetRange",
-                 "ots:BatchGetRow",
-                 "ots:BatchWriteRow",
-                 "ots:ComputeSplitPointsBySize"
-               ],
-               "Resource": "*",
-               "Effect": "Allow"
-             }
-            ]
-            }
-            --还可自定义其他权限
-            ```
-
-        5.  在角色管理页面，将 AliyunODPSRolePolicy 权限授权给 AliyunODPSDefaultRole 角色。
-
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156646310611957_zh-CN.png)
-
+4.  在 RAM 控制台授权 MaxCompute 访问表格存储的权限。具体参见[同账号授权](cn.zh-CN/计算与分析/MaxCompute/同账号授权.md#)、[跨账号授权](cn.zh-CN/计算与分析/MaxCompute/跨账号授权.md#)。
 5.  在表格存储控制台[创建实例](../../../../cn.zh-CN/快速入门/创建实例.md#)和[创建数据表](../../../../cn.zh-CN/快速入门/创建数据表.md#)。 
 
     在本示例中，创建的表格存储实例和数据表信息如下：
@@ -104,10 +37,10 @@
 
     -   设置实例网络类型为**允许任意网络访问**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156646310611958_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156818370811958_zh-CN.png)
 
 
-## 步骤 1. 安装并配置客户端 {#section_v4j_ssh_dfb .section}
+## 步骤一： 安装并配置客户端 {#section_v4j_ssh_dfb .section}
 
 1.  下载 [MaxCompute 客户端](http://repo.aliyun.com/download/odpscmd/latest/odpscmd_public.zip?spm=a2c4g.11186623.2.28.447730b3NxdBQA&file=odpscmd_public.zip)并解压。 
 
@@ -137,14 +70,14 @@
 
     如果显示当前 MaxCompute 项目中的表，则表述上述配置正确。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156646310611959_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20327/156818370811959_zh-CN.png)
 
 
-## 步骤 2. 创建外部表 {#section_qkd_hth_dfb .section}
+## 步骤二： 创建外部表 {#section_qkd_hth_dfb .section}
 
 创建一张 MaxCompute 的数据表（ots\_vehicle\_track）关联到 Tablestore 的某一张表（vehicle\_track）。
 
-关联的数据表信息如下：
+关联的数据表信息如下。
 
 -   实例名称：cap1
 -   数据表名称：vehicle\_track
@@ -180,7 +113,7 @@ LOCATION 'tablestore://cap1.cn-hangzhou.ots-internal.aliyuncs.com'; -- (5)
 |（4）|tablestore.table.name|需要访问的 Tablestore 表名。 如果指定的 Tablestore 表名错误（不存在），则会报错。MaxCompute 不会主动创建 Tablestore 表。|
 |（5）|LOCATION|指定访问的 Tablestore 的实例信息，包括实例名和 endpoint 等。|
 
-## 步骤 3. 通过外部表访问 Tablestore 数据 {#section_tlr_1j3_dfb .section}
+## 步骤三：通过外部表访问 Tablestore 数据 {#section_tlr_1j3_dfb .section}
 
 创建外部表后，Tablestore 的数据便引入到了 MaxCompute 生态中，您可通过 MaxCompute SQL 命令来访问 Tablestore 数据。
 
