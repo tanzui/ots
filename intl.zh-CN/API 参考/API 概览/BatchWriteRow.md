@@ -28,7 +28,7 @@ message BatchWriteRowRequest {
 -   tables 中任一行操作未指定主键、主键列名称不符合规范或者主键列类型不正确。
 -   tables 中任一属性列名称不符合[命名规则和数据类型](../../../../intl.zh-CN/开发指南/Wide column模型/命名规则和数据类型.md#)。
 -   tables 中任一行操作存在与主键列同名的属性列。
--   tables 中任一主键列或者属性列的值大小超过[上限]()。
+-   tables 中任一主键列或者属性列的值大小超过[使用限制](../../../../intl.zh-CN/开发指南/使用限制.md#)。
 -   tables 中任一表中存在主键完全相同的请求。
 -   tables 中所有表总的行操作个数超过 200 个，或者其含有的总数据大小超过 4 M。
 -   tables 中任一表内没有包含行操作，则返回 OTSParameterInvalidException 的错误。
