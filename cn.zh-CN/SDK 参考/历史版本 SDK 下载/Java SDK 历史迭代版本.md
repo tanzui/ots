@@ -2,6 +2,14 @@
 
 4.0.0 以上版本的 SDK 支持数据多版本和生命周期，但是该版本 SDK 不兼容 2.x.x 系列的 SDK。
 
+## 版本号：5.3.0 {#section_qow_g9a_4b7 .section}
+
+发布时间：2019-09-10
+
+下载地址：[5.3.0](https://tablestore-doc.oss-cn-hangzhou.aliyuncs.com/aliyun-tablestore-sdk/java/tablestore-5.3.0-release.zip)
+
+更新日志：多元索引新增统计聚合功能。
+
 ## 版本号：5.1.0 {#section_hho_rbh_a48 .section}
 
 发布时间：2019-07-01
@@ -61,7 +69,7 @@ SearchIndex相关
 -   支持设置IndexSort。
 -   使用Token替换SearchAfter进行翻页。
 -   新增TermsQuery。
--   支持设置TotalCount是否返回\(默认不返回\)。
+-   支持设置TotalCount是否返回（默认不返回）。
 
 日志配置和线程名调整。
 
@@ -180,10 +188,10 @@ SearchIndex相关
 
 2.1.0 与 2.0.4 版本有细微不兼容之处，如下所示，详情请参见[老版 SDK 迁移教程](https://bbs.aliyun.com/read/262897.html)。
 
--   替换新的 SDK 后需要更改少数几个类的 import 路径。因为有几个类的 package 有调整，比如 ClientConfiguration 的 package 由 com.aliyun.openservices 调整为 com.aliyun.openservices.ots。调整 package 的主要原因是表格存储的 SDK 已经与 OSS SDK 分离，之前公用的几个类放在 ots 的 package 下更为合理。
--   当您不再使用一个 OTSClient 实例时（比如程序结束前），需要主动调用 OTSClient 的 shutdown 方法，释放 OTSClient 对象占有的线程和连接资源。
--   ClientConfiguration 中部分配置项的名称有调整，比如在配置项名称中加入了时间单位。
--   新 SDK 的包依赖有变化，比如使用了 HttpAsyncClient 和 Jodatime 等，如果您在运行中有遇到问题，需要考虑是否引入了冲突的依赖。
+-   替换新的 SDK 后需要更改少数几个类的 import 路径。因为有几个类的 package 有调整，例如 ClientConfiguration 的 package 由 com.aliyun.openservices 调整为 com.aliyun.openservices.ots。调整 package 的主要原因是表格存储的 SDK 已经与 OSS SDK 分离，之前公用的几个类放在 ots 的 package 下更为合理。
+-   当您不再使用一个 OTSClient 实例时（例如程序结束前），需要主动调用 OTSClient 的 shutdown 方法，释放 OTSClient 对象占有的线程和连接资源。
+-   ClientConfiguration 中部分配置项的名称有调整，例如在配置项名称中加入了时间单位。
+-   新 SDK 的包依赖有变化，例如使用了 HttpAsyncClient 和 Jodatime 等，如果您在运行中有遇到问题，需要考虑是否引入了冲突的依赖。
 
 ## 版本号 2.0.4 {#section_5b1_da6_oa6 .section}
 
