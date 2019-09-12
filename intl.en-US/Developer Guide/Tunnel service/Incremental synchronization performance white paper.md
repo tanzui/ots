@@ -32,7 +32,7 @@ This topic describes the test on the performance of incremental synchronization 
 
     The Table Store Java SDK can collect statistics of the consumption rate of incremental data and the total number of consumed rows in real time. You can add the logic demonstrated in the following example to the callback to collect rate statistics.
 
-    **Example**
+    Example
 
     ``` {#codeblock_0qi_dwz_mdi}
     private static final Gson GSON = new Gson();
@@ -92,9 +92,7 @@ When Tunnel Service is used for data synchronization, it synchronizes data seque
     5.  Check the total bandwidth consumed during the incremental synchronization.
 -   Test data description
 
-    As shown in the following figure, sample data includes four primary key columns and one or two attribute columns. The size of each row is approximately 220 bytes. The first primary key \(partition key\) is a 4-byte hash value, which ensures that stress testing data is evenly written to each partition.
-
-    ![](images/40034_en-US.png)
+    ample data includes four primary key columns and one or two attribute columns. The size of each row is approximately 220 bytes. The first primary key \(partition key\) is a 4-byte hash value, which eguarantees that stress testing data is evenly written to each partition.
 
 
 ## Test indicators {#section_m3k_3gn_zgb .section}
@@ -119,23 +117,17 @@ This section describes the test results for each scenario. For more information,
 
     In the single-server 64-partition synchronization scenario, the gigabit NIC works at its full capacity, resulting in only 570,000 QPS. For more information, see test details. The QPS in the double-server 64-partition synchronization scenario reaches 780,000, which is approximately twice the 420,000 QPS in the single-server 32-partition synchronization scenario. In the double-server 128-partition synchronization scenario, the QPS reaches 1,000,000.
 
-    ![](images/40035_en-US.png)
-
 -   System resource consumption
 
     The following figure shows the CPU and memory usage in each scenario. The CPU usage increases linearly with the number of partitions.
 
     The single-server single-partition synchronization uses 0.25 single-core CPUs. When the QPS reaches 1,000,000 in the double-server 128-partition synchronization scenario, only 10.2 single-core CPUs are used. The memory usage increases linearly with the number of partitions when it is less than 32. When more partitions, for example, 32, 64, or 128 partitions in this test, need to be processed, the memory usage is stably around 5.3 GB on each server.
 
-    ![](images/40036_en-US.png)
-
 -   Total bandwidth consumption
 
     The following figure shows the total bandwidth consumed during the incremental synchronization. In this figure, the consumed bandwidth increases linearly with the number of partitions.
 
     The single-server 64-partition synchronization uses a total bandwidth of 125 Mbit/s, which is the maximum rate supported by the gigabit NIC. In the double-server 64-partition synchronization scenario, the consumed bandwidth is 169 Mbit/s, which is the actual bandwidth required for 64-partition synchronization. This is approximately twice the 86 Mbit/s bandwidth required in the single-server 32-partition synchronization scenario. When the QPS reaches 1,000,000 in the double-server 128-partition synchronization scenario, the total bandwidth consumed reaches 220 Mbit/s.
-
-    ![](images/40037_en-US.png)
 
 
 ## Test details {#section_rfg_33n_zgb .section}
@@ -144,111 +136,51 @@ This section describes the test results for each scenario. For more information,
     -   Tested at: 17:40, January 30, 2019.
     -   QPS: steady at approximately 19,000 rows per second, with a peak rate of 21,800 rows per second.
     -   Latency: approximately 50 ms per 1,000 rows.
-
-        ![](images/40038_en-US.png)
-
     -   CPU usage: approximately 25% of a single-core CPU.
     -   Memory usage: approximately 0.4% of the total physical memory, which is approximately 0.256 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 4,000 Kbit/s.
-
-        ![](images/40039_en-US.png)
-
 -   Single-server 4-partition synchronization: 70,000 QPS.
-
-    ![](images/40040_en-US.png)
-
     -   Tested at: 20:00, January 30, 2019.
     -   QPS: steady at approximately 70,000 rows per second, with a peak rate of 72,400 rows per second.
     -   Latency: approximately 14.28 ms per 1,000 rows.
-
-        ![](images/40041_en-US.png)
-
     -   CPU usage: approximately 70% of a single-core CPU.
     -   Memory usage: approximately 1.9% of the total physical memory, which is approximately 1.1 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 13 Mbit/s.
-
-        ![](images/40042_en-US.png)
-
 -   Single-server 8-partition synchronization: 130,000 QPS.
-
-    ![](images/40043_en-US.png)
-
     -   Tested at: 20:20, January 30, 2019.
     -   QPS: steady at approximately 130,000 rows per second, with a peak rate of 141,644 rows per second.
     -   Latency: approximately 7.69 ms per 1,000 rows.
-
-        ![](images/40044_en-US.png)
-
     -   CPU usage: approximately 120% of a single-core CPU.
     -   Memory usage: approximately 4.1% of the total physical memory, which is approximately 2.62 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 27 Mbit/s.
-
-        ![](images/40045_en-US.png)
-
 -   Single-server 32-partition synchronization: 420,000 QPS.
-
-    ![](images/40046_en-US.png)
-
     -   Tested at: 15:50, January 31, 2019.
     -   QPS: steady at approximately 420,000 rows per second, with a peak rate of 447,600 rows per second.
     -   Latency: 2.38 ms per 1,000 rows.
-
-        ![](images/40047_en-US.png)
-
     -   CPU usage: approximately 450% of a single-core CPU.
     -   Memory usage: approximately 8.2% of the total physical memory, which is approximately 5.25 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 86 Mbit/s.
-
-        ![](images/40048_en-US.png)
-
 -   Single-server 64-partition synchronization: 570,000 QPS, with the gigabit NIC working at its full capacity.
-
-    ![](images/40049_en-US.png)
-
     -   Tested at: 22:10, January 31, 2019.
     -   QPS: steady at approximately 570,000 rows per second, with a peak rate of 581,400 rows per second.
     -   Latency: approximately 1.75 ms per 1,000 rows.
-
-        ![](images/40050_en-US.png)
-
     -   CPU usage: approximately 640% of a single-core CPU.
     -   Memory usage: approximately 8.4% of the total physical memory, which is approximately 5.376 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 125 Mbit/s, which is the maximum rate of the gigabit NIC.
-
-        ![](images/40051_en-US.png)
-
 -   Double-server 64-partition synchronization: 780,000 QPS.
-
-    ![](images/40052_en-US.png)
-
     -   Tested at: 22:30, January 31, 2019.
     -   QPS: steady at approximately 390,000 rows per second on each server and 780,000 rows per second on both servers.
     -   Latency: approximately 1.28 ms per 1,000 rows.
-
-        ![](images/40053_en-US.png)
-
     -   CPU usage: approximately 420% of a single-core CPU on each server and 840% of a single-core CPU on both servers.
     -   Memory usage: approximately 8.2% of the total physical memory, which is approximately 10.5 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 169 Mbit/s. This indicates that bandwidth becomes the bottleneck when the number of partitions reaches 64 in single-server scenarios.
-
-        ![](images/40054_en-US.png)
-
 -   Double-server 128-partition synchronization: 1,000,000 QPS, with both gigabit NICs almost working at their full capacities.
-
-    ![](images/40033_en-US.png)
-
     -   Tested at: 23:20, January 31, 2019.
     -   QPS: steady at approximately 500,000 rows per second on each server and 1,000,000 rows per second on both servers.
     -   Latency: approximately 1 ms per 1,000 rows.
-
-        ![](images/40055_en-US.png)
-
     -   CPU usage: approximately 560% of a single-core CPU on each server and 1,020% of a single-core CPU on both servers.
     -   Memory usage: approximately 8.2% of the total physical memory, which is approximately 10.5 GB. \(Each test server provides 64 GB physical memory.\)
     -   Bandwidth consumption: approximately 220 Mbit/s.
-
-        ![](images/40056_en-US.png)
-
 
 ## Summary {#section_yz5_13n_zgb .section}
 
