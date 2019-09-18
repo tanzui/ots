@@ -2,7 +2,7 @@
 
 ## Use the console to create a table {#section_a1q_knf_cfb .section}
 
-1.  Log on to the [Table Store console](https://partners-intl.console.aliyun.com/#/ots).
+1.  Log on to the Table Store console.
 2.  Locate and click your target instance, or click **Manage** in the Actions column to go to the Instance Details page.
 3.  Click **Create Table**.
 
