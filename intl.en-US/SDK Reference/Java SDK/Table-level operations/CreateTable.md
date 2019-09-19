@@ -6,7 +6,7 @@ You can call this operation to create a table. Specify TableMeta and TableOption
 
 ## Parameters {#section_xny_3tz_zfb .section}
 
--   **TableMeta**
+-   TableMeta
 
     TableMeta includes the TableName and List parameters.
 
@@ -18,7 +18,7 @@ You can call this operation to create a table. Specify TableMeta and TableOption
     -   You do not need to define attribute columns. Data columns in each row can be different. You can specify the name of an attribute column when writing data to the column.
  |
 
--   **TableOptions**
+-   TableOptions
 
     TableOptions includes the TTL, MaxVersions, and MaxTimeDeviation parameters.
 
@@ -26,7 +26,7 @@ You can call this operation to create a table. Specify TableMeta and TableOption
     |:--------|:---------|:----------|
     |TTL|Time To Live, the life span of data.|     -   Unit: seconds.
     -   If you do not want data to expire, set TTL to -1.
-    -   Table Store checks whether data has expired based on the data timestamp, current system time, or table TTL. Data expires and is deleted if `current system time - data timestamp > table TTL`. For more information about timestamps, see [Preface](../../../../../intl.en-US/Data Models/Preface.md#).
+    -   Table Store checks whether data has expired based on the data timestamp, current system time, or table TTL. Data expires and is deleted if `current system time - data timestamp > table TTL`.
     -   When you write data with TTL, make sure that you specify a valid timestamp. We recommend that you set MaxTimeDeviation to specify the timestamp.
  |
     |MaxTimeDeviation|The maximum time deviation between the timestamp of written data and current system time.|     -   The system generates a timestamp for new data by default. The system checks whether data is expired based on the timestamp and TTL. You can specify the timestamp of written data. When the deviation between the timestamp you have specified and current system time is greater than the specified TTL, the written data expires immediately. To avoid this problem, you can set MaxTimeDeviation.
@@ -35,18 +35,18 @@ You can call this operation to create a table. Specify TableMeta and TableOption
  |
     |MaxVersions|The maximum number of versions that each attribute column can contain.|If the number of versions of an attribute column is more than the value of MaxVersions, Table Store only keeps the latest version that you have specified for MaxVersions.|
 
--   **ReservedThroughput**
+-   ReservedThroughput
 
     The configuration of reserved read and write throughput of a table.
 
     -   Table Store calculates billing according to the reserved read and write throughput you have specified in the ReservedThroughput field.
-    -   If ReservedThroughtput is higher than 0, Table Store calculates billing based on the reserved throughput and duration. The actual read and write throughput more than the reserved quota follows the Pay-As-You-Go billing method. For more information, see [Billing items and pricing](../../../../../intl.en-US/Pricing/Billing items and pricing.md#) to avoid unexpected fees.
+    -   If ReservedThroughtput is higher than 0, Table Store calculates billing based on the reserved throughput and duration. The actual read and write throughput more than the reserved quota follows the Pay-As-You-Go billing method. For more information, see [Billing items and pricing](../../../../intl.en-US/Pricing/Billing items and pricing.md#) to avoid unexpected fees.
     -   The default value 0 indicates that the Pay-As-You-Go billing method is fully applicable to Table Store.
     -   You can set the reserved read and write throughput of capacity instances only to 0. These instances do not allow reserved throughput.
 
 ## Example {#section_mwm_yq5_cgb .section}
 
-```
+``` {#codeblock_zjk_kvb_i10}
 private static void createTable(SyncClient client) {
         TableMeta tableMeta = new TableMeta(TABLE_NAME);
         tableMeta.addPrimaryKeyColumn(new PrimaryKeySchema(PRIMARY_KEY_NAME, PrimaryKeyType.STRING)); // Add a primary key column to the primary table.
