@@ -8,7 +8,7 @@ You can call the CreateTable operation to create a table. When creating a table 
 
 After you create the table, the server loads partitions of the table to specified nodes. Therefore, you must wait several seconds before reading data from or writing data to the table. Otherwise, the system throws an exception. Note: If the system throws an exception, the SDK automatically retries the read or write operation.
 
-**Method**
+Method
 
 ``` {#codeblock_oes_op0_e9d .language-php}
      /**
@@ -23,7 +23,7 @@ After you create the table, the server loads partitions of the table to specifie
 			
 ```
 
-**Request format**
+Request format
 
 ``` {#codeblock_enz_8xw_0s0 .language-php}
 $result = $client->createTable([
@@ -53,7 +53,7 @@ $result = $client->createTable([
 ]);            
 ```
 
-**Request format description**
+Request format description
 
 -   table\_meta: required. The table name and the schema of the primary key.
     -   table\_name: the table name.
@@ -74,24 +74,24 @@ $result = $client->createTable([
         -   Table Store checks whether data has expired based on the data timestamp, current time, and table TTL. If the difference between the current time and the data timestamp is greater than the table TTL, data expires and is cleared by the Table Store server. For more information about the data timestamp, see [Preface](../../../../intl.en-US/hide/Preface.md#).
         -   After the TTL is set, the server checks whether data expires based on the data timestamp. If you specify a timestamp when writing data and the timestamp is significantly different from the actual time, unexpected data expiration may occur. For example, if the specified data timestamp is too small, the data may expire and be deleted as soon as it is written. If the specified timestamp is too large, the data may not expire when required. Therefore, when writing data with the TTL specified, make sure that you set a reasonable timestamp.
     -   max\_versions: the maximum number of versions retained by each attribute column.
-        -   The latest version of Table Store API supports data models of multiple versions. For more information, see [Preface](../../../../intl.en-US/hide/Preface.md#). The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
+        -   The max\_versions parameter is used to specify the maximum number of data versions saved by each attribute column. If a new version causes the total number of versions to exceed the value of max\_versions, the server deletes the earliest version to ensure that the number of versions do not exceed this value.
     -   deviation\_cell\_version\_in\_sec: the maximum deviation allowed between the specified version and the current system time when data is written to the version. Unit: seconds.
         -   Table Store supports multiple versions. By default, the system generates a new version number when writing new data. The version number is a timestamp corresponding to the write time in milliseconds. The TTL feature uses this timestamp to determine if data has expired. In addition, you can specify the data writing timestamp. If you set an extremely small timestamp, which deviates from the current time by more than the TTL set for the table, the written data immediately expires. To prevent immediate data expiration, Table Store provides the deviation\_cell\_version\_in\_sec parameter to limit the permissible deviation between the data writing timestamp and the current system time. The value of this parameter is expressed in seconds. You can specify this parameter when creating a table and modify it by using the UpdateTable operation.
 -   stream\_spec: optional. The Stream-related settings.
     -   enable\_stream: specifies whether to enable Stream.
     -   expiration\_time: the expiration time of the Stream data of the table. Unit: hours. Earlier modification records are deleted.
 
-**Response format**
+Response format
 
 ``` {#codeblock_r6g_qan_hsm .language-php}
     []      
 ```
 
-**Response format description**
+Response format description
 
 The response is empty. If an error occurs, the system throws an exception.
 
-**Example**
+Example
 
 The following code provides an example of how to create a table with three primary key columns, set the reserved read and write throughput to 0 and TTL to -1, and then enable Stream.
 
