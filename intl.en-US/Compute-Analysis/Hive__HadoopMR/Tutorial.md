@@ -1,6 +1,6 @@
 # Tutorial {#concept_45028_zh .concept}
 
-## Data preparation { .section}
+## Data preparation {#section_lvn_uq4_nw2 .section}
 
 Name a table in Table Store as pet and import the following data. Note that column `Name` is the only Primary Key.
 
@@ -16,9 +16,9 @@ Name a table in Table Store as pet and import the following data. Note that colu
 |Slim|Benny|snake|m|1996-04-29| |
 |Puffball|Diane|hamster|f|1999-03-30|
 
-**Note:** As Table Store is schemafree \(according to the [Data model](../../../../reseller.en-US/Data Models/Preface.md#) topic\), you do not need to input anything \(such as `NULL`\) into blank cells.
+**Note:** As Table Store is schemafree \(according to the [../../../../dita-oss-bucket/SP\_28/DNots1824465/EN-US\_TP\_20271.md\#](../../../../reseller.en-US/Developer Guide/Wide column model/Introduction.md#) topic\), you do not need to input anything \(such as `NULL`\) into blank cells.
 
-## Example for accessing by Hive { .section}
+## Example for accessing by Hive {#section_0xj_416_uh7 .section}
 
 Preparations
 
@@ -26,7 +26,7 @@ Prepare the environment for Hadoop, Hive, JDK, and dependency package of Table S
 
 Example
 
-```
+``` {#codeblock_6vq_9ak_c3h}
 # You can add HADOOP_HOME and HADOOP_CLASSPATH into /etc/profile
 $ export HADOOP_HOME=${Your Hadoop Path}
 $ export HADOOP_CLASSPATH=emr-tablestore-1.4.2.jar:tablestore-4.3.1-jar-with-dependencies.jar:joda-time-2.9.4.jar
@@ -58,7 +58,7 @@ Puffball        Diane   hamster f       1999-03-30      NULL
 Slim    Benny   snake   m       1996-04-29      NULL
 Whistler        Gwen    bird    NULL    1997-12-09      NULL
 Time taken: 1.41 seconds, Fetched 4 row(s)
-
+			
 ```
 
 Parameters explanation
@@ -70,18 +70,18 @@ Parameters explanation
     **Note:** Table Store supports column names with blank characters, which means a blank space is considered part of the column name.
 
 -   TBLPROPERTIES
-    -   tablestore.endpoint \(required\): The [endpoint](../../../../reseller.en-US/Product Introduction/Terms/Endpoint.md#). You can view the endpoint information of the instance on the Table Store console.
+    -   tablestore.endpoint \(required\): The [endpoint](../../../../reseller.en-US/Developer Guide/Terms/Endpoint.md#). You can view the endpoint information of the instance on the Table Store console.
 
-    -   tablestore.instance \(optional\): The [instance](../../../../reseller.en-US/Product Introduction/Terms/Instance.md#) name. If it is not specified, it is the first field of tablestore.endpoint.
+    -   tablestore.instance \(optional\): The [instance](../../../../reseller.en-US/Developer Guide/Terms/Instance.md#) name. If it is not specified, it is the first field of tablestore.endpoint.
 
     -   tablestore.table.name \(required\): The table name in Table Store.
 
     -   tablestore.access\_key\_id, tablestore.access\_key\_secret \(required\): See [Access control](https://partners-intl.aliyun.com/help/doc-detail/27296.htm).
 
-    -   tablestore.sts\_token \(optional\): See [Security Token](../../../../reseller.en-US/Authorization/RAM and STS.md#).
+    -   tablestore.sts\_token \(optional\): See [Security Token](../../../../reseller.en-US/Developer Guide/Authorization management/RAM and STS.md#).
 
 
-## Example for accessing by HadoopMR { .section}
+## Example for accessing by HadoopMR {#section_wz7_dww_034 .section}
 
 The following example illustrates how to count rows in pet using HadoopMR.
 
@@ -89,7 +89,7 @@ Code examples
 
 -   Construct Mappers and Reducers.
 
-    ```
+    ``` {#codeblock_hog_lt9_vu1}
     public class RowCounter {
     public static class RowCounterMapper
     extends Mapper<PrimaryKeyWritable, RowWritable, Text, LongWritable> {
@@ -119,44 +119,44 @@ Code examples
         }
     }
     }
-    
+    					
     ```
 
     Each time HadoopMR fetches a row from pet, it calls map\(\) of the mapper. The first two parameters, PrimaryKeyWritable and RowWritable, correspond to the row’s Primary Key and the contents of this row, respectively. You can get the Primary Key object and the row object defined by Table Store JAVA SDK by invoking PrimaryKeyWritable.getPrimaryKey\(\) and RowWritable.getRow\(\).
 
 -   Configure Table Store as data source of mapper.
 
-    ```
-    	private static RangeRowQueryCriteria fetchCriteria() {
-    	    RangeRowQueryCriteria res = new 	RangeRowQueryCriteria("YourTableName");
-    	    res.setMaxVersions(1);
-    	    List<PrimaryKeyColumn> lower = new ArrayList<PrimaryKeyColumn>();
-    	    List<PrimaryKeyColumn> upper = new ArrayList<PrimaryKeyColumn>();
-    	    lower.add(new PrimaryKeyColumn("YourPkeyName", PrimaryKeyValue.INF_MIN));
-    	    upper.add(new PrimaryKeyColumn("YourPkeyName", PrimaryKeyValue.INF_MAX));
-    	    res.setInclusiveStartPrimaryKey(new PrimaryKey(lower));
-    	    res.setExclusiveEndPrimaryKey(new PrimaryKey(upper));
-    	    return res;
-    	}
+    ``` {#codeblock_awf_lvz_6jc}
+        private static RangeRowQueryCriteria fetchCriteria() {
+            RangeRowQueryCriteria res = new     RangeRowQueryCriteria("YourTableName");
+            res.setMaxVersions(1);
+            List<PrimaryKeyColumn> lower = new ArrayList<PrimaryKeyColumn>();
+            List<PrimaryKeyColumn> upper = new ArrayList<PrimaryKeyColumn>();
+            lower.add(new PrimaryKeyColumn("YourPkeyName", PrimaryKeyValue.INF_MIN));
+            upper.add(new PrimaryKeyColumn("YourPkeyName", PrimaryKeyValue.INF_MAX));
+            res.setInclusiveStartPrimaryKey(new PrimaryKey(lower));
+            res.setExclusiveEndPrimaryKey(new PrimaryKey(upper));
+            return res;
+        }
     
-    	public static void main(String[] args) throws Exception {
-    	    Configuration conf = new Configuration();
-    	    Job job = Job.getInstance(conf, "row count");
-    	    job.addFileToClassPath(new Path("hadoop-connector.jar"));
-    	    job.setJarByClass(RowCounter.class);
-    	    job.setMapperClass(RowCounterMapper.class);
-    	    job.setCombinerClass(IntSumReducer.class);
-    	    job.setReducerClass(IntSumReducer.class);
-    	    job.setOutputKeyClass(Text.class);
-    	    job.setOutputValueClass(LongWritable.class);
-    	    job.setInputFormatClass(TableStoreInputFormat.class);
-    	    TableStoreInputFormat.setEndpoint(job, "https://YourInstance.Region.ots.aliyuncs.com/");
-    	    TableStoreInputFormat.setCredential(job, "YourAccessKeyId", "YourAccessKeySecret");
-    	    TableStoreInputFormat.addCriteria(job, fetchCriteria());
-    	    FileOutputFormat.setOutputPath(job, new Path("output"));
-    	    System.exit(job.waitForCompletion(true) ? 0 : 1);
-    	}
-    
+        public static void main(String[] args) throws Exception {
+            Configuration conf = new Configuration();
+            Job job = Job.getInstance(conf, "row count");
+            job.addFileToClassPath(new Path("hadoop-connector.jar"));
+            job.setJarByClass(RowCounter.class);
+            job.setMapperClass(RowCounterMapper.class);
+            job.setCombinerClass(IntSumReducer.class);
+            job.setReducerClass(IntSumReducer.class);
+            job.setOutputKeyClass(Text.class);
+            job.setOutputValueClass(LongWritable.class);
+            job.setInputFormatClass(TableStoreInputFormat.class);
+            TableStoreInputFormat.setEndpoint(job, "https://YourInstance.Region.ots.aliyuncs.com/");
+            TableStoreInputFormat.setCredential(job, "YourAccessKeyId", "YourAccessKeySecret");
+            TableStoreInputFormat.addCriteria(job, fetchCriteria());
+            FileOutputFormat.setOutputPath(job, new Path("output"));
+            System.exit(job.waitForCompletion(true) ? 0 : 1);
+        }
+    					
     ```
 
     In the preceding example, job.setInputFormatClass\(TableStoreInputFormat.class\) is used to set Table Store as the data source. To complete the example, the following steps are also required:
@@ -174,9 +174,9 @@ Code examples
         -   Add RangeRowQueryCriterias to multiple tables to merge them.
         -   Add multiple RangeRowQueryCriterias to a single table to tune the splits. TableStore-Hadoop Connector can then split the range of the user’s input based on specified requirements.
 
-## Run the program { .section}
+## Run the program {#section_qtn_ihh_mne .section}
 
-```
+``` {#codeblock_ezp_ylm_qdq}
 $ HADOOP_CLASSPATH=hadoop-connector.jar bin/hadoop jar row-counter.jar
 ...
 $ find output -type f
@@ -186,10 +186,10 @@ output/. _SUCCESS.crc
 output/.part-r-00000.crc
 $ cat out/part-r-00000
 TOTAL   9
-
+			
 ```
 
-## Data type conversion { .section}
+## Data type conversion {#section_jd3_51o_06w .section}
 
 Table Store and Hive/Spark support different sets of data types.
 
