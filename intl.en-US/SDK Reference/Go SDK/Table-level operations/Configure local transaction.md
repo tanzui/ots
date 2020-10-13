@@ -53,7 +53,7 @@ You can use local transaction to specify that the operations on a partition key 
             PrimaryKey: transPk,
         }
         response, err := client.StartLocalTransaction(trans)
-        if err ! = nil {
+        if err != nil {
             fmt.Println("failed to create transaction", err)
             return
         }
